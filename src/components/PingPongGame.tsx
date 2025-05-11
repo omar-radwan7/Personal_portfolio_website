@@ -1,9 +1,11 @@
 
 import React, { useEffect, useRef } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const PingPongGame: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const requestIdRef = useRef<number | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -12,11 +14,10 @@ const PingPongGame: React.FC = () => {
     const context = canvas.getContext('2d');
     if (!context) return;
 
-    // Game variables
-    let animationFrameId: number;
-    const paddleHeight = 50;
-    const paddleWidth = 10;
-    const ballRadius = 5;
+    // Game variables - scale based on screen size
+    const paddleHeight = isMobile ? 40 : 50; 
+    const paddleWidth = isMobile ? 8 : 10;
+    const ballRadius = isMobile ? 4 : 5;
     let player1Score = 0;
     let player2Score = 0;
     const winningScore = 7;
@@ -28,13 +29,16 @@ const PingPongGame: React.FC = () => {
     let lastBallX = 0;
     let lastBallY = 0;
 
+    // Calculate game speed based on screen size
+    const gameSpeed = isMobile ? 2 : 2.5;
+
     // Ball object
     let ball = {
       x: canvas.width / 2,
       y: canvas.height / 2,
-      dx: 2.5,
-      dy: 2.5,
-      speed: 2.5,
+      dx: gameSpeed,
+      dy: gameSpeed,
+      speed: gameSpeed,
       radius: ballRadius
     };
 
@@ -45,7 +49,7 @@ const PingPongGame: React.FC = () => {
       width: paddleWidth,
       height: paddleHeight,
       dy: 0,
-      speed: 2.5
+      speed: gameSpeed
     };
 
     let paddle2 = {
@@ -54,7 +58,7 @@ const PingPongGame: React.FC = () => {
       width: paddleWidth,
       height: paddleHeight,
       dy: 0,
-      speed: 2.5
+      speed: gameSpeed
     };
 
     // Draw functions
@@ -90,7 +94,8 @@ const PingPongGame: React.FC = () => {
 
     function drawScore() {
       if (!context || !canvas) return;
-      context.font = '32px Arial';
+      const fontSize = isMobile ? '24px' : '32px';
+      context.font = `${fontSize} Arial`;
       context.fillStyle = '#FFFFFF';
       context.textAlign = 'center';
       context.fillText(player1Score.toString(), canvas.width / 4, 50);
@@ -218,11 +223,14 @@ const PingPongGame: React.FC = () => {
       context.fillStyle = 'rgba(0, 0, 0, 0.5)';
       context.fillRect(0, 0, canvas.width, canvas.height);
       
-      context.font = '24px Arial';
+      const titleFontSize = isMobile ? '18px' : '24px';
+      const subFontSize = isMobile ? '14px' : '16px';
+      
+      context.font = `${titleFontSize} Arial`;
       context.fillStyle = '#FFFFFF';
       context.textAlign = 'center';
       context.fillText(`${player1Score > player2Score ? 'Left' : 'Right'} wins!`, canvas.width / 2, canvas.height / 2);
-      context.font = '16px Arial';
+      context.font = `${subFontSize} Arial`;
       context.fillText('Restarting...', canvas.width / 2, canvas.height / 2 + 30);
     }
 
@@ -295,7 +303,7 @@ const PingPongGame: React.FC = () => {
       }
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <canvas 
