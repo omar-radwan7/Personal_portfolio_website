@@ -4,30 +4,21 @@ import PingPongGame from './PingPongGame';
 
 const Projects: React.FC = () => {
   return (
-    <section id="projects" className="py-20 bg-muted relative overflow-hidden">
-      {/* Background styling */}
-      <div className="absolute inset-0 opacity-10">
-        <img 
-          src="/lovable-uploads/1c923480-2b5b-46d5-b950-a39f43d28633.png" 
-          alt="Wave Background" 
-          className="w-full h-full object-cover"
-        />
-      </div>
-      
+    <section id="projects" className="py-20 bg-navyDark relative">
       <div className="section-container">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 title-gradient">Projects</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* Ping Pong Game Project */}
-          <div className="bg-card rounded-lg overflow-hidden card-hover shadow-md border border-purple/10 flex flex-col h-full">
-            <div className="p-3">
-              <h3 className="text-lg font-semibold mb-1">PingPong Game</h3>
-              <p className="text-gray-400 mb-2 text-xs">PingPong game With HTML, CSS & JavaScript</p>
-              <div className="mb-3 h-20 flex items-center justify-center overflow-hidden">
-                <PingPongGame />
-              </div>
-              <div className="flex justify-between items-center mt-auto">
-                <div className="flex gap-1 flex-wrap">
+          <div className="bg-card rounded-lg overflow-hidden shadow-md border border-purple/10 flex flex-col">
+            <div className="aspect-video w-full bg-black flex items-center justify-center">
+              <PingPongGame />
+            </div>
+            <div className="p-5 bg-[#1e2235]">
+              <p className="text-gray-400 text-sm">PingPong game With HTML, CSS & JavaScript</p>
+              <h3 className="text-xl font-semibold mb-3">PingPong Game</h3>
+              <div className="flex justify-between items-center">
+                <div className="flex gap-2 flex-wrap">
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">HTML</span>
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">CSS</span>
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">JS</span>
@@ -36,7 +27,7 @@ const Projects: React.FC = () => {
                   href="https://github.com/omar-radwan7/PingPongGame" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-purple hover:text-purple-light text-xs"
+                  className="text-purple-light hover:text-purple text-sm"
                 >
                   More Details
                 </a>
@@ -45,42 +36,25 @@ const Projects: React.FC = () => {
           </div>
           
           {/* Weather App Project */}
-          <div className="bg-card rounded-lg overflow-hidden card-hover shadow-md border border-purple/10 flex flex-col h-full">
-            <div className="p-3">
-              <div className="flex justify-center items-center mb-2 text-purple-light text-3xl">
-                <i className="fas fa-cloud"></i>
+          <div className="bg-card rounded-lg overflow-hidden shadow-md border border-purple/10 flex flex-col">
+            <div className="aspect-video w-full bg-[#1c2133] flex items-center justify-center">
+              <div className="text-center">
+                <div className="flex justify-center items-center mb-2 text-white">
+                  <i className="fas fa-cloud text-5xl"></i>
+                  <i className="fas fa-thermometer-half text-3xl ml-2"></i>
+                </div>
+                <h3 className="text-lg font-semibold mb-1">Weather Application</h3>
               </div>
-              <h3 className="text-lg font-semibold mb-1 text-center">Weather Application</h3>
-              <p className="text-gray-400 mb-2 text-xs text-center">React & OpenWeatherMap API</p>
-              <div className="flex justify-center mb-3 h-14">
-                <span className="px-3 py-1 bg-purple/10 text-purple-light rounded text-sm flex items-center">Coming Soon</span>
-              </div>
-              <div className="flex justify-between items-center mt-auto">
-                <div className="flex gap-1">
+            </div>
+            <div className="p-5 bg-[#1e2235]">
+              <p className="text-gray-400 text-sm">React & OpenWeatherMap API</p>
+              <h3 className="text-xl font-semibold mb-3">Weather App</h3>
+              <div className="flex justify-between items-center">
+                <div className="flex gap-2">
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">React</span>
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">API</span>
                 </div>
-                <span className="text-gray-500 text-xs">In Development</span>
-              </div>
-            </div>
-          </div>
-          
-          {/* Third project card */}
-          <div className="bg-card rounded-lg overflow-hidden card-hover shadow-md border border-purple/10 flex flex-col h-full">
-            <div className="p-3">
-              <div className="flex justify-center items-center mb-2 text-purple-light text-3xl">
-                <i className="fas fa-code"></i>
-              </div>
-              <h3 className="text-lg font-semibold mb-1 text-center">Coming Soon</h3>
-              <p className="text-gray-400 mb-2 text-xs text-center">Future Project</p>
-              <div className="flex justify-center mb-3 h-14">
-                <span className="px-3 py-1 bg-purple/10 text-purple-light rounded text-sm flex items-center">In Planning</span>
-              </div>
-              <div className="flex justify-between items-center mt-auto">
-                <div className="flex gap-1">
-                  <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">TBD</span>
-                </div>
-                <span className="text-gray-500 text-xs">Coming Soon</span>
+                <span className="text-purple-light text-sm">Coming Soon</span>
               </div>
             </div>
           </div>

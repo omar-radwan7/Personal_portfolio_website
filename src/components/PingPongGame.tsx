@@ -14,9 +14,9 @@ const PingPongGame: React.FC = () => {
 
     // Game variables
     let animationFrameId: number;
-    const paddleHeight = 25; // Smaller paddle height
-    const paddleWidth = 4; // Smaller paddle width
-    const ballRadius = 2; // Smaller ball radius
+    const paddleHeight = 50;
+    const paddleWidth = 10;
+    const ballRadius = 5;
     let player1Score = 0;
     let player2Score = 0;
     const winningScore = 7;
@@ -32,9 +32,9 @@ const PingPongGame: React.FC = () => {
     let ball = {
       x: canvas.width / 2,
       y: canvas.height / 2,
-      dx: 1.5, // Slower ball speed
-      dy: 1.5,
-      speed: 1.5,
+      dx: 2.5,
+      dy: 2.5,
+      speed: 2.5,
       radius: ballRadius
     };
 
@@ -45,7 +45,7 @@ const PingPongGame: React.FC = () => {
       width: paddleWidth,
       height: paddleHeight,
       dy: 0,
-      speed: 1.5
+      speed: 2.5
     };
 
     let paddle2 = {
@@ -54,7 +54,7 @@ const PingPongGame: React.FC = () => {
       width: paddleWidth,
       height: paddleHeight,
       dy: 0,
-      speed: 1.5
+      speed: 2.5
     };
 
     // Draw functions
@@ -62,7 +62,7 @@ const PingPongGame: React.FC = () => {
       if (!context) return;
       context.beginPath();
       context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-      context.fillStyle = '#9b87f5';
+      context.fillStyle = '#FFFFFF';
       context.fill();
       context.closePath();
     }
@@ -76,13 +76,25 @@ const PingPongGame: React.FC = () => {
       context.closePath();
     }
 
+    function drawDottedLine() {
+      if (!context || !canvas) return;
+      
+      context.beginPath();
+      context.setLineDash([5, 10]);
+      context.moveTo(canvas.width / 2, 0);
+      context.lineTo(canvas.width / 2, canvas.height);
+      context.strokeStyle = '#FFFFFF';
+      context.stroke();
+      context.setLineDash([]);
+    }
+
     function drawScore() {
       if (!context || !canvas) return;
-      context.font = '8px Arial'; // Smaller font
+      context.font = '32px Arial';
       context.fillStyle = '#FFFFFF';
       context.textAlign = 'center';
-      context.fillText(player1Score.toString(), canvas.width / 4, 10); // Adjusted position
-      context.fillText(player2Score.toString(), 3 * canvas.width / 4, 10);
+      context.fillText(player1Score.toString(), canvas.width / 4, 50);
+      context.fillText(player2Score.toString(), 3 * canvas.width / 4, 50);
     }
 
     // AI for paddles
@@ -93,9 +105,9 @@ const PingPongGame: React.FC = () => {
       // Add some difficulty by limiting the AI's reaction time
       if (ball.dx < 0 && ball.x < canvas.width / 2) {
         // Only move when ball is coming towards this paddle and in its half
-        if (paddle1.y < paddle1TargetY - 10) {
+        if (paddle1.y < paddle1TargetY - 15) {
           paddle1.y += paddle1.speed;
-        } else if (paddle1.y > paddle1TargetY + 10) {
+        } else if (paddle1.y > paddle1TargetY + 15) {
           paddle1.y -= paddle1.speed;
         }
       }
@@ -105,9 +117,9 @@ const PingPongGame: React.FC = () => {
       
       if (ball.dx > 0 && ball.x > canvas.width / 2) {
         // Only move when ball is coming towards this paddle and in its half
-        if (paddle2.y < paddle2TargetY - 10) {
+        if (paddle2.y < paddle2TargetY - 15) {
           paddle2.y += paddle2.speed;
-        } else if (paddle2.y > paddle2TargetY + 10) {
+        } else if (paddle2.y > paddle2TargetY + 15) {
           paddle2.y -= paddle2.speed;
         }
       }
@@ -132,7 +144,7 @@ const PingPongGame: React.FC = () => {
         // If ball appears stuck for too many frames, reset it
         if (stuckCounter > 90) { // ~1.5 seconds at 60fps
           // Give the ball a new direction to break it free
-          ball.dx = (Math.random() > 0.5 ? 1 : -1) * 3;
+          ball.dx = (Math.random() > 0.5 ? 1 : -1) * ball.speed;
           ball.dy = (Math.random() * 6 - 3);
           stuckCounter = 0;
         }
@@ -155,11 +167,11 @@ const PingPongGame: React.FC = () => {
       if (ball.dx < 0 && ball.x - ball.radius < paddle1.x + paddle1.width && ball.y > paddle1.y && ball.y < paddle1.y + paddle1.height) {
         ball.dx = -ball.dx;
         const hitPosition = (ball.y - (paddle1.y + paddle1.height / 2)) / (paddle1.height / 2);
-        ball.dy = hitPosition * 3; // Adjust angle based on hit position
+        ball.dy = hitPosition * 5; // Adjust angle based on hit position
       } else if (ball.dx > 0 && ball.x + ball.radius > paddle2.x && ball.y > paddle2.y && ball.y < paddle2.y + paddle2.height) {
         ball.dx = -ball.dx;
         const hitPosition = (ball.y - (paddle2.y + paddle2.height / 2)) / (paddle2.height / 2);
-        ball.dy = hitPosition * 3; // Adjust angle based on hit position
+        ball.dy = hitPosition * 5; // Adjust angle based on hit position
       }
 
       // Scoring
@@ -206,12 +218,12 @@ const PingPongGame: React.FC = () => {
       context.fillStyle = 'rgba(0, 0, 0, 0.5)';
       context.fillRect(0, 0, canvas.width, canvas.height);
       
-      context.font = '8px Arial'; // Smaller font
+      context.font = '24px Arial';
       context.fillStyle = '#FFFFFF';
       context.textAlign = 'center';
       context.fillText(`${player1Score > player2Score ? 'Left' : 'Right'} wins!`, canvas.width / 2, canvas.height / 2);
-      context.font = '6px Arial'; // Smaller font
-      context.fillText('Restarting...', canvas.width / 2, canvas.height / 2 + 10); // Adjusted position
+      context.font = '16px Arial';
+      context.fillText('Restarting...', canvas.width / 2, canvas.height / 2 + 30);
     }
 
     function draw() {
@@ -221,10 +233,11 @@ const PingPongGame: React.FC = () => {
       context.clearRect(0, 0, canvas.width, canvas.height);
       
       // Draw elements
+      drawDottedLine();
+      drawScore();
       drawBall();
       drawPaddle(paddle1);
       drawPaddle(paddle2);
-      drawScore();
       
       if (!gameOver) {
         // Update AI
@@ -254,10 +267,20 @@ const PingPongGame: React.FC = () => {
       if (!canvas) return;
       
       const parentWidth = canvas.parentElement?.clientWidth || canvas.width;
-      const scale = Math.min(1, parentWidth / 120); // Adjusted base width for smaller cards
+      const parentHeight = canvas.parentElement?.clientHeight || canvas.height;
       
-      canvas.style.transform = `scale(${scale})`;
-      canvas.style.transformOrigin = 'top left';
+      // Set canvas dimensions to match container
+      canvas.width = parentWidth;
+      canvas.height = parentHeight;
+      
+      // Reset paddle positions and ball after resize
+      paddle1.x = 0;
+      paddle1.y = canvas.height / 2 - paddleHeight / 2;
+      
+      paddle2.x = canvas.width - paddleWidth;
+      paddle2.y = canvas.height / 2 - paddleHeight / 2;
+      
+      resetBall();
     }
 
     window.addEventListener('resize', handleResize);
@@ -275,11 +298,10 @@ const PingPongGame: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full flex justify-center">
-      <div className="relative bg-black rounded-lg overflow-hidden w-full h-full">
-        <canvas ref={canvasRef} width={120} height={70} className="bg-black w-full h-full" />
-      </div>
-    </div>
+    <canvas 
+      ref={canvasRef}
+      className="w-full h-full"
+    />
   );
 };
 
