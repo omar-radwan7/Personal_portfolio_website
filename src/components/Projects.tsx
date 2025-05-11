@@ -6,8 +6,13 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="py-20 bg-muted relative overflow-hidden">
       {/* Background styling */}
-      <div className="absolute inset-0 opacity-10 bg-waves bg-no-repeat bg-cover"></div>
-      <div className="wave-animation"></div>
+      <div className="absolute inset-0 opacity-10">
+        <img 
+          src="/lovable-uploads/1c923480-2b5b-46d5-b950-a39f43d28633.png" 
+          alt="Wave Background" 
+          className="w-full h-full object-cover"
+        />
+      </div>
       
       <div className="section-container">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 title-gradient">Projects</h2>
@@ -18,7 +23,7 @@ const Projects: React.FC = () => {
             <div className="p-3">
               <h3 className="text-lg font-semibold mb-1">PingPong Game</h3>
               <p className="text-gray-400 mb-2 text-xs">PingPong game With HTML, CSS & JavaScript</p>
-              <div className="mb-3 h-32 flex items-center justify-center overflow-hidden">
+              <div className="mb-3 h-20 flex items-center justify-center overflow-hidden">
                 <PingPongGame />
               </div>
               <div className="flex justify-between items-center mt-auto">
