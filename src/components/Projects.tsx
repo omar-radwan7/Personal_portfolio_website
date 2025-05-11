@@ -13,12 +13,12 @@ const Projects: React.FC = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 title-gradient">Projects</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* Ping Pong Game Project - Smaller */}
+          {/* Ping Pong Game Project */}
           <div className="bg-card rounded-lg overflow-hidden card-hover shadow-md border border-purple/10 flex flex-col h-full">
             <div className="p-3">
               <h3 className="text-lg font-semibold mb-1">PingPong Game</h3>
               <p className="text-gray-400 mb-2 text-xs">PingPong game With HTML, CSS & JavaScript</p>
-              <div className="mb-3 h-40 flex items-center justify-center">
+              <div className="mb-3 h-32 flex items-center justify-center overflow-hidden">
                 <PingPongGame />
               </div>
               <div className="flex justify-between items-center mt-auto">
@@ -39,7 +39,7 @@ const Projects: React.FC = () => {
             </div>
           </div>
           
-          {/* Weather App Project - Smaller */}
+          {/* Weather App Project */}
           <div className="bg-card rounded-lg overflow-hidden card-hover shadow-md border border-purple/10 flex flex-col h-full">
             <div className="p-3">
               <div className="flex justify-center items-center mb-2 text-purple-light text-3xl">
@@ -60,7 +60,7 @@ const Projects: React.FC = () => {
             </div>
           </div>
           
-          {/* Add a third empty project card to demonstrate the grid */}
+          {/* Third project card */}
           <div className="bg-card rounded-lg overflow-hidden card-hover shadow-md border border-purple/10 flex flex-col h-full">
             <div className="p-3">
               <div className="flex justify-center items-center mb-2 text-purple-light text-3xl">

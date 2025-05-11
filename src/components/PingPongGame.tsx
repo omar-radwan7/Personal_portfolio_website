@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 
 const PingPongGame: React.FC = () => {
@@ -14,9 +13,9 @@ const PingPongGame: React.FC = () => {
 
     // Game variables
     let animationFrameId: number;
-    const paddleHeight = 60;
-    const paddleWidth = 8;
-    const ballRadius = 5;
+    const paddleHeight = 40; // Smaller paddle height
+    const paddleWidth = 6; // Smaller paddle width
+    const ballRadius = 3; // Smaller ball radius
     let player1Score = 0;
     let player2Score = 0;
     const winningScore = 7;
@@ -32,9 +31,9 @@ const PingPongGame: React.FC = () => {
     let ball = {
       x: canvas.width / 2,
       y: canvas.height / 2,
-      dx: 3,
-      dy: 3,
-      speed: 3,
+      dx: 2, // Slower ball speed
+      dy: 2,
+      speed: 2,
       radius: ballRadius
     };
 
@@ -45,7 +44,7 @@ const PingPongGame: React.FC = () => {
       width: paddleWidth,
       height: paddleHeight,
       dy: 0,
-      speed: 3
+      speed: 2
     };
 
     let paddle2 = {
@@ -54,7 +53,7 @@ const PingPongGame: React.FC = () => {
       width: paddleWidth,
       height: paddleHeight,
       dy: 0,
-      speed: 3
+      speed: 2
     };
 
     // Draw functions
@@ -78,11 +77,11 @@ const PingPongGame: React.FC = () => {
 
     function drawScore() {
       if (!context || !canvas) return;
-      context.font = '32px Arial';
+      context.font = '16px Arial'; // Smaller font
       context.fillStyle = '#FFFFFF';
       context.textAlign = 'center';
-      context.fillText(player1Score.toString(), canvas.width / 4, 50);
-      context.fillText(player2Score.toString(), 3 * canvas.width / 4, 50);
+      context.fillText(player1Score.toString(), canvas.width / 4, 20); // Adjusted position
+      context.fillText(player2Score.toString(), 3 * canvas.width / 4, 20);
     }
 
     // AI for paddles
@@ -206,12 +205,12 @@ const PingPongGame: React.FC = () => {
       context.fillStyle = 'rgba(0, 0, 0, 0.5)';
       context.fillRect(0, 0, canvas.width, canvas.height);
       
-      context.font = '32px Arial';
+      context.font = '16px Arial'; // Smaller font
       context.fillStyle = '#FFFFFF';
       context.textAlign = 'center';
       context.fillText(`${player1Score > player2Score ? 'Left' : 'Right'} player wins!`, canvas.width / 2, canvas.height / 2);
-      context.font = '20px Arial';
-      context.fillText('Restarting game...', canvas.width / 2, canvas.height / 2 + 40);
+      context.font = '12px Arial'; // Smaller font
+      context.fillText('Restarting game...', canvas.width / 2, canvas.height / 2 + 20); // Adjusted position
     }
 
     function draw() {
@@ -254,7 +253,7 @@ const PingPongGame: React.FC = () => {
       if (!canvas) return;
       
       const parentWidth = canvas.parentElement?.clientWidth || canvas.width;
-      const scale = Math.min(1, parentWidth / 300); // Adjusted base width to 300px for smaller cards
+      const scale = Math.min(1, parentWidth / 220); // Adjusted base width for smaller cards
       
       canvas.style.transform = `scale(${scale})`;
       canvas.style.transformOrigin = 'top left';
@@ -276,8 +275,8 @@ const PingPongGame: React.FC = () => {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="relative bg-black rounded-lg overflow-hidden w-full max-w-full">
-        <canvas ref={canvasRef} width={300} height={200} className="bg-black w-full h-full" />
+      <div className="relative bg-black rounded-lg overflow-hidden w-full h-full">
+        <canvas ref={canvasRef} width={220} height={140} className="bg-black w-full h-full" />
       </div>
     </div>
   );
