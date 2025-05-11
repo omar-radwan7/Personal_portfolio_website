@@ -8,6 +8,7 @@ import NavBar from "@/components/NavBar";
 import Index from "@/pages/Index";
 import AboutMe from "@/pages/AboutMe";
 import NotFound from "@/pages/NotFound";
+import BackToTop from "@/components/BackToTop";
 
 // Add Font Awesome CSS
 const link = document.createElement('link');
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/about" element={<AboutMe />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <BackToTop />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
