@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 
 const PingPongGame: React.FC = () => {
@@ -21,6 +22,11 @@ const PingPongGame: React.FC = () => {
     const winningScore = 7;
     let gameOver = false;
     let resetTimeout: ReturnType<typeof setTimeout> | null = null;
+    
+    // Anti-stuck variables
+    let stuckCounter = 0;
+    let lastBallX = 0;
+    let lastBallY = 0;
 
     // Ball object
     let ball = {
@@ -114,6 +120,30 @@ const PingPongGame: React.FC = () => {
       if (paddle2.y + paddle2.height > canvas.height) paddle2.y = canvas.height - paddle2.height;
     }
 
+    // Anti-stuck detection
+    function checkIfStuck() {
+      // If ball position hasn't changed much over several frames, it might be stuck
+      const deltaX = Math.abs(ball.x - lastBallX);
+      const deltaY = Math.abs(ball.y - lastBallY);
+      
+      if (deltaX < 0.5 && deltaY < 0.5) {
+        stuckCounter++;
+        
+        // If ball appears stuck for too many frames, reset it
+        if (stuckCounter > 90) { // ~1.5 seconds at 60fps
+          // Give the ball a new direction to break it free
+          ball.dx = (Math.random() > 0.5 ? 1 : -1) * 3;
+          ball.dy = (Math.random() * 6 - 3);
+          stuckCounter = 0;
+        }
+      } else {
+        stuckCounter = 0;
+      }
+      
+      lastBallX = ball.x;
+      lastBallY = ball.y;
+    }
+
     // Collision detection
     function detectCollision() {
       // Collision with top and bottom walls
@@ -160,6 +190,7 @@ const PingPongGame: React.FC = () => {
       ball.y = canvas.height / 2;
       ball.dx = -ball.dx;
       ball.dy = Math.random() * 6 - 3; // Random vertical direction
+      stuckCounter = 0; // Reset stuck counter
     }
 
     function resetGame() {
@@ -205,6 +236,9 @@ const PingPongGame: React.FC = () => {
         
         // Detect collisions
         detectCollision();
+        
+        // Check if ball is stuck
+        checkIfStuck();
       } else {
         drawGameOver();
       }

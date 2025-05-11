@@ -28,9 +28,19 @@ const Hero: React.FC = () => {
 
   return (
     <section ref={heroRef} className="min-h-screen pt-20 pb-10 relative overflow-hidden flex items-center">
+      {/* Background styling */}
       <div className="wave-animation" style={{top: '10%', left: '0'}}></div>
       <div className="wave-animation" style={{top: '30%', left: '10%'}}></div>
       <div className="wave-animation" style={{bottom: '20%', right: '5%'}}></div>
+      
+      {/* New background image behind the name and title */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <img 
+          src="/lovable-uploads/473fc0ae-44e5-436f-9534-37b45dfcdd76.png" 
+          alt="Wave Background" 
+          className="max-w-full h-auto opacity-20"
+        />
+      </div>
       
       <div className="section-container relative z-10">
         <div className="max-w-3xl animate-fadeIn">
