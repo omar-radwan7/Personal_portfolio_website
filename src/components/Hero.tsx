@@ -33,14 +33,17 @@ const Hero: React.FC = () => {
       <div className="wave-animation" style={{top: '30%', left: '10%'}}></div>
       <div className="wave-animation" style={{bottom: '20%', right: '5%'}}></div>
       
-      {/* New background image behind the name and title */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <img 
-          src="/lovable-uploads/99d1d8a5-5872-439c-9e73-8aa2bc44b16c.png" 
-          alt="Wave Background" 
-          className="max-w-full h-auto opacity-20"
-        />
-      </div>
+      {/* Background image behind the name and title */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url('/lovable-uploads/b8425c89-7af0-4cdb-8fa8-09d58e451ce0.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.8
+        }}
+      ></div>
       
       <div className="section-container relative z-10">
         <div className="max-w-3xl animate-fadeIn">

@@ -4,16 +4,7 @@ import PingPongGame from './PingPongGame';
 
 const Projects: React.FC = () => {
   return (
-    <section 
-      id="projects" 
-      className="py-12 sm:py-16 md:py-20 relative"
-      style={{
-        backgroundImage: "url('/lovable-uploads/b8425c89-7af0-4cdb-8fa8-09d58e451ce0.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
+    <section id="projects" className="py-12 sm:py-16 md:py-20 bg-navyDark relative">
       <div className="section-container px-4 sm:px-6">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-10 md:mb-12 title-gradient">Projects</h2>
         
