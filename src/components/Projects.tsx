@@ -12,20 +12,20 @@ const Projects: React.FC = () => {
       <div className="section-container">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 title-gradient">Projects</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Ping Pong Game Project - Now smaller */}
-          <div className="bg-card rounded-xl overflow-hidden card-hover shadow-lg border border-purple/10">
-            <div className="p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Ping Pong Game Project - Smaller */}
+          <div className="bg-card rounded-lg overflow-hidden card-hover shadow-md border border-purple/10 flex flex-col h-full">
+            <div className="p-3">
               <h3 className="text-lg font-semibold mb-1">PingPong Game</h3>
-              <p className="text-gray-400 mb-3 text-sm">PingPong game With HTML, CSS & JavaScript</p>
-              <div className="mb-4 h-48 md:h-56">
+              <p className="text-gray-400 mb-2 text-xs">PingPong game With HTML, CSS & JavaScript</p>
+              <div className="mb-3 h-40 flex items-center justify-center">
                 <PingPongGame />
               </div>
-              <div className="flex justify-between items-center">
-                <div className="flex gap-1">
+              <div className="flex justify-between items-center mt-auto">
+                <div className="flex gap-1 flex-wrap">
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">HTML</span>
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">CSS</span>
-                  <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">JavaScript</span>
+                  <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">JS</span>
                 </div>
                 <a 
                   href="https://github.com/omar-radwan7/PingPongGame" 
@@ -39,23 +39,43 @@ const Projects: React.FC = () => {
             </div>
           </div>
           
-          {/* Weather App Project - Now smaller */}
-          <div className="bg-card rounded-xl overflow-hidden card-hover shadow-lg border border-purple/10">
-            <div className="p-4">
-              <div className="flex justify-center items-center mb-3 text-purple-light text-4xl">
+          {/* Weather App Project - Smaller */}
+          <div className="bg-card rounded-lg overflow-hidden card-hover shadow-md border border-purple/10 flex flex-col h-full">
+            <div className="p-3">
+              <div className="flex justify-center items-center mb-2 text-purple-light text-3xl">
                 <i className="fas fa-cloud"></i>
               </div>
               <h3 className="text-lg font-semibold mb-1 text-center">Weather Application</h3>
-              <p className="text-gray-400 mb-3 text-sm text-center">React & OpenWeatherMap API</p>
-              <div className="flex justify-center mb-4 h-20">
+              <p className="text-gray-400 mb-2 text-xs text-center">React & OpenWeatherMap API</p>
+              <div className="flex justify-center mb-3 h-14">
                 <span className="px-3 py-1 bg-purple/10 text-purple-light rounded text-sm flex items-center">Coming Soon</span>
               </div>
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center mt-auto">
                 <div className="flex gap-1">
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">React</span>
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">API</span>
                 </div>
                 <span className="text-gray-500 text-xs">In Development</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Add a third empty project card to demonstrate the grid */}
+          <div className="bg-card rounded-lg overflow-hidden card-hover shadow-md border border-purple/10 flex flex-col h-full">
+            <div className="p-3">
+              <div className="flex justify-center items-center mb-2 text-purple-light text-3xl">
+                <i className="fas fa-code"></i>
+              </div>
+              <h3 className="text-lg font-semibold mb-1 text-center">Coming Soon</h3>
+              <p className="text-gray-400 mb-2 text-xs text-center">Future Project</p>
+              <div className="flex justify-center mb-3 h-14">
+                <span className="px-3 py-1 bg-purple/10 text-purple-light rounded text-sm flex items-center">In Planning</span>
+              </div>
+              <div className="flex justify-between items-center mt-auto">
+                <div className="flex gap-1">
+                  <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">TBD</span>
+                </div>
+                <span className="text-gray-500 text-xs">Coming Soon</span>
               </div>
             </div>
           </div>

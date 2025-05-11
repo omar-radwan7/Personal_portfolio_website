@@ -36,7 +36,7 @@ const Hero: React.FC = () => {
       {/* New background image behind the name and title */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <img 
-          src="/lovable-uploads/473fc0ae-44e5-436f-9534-37b45dfcdd76.png" 
+          src="/lovable-uploads/99d1d8a5-5872-439c-9e73-8aa2bc44b16c.png" 
           alt="Wave Background" 
           className="max-w-full h-auto opacity-20"
         />
