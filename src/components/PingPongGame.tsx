@@ -13,9 +13,9 @@ const PingPongGame: React.FC = () => {
 
     // Game variables
     let animationFrameId: number;
-    const paddleHeight = 80;
-    const paddleWidth = 10;
-    const ballRadius = 7;
+    const paddleHeight = 60;
+    const paddleWidth = 8;
+    const ballRadius = 5;
     let player1Score = 0;
     let player2Score = 0;
     const winningScore = 7;
@@ -26,9 +26,9 @@ const PingPongGame: React.FC = () => {
     let ball = {
       x: canvas.width / 2,
       y: canvas.height / 2,
-      dx: 4,
-      dy: 4,
-      speed: 4,
+      dx: 3,
+      dy: 3,
+      speed: 3,
       radius: ballRadius
     };
 
@@ -39,7 +39,7 @@ const PingPongGame: React.FC = () => {
       width: paddleWidth,
       height: paddleHeight,
       dy: 0,
-      speed: 4
+      speed: 3
     };
 
     let paddle2 = {
@@ -48,7 +48,7 @@ const PingPongGame: React.FC = () => {
       width: paddleWidth,
       height: paddleHeight,
       dy: 0,
-      speed: 4
+      speed: 3
     };
 
     // Draw functions
@@ -220,7 +220,7 @@ const PingPongGame: React.FC = () => {
       if (!canvas) return;
       
       const parentWidth = canvas.parentElement?.clientWidth || canvas.width;
-      const scale = Math.min(1, parentWidth / 400); // Base width is 400px
+      const scale = Math.min(1, parentWidth / 300); // Adjusted base width to 300px for smaller cards
       
       canvas.style.transform = `scale(${scale})`;
       canvas.style.transformOrigin = 'top left';
@@ -242,8 +242,8 @@ const PingPongGame: React.FC = () => {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="relative bg-black rounded-lg overflow-hidden w-full max-w-md">
-        <canvas ref={canvasRef} width={400} height={300} className="bg-black w-full h-full" />
+      <div className="relative bg-black rounded-lg overflow-hidden w-full max-w-full">
+        <canvas ref={canvasRef} width={300} height={200} className="bg-black w-full h-full" />
       </div>
     </div>
   );
