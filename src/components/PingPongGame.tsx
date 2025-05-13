@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -33,6 +34,9 @@ const PingPongGame: React.FC = () => {
     
     // Increased paddle speed (from gameSpeed to 1.5x gameSpeed)
     const paddleSpeed = gameSpeed * 1.5;
+    
+    // Speed increase percentage per hit
+    const speedIncreasePerHit = 0.045; // 4.5%
 
     // Ball object
     let ball = {
@@ -163,6 +167,21 @@ const PingPongGame: React.FC = () => {
       lastBallY = ball.y;
     }
 
+    // Function to increase ball speed
+    function increaseBallSpeed() {
+      // Increase speed by 4.5%
+      ball.speed *= (1 + speedIncreasePerHit);
+      
+      // Update dx and dy while preserving direction
+      const directionX = ball.dx > 0 ? 1 : -1;
+      const directionY = ball.dy > 0 ? 1 : -1;
+      
+      // Calculate new dx and dy based on speed and current angle
+      const angle = Math.atan2(Math.abs(ball.dy), Math.abs(ball.dx));
+      ball.dx = Math.cos(angle) * ball.speed * directionX;
+      ball.dy = Math.sin(angle) * ball.speed * directionY;
+    }
+
     // Collision detection
     function detectCollision() {
       // Collision with top and bottom walls
@@ -175,10 +194,12 @@ const PingPongGame: React.FC = () => {
         ball.dx = -ball.dx;
         const hitPosition = (ball.y - (paddle1.y + paddle1.height / 2)) / (paddle1.height / 2);
         ball.dy = hitPosition * 5; // Adjust angle based on hit position
+        increaseBallSpeed(); // Increase ball speed on paddle hit
       } else if (ball.dx > 0 && ball.x + ball.radius > paddle2.x && ball.y > paddle2.y && ball.y < paddle2.y + paddle2.height) {
         ball.dx = -ball.dx;
         const hitPosition = (ball.y - (paddle2.y + paddle2.height / 2)) / (paddle2.height / 2);
         ball.dy = hitPosition * 5; // Adjust angle based on hit position
+        increaseBallSpeed(); // Increase ball speed on paddle hit
       }
 
       // Scoring
@@ -209,6 +230,8 @@ const PingPongGame: React.FC = () => {
       ball.y = canvas.height / 2;
       ball.dx = -ball.dx;
       ball.dy = Math.random() * 4 - 2; // Random vertical direction
+      // Reset ball speed to initial speed when a point is scored
+      ball.speed = gameSpeed;
       stuckCounter = 0; // Reset stuck counter
     }
 
