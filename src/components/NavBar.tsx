@@ -22,14 +22,14 @@ const NavBar: React.FC = () => {
 
   useEffect(() => {
     setMobileMenuOpen(false);
-    // Add page transition effect
+    // Add enhanced page transition effect
     setPageTransitionClass("opacity-0 translate-y-4");
     setIsTransitioning(true);
     
     const timer = setTimeout(() => {
       setPageTransitionClass("opacity-100 translate-y-0");
       setIsTransitioning(false);
-    }, 100);
+    }, 300); // Increased for smoother transition
     
     return () => clearTimeout(timer);
   }, [location.pathname]);
@@ -80,18 +80,6 @@ const NavBar: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link 
-                  to="/about" 
-                  className={cn(
-                    "nav-link transition-all duration-300", 
-                    isActive('/about') && "text-purple-light after:scale-x-100",
-                    !isActive('/about') && "hover:text-purple-light hover:translate-y-[-2px]"
-                  )}
-                >
-                  About Me
-                </Link>
-              </li>
-              <li>
                 <a 
                   href="/#services" 
                   className="nav-link transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]"
@@ -121,7 +109,7 @@ const NavBar: React.FC = () => {
       </header>
       
       <main className={cn(
-        "pt-24 transition-all duration-500 ease-in-out",
+        "pt-24 transition-all duration-700 ease-in-out", // Increased duration for smoother transitions
         pageTransitionClass
       )}>
         {/* Page content goes here */}

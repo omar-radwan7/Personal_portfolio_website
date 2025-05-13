@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -31,6 +30,9 @@ const PingPongGame: React.FC = () => {
 
     // Calculate game speed based on screen size
     const gameSpeed = isMobile ? 2 : 2.5;
+    
+    // Increased paddle speed (from gameSpeed to 1.5x gameSpeed)
+    const paddleSpeed = gameSpeed * 1.5;
 
     // Ball object
     let ball = {
@@ -49,7 +51,7 @@ const PingPongGame: React.FC = () => {
       width: paddleWidth,
       height: paddleHeight,
       dy: 0,
-      speed: gameSpeed
+      speed: paddleSpeed
     };
 
     let paddle2 = {
@@ -58,7 +60,7 @@ const PingPongGame: React.FC = () => {
       width: paddleWidth,
       height: paddleHeight,
       dy: 0,
-      speed: gameSpeed
+      speed: paddleSpeed
     };
 
     // Draw functions
