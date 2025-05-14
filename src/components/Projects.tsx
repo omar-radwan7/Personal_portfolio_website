@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PingPongGame from './PingPongGame';
 
 const Projects: React.FC = () => {
@@ -23,14 +24,12 @@ const Projects: React.FC = () => {
                   <span className="px-1 sm:px-2 py-0.5 sm:py-1 bg-purple/20 text-purple-light rounded text-xs">CSS</span>
                   <span className="px-1 sm:px-2 py-0.5 sm:py-1 bg-purple/20 text-purple-light rounded text-xs">JS</span>
                 </div>
-                <a 
-                  href="https://github.com/omar-radwan7/PingPongGame" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <Link 
+                  to="/project/pingpong" 
                   className="text-purple-light hover:text-purple text-xs sm:text-sm"
                 >
                   More Details
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -54,7 +53,12 @@ const Projects: React.FC = () => {
                   <span className="px-1 sm:px-2 py-0.5 sm:py-1 bg-purple/20 text-purple-light rounded text-xs">React</span>
                   <span className="px-1 sm:px-2 py-0.5 sm:py-1 bg-purple/20 text-purple-light rounded text-xs">API</span>
                 </div>
-                <span className="text-purple-light text-xs sm:text-sm">Coming Soon</span>
+                <Link 
+                  to="/project/weather" 
+                  className="text-purple-light hover:text-purple text-xs sm:text-sm"
+                >
+                  More Details
+                </Link>
               </div>
             </div>
           </div>

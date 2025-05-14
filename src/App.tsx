@@ -9,6 +9,7 @@ import Index from "@/pages/Index";
 import AboutMe from "@/pages/AboutMe";
 import NotFound from "@/pages/NotFound";
 import BackToTop from "@/components/BackToTop";
+import ProjectDetail from "@/pages/ProjectDetail";
 
 // Add Font Awesome CSS
 const link = document.createElement('link');
@@ -28,6 +29,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<AboutMe />} />
+          <Route path="/project/:id" element={<ProjectDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <BackToTop />
