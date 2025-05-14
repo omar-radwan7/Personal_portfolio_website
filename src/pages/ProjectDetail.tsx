@@ -49,7 +49,7 @@ const ProjectDetail: React.FC = () => {
           <h1 className="text-2xl sm:text-3xl font-bold mb-4">Project Not Found</h1>
           <p className="mb-6">The project you are looking for doesn't exist or has been removed.</p>
           <Link to="/" className="inline-flex items-center text-purple-light hover:text-purple">
-            <ArrowRight className="mr-2 h-4 w-4" />
+            <ArrowRight className="mr-2 h-4 w-4 rotate-180" />
             Back to Home
           </Link>
         </div>
@@ -61,7 +61,14 @@ const ProjectDetail: React.FC = () => {
     <div className="min-h-screen bg-navyDark flex flex-col">
       <div className="flex-grow">
         <div className="max-w-4xl mx-auto px-4 py-12 sm:py-16">
-          <Link to="/#projects" className="inline-flex items-center text-purple-light hover:text-purple mb-6">
+          <Link 
+            to="/#projects" 
+            className="inline-flex items-center text-purple-light hover:text-purple mb-6"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/#projects";
+            }}
+          >
             <ArrowRight className="mr-2 h-4 w-4 rotate-180" />
             Back to Projects
           </Link>

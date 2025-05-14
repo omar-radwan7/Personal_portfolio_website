@@ -6,8 +6,11 @@ import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
+import { useLocation } from 'react-router-dom';
 
 const Index: React.FC = () => {
+  const location = useLocation();
+  
   useEffect(() => {
     // Smooth scrolling for anchor links
     const handleAnchorClick = (e: MouseEvent) => {
@@ -33,10 +36,28 @@ const Index: React.FC = () => {
     
     document.addEventListener('click', handleAnchorClick);
     
+    // Handle direct navigation to hash
+    if (location.hash) {
+      setTimeout(() => {
+        const id = location.hash.slice(1);
+        const element = document.getElementById(id);
+        
+        if (element) {
+          const navHeight = 80; // Approximate navbar height
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          
+          window.scrollTo({
+            top: elementPosition - navHeight,
+            behavior: 'smooth'
+          });
+        }
+      }, 500); // Small delay to ensure DOM is ready
+    }
+    
     return () => {
       document.removeEventListener('click', handleAnchorClick);
     };
-  }, []);
+  }, [location]);
   
   return (
     <div className="min-h-screen bg-navyDark">
