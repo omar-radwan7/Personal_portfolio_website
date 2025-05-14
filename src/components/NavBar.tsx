@@ -7,8 +7,6 @@ const NavBar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [pageTransitionClass, setPageTransitionClass] = useState("opacity-100");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,16 +20,6 @@ const NavBar: React.FC = () => {
 
   useEffect(() => {
     setMobileMenuOpen(false);
-    // Add enhanced page transition effect
-    setPageTransitionClass("opacity-0 translate-y-4");
-    setIsTransitioning(true);
-    
-    const timer = setTimeout(() => {
-      setPageTransitionClass("opacity-100 translate-y-0");
-      setIsTransitioning(false);
-    }, 300); // Increased for smoother transition
-    
-    return () => clearTimeout(timer);
   }, [location.pathname]);
 
   const isActive = (path: string) => {
@@ -108,10 +96,7 @@ const NavBar: React.FC = () => {
         </div>
       </header>
       
-      <main className={cn(
-        "pt-24 transition-all duration-700 ease-in-out", // Increased duration for smoother transitions
-        pageTransitionClass
-      )}>
+      <main className="pt-24">
         {/* Page content goes here */}
       </main>
     </>

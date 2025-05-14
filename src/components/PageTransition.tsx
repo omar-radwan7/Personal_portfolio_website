@@ -13,7 +13,7 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
   const [transitionStage, setTransitionStage] = useState('fadeIn');
   
   useEffect(() => {
-    if (location !== displayLocation) {
+    if (location.pathname !== displayLocation.pathname) {
       setTransitionStage('fadeOut');
       
       const timeout = setTimeout(() => {
