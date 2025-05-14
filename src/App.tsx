@@ -10,6 +10,7 @@ import AboutMe from "@/pages/AboutMe";
 import NotFound from "@/pages/NotFound";
 import BackToTop from "@/components/BackToTop";
 import ProjectDetail from "@/pages/ProjectDetail";
+import PageTransition from "@/components/PageTransition";
 
 // Add Font Awesome CSS
 const link = document.createElement('link');
@@ -26,12 +27,14 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <NavBar />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<AboutMe />} />
-          <Route path="/project/:id" element={<ProjectDetail />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <PageTransition>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<AboutMe />} />
+            <Route path="/project/:id" element={<ProjectDetail />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </PageTransition>
         <BackToTop />
       </BrowserRouter>
     </TooltipProvider>
