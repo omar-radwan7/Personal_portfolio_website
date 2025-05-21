@@ -24,25 +24,38 @@ const BouncingQ: React.FC = () => {
     
     // Q parameters
     let x = canvas.width / 2;
-    let y = canvas.height / 2;
-    let dx = 2;
-    let dy = -2;
-    const radius = Math.min(canvas.width, canvas.height) / 10;
+    const radius = Math.min(canvas.width, canvas.height) / 8; // Increased size
+    
+    // Animation parameters
+    let time = 0;
+    const amplitude = 30; // Height of bounce
+    const period = 3; // Speed of bounce (higher = slower)
     
     // Animation function
     const animate = () => {
       if (!ctx || !canvas) return;
       
       // Clear canvas
-      ctx.fillStyle = '#000000';
+      ctx.fillStyle = '#1A1F2C'; // Darker purple background that fits website theme
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
+      // Calculate y position with smooth sine wave for bouncing
+      time += 0.01;
+      const y = canvas.height / 2 + Math.sin(time / period) * amplitude;
+      
+      // Draw shadow
+      const shadowY = canvas.height / 2 + 40;
+      const shadowSize = radius * (0.8 - Math.abs(Math.sin(time / period)) * 0.3);
+      ctx.beginPath();
+      ctx.ellipse(x, shadowY, shadowSize, shadowSize / 3, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+      ctx.fill();
+      
       // Draw Q letter
-      ctx.font = `bold ${radius * 1.5}px Arial`;
+      ctx.font = `bold ${radius * 2}px Arial`; // Bigger letter
       ctx.fillStyle = '#9b87f5';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('Q', x, y);
       
       // Add glow effect
       ctx.shadowColor = '#9b87f5';
@@ -50,36 +63,22 @@ const BouncingQ: React.FC = () => {
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
       
+      ctx.fillText('Q', x, y);
+      ctx.shadowBlur = 0; // Reset shadow for other elements
+      
       // Add smaller dots around Q
       for (let i = 0; i < 5; i++) {
         const angle = Math.random() * Math.PI * 2;
         const distance = radius * (0.8 + Math.random() * 0.5);
         const dotX = x + Math.cos(angle) * distance;
         const dotY = y + Math.sin(angle) * distance;
-        const dotSize = radius * 0.1;
+        const dotSize = radius * 0.12; // Slightly bigger dots
         
         ctx.beginPath();
         ctx.arc(dotX, dotY, dotSize, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(155, 135, 245, 0.6)';
         ctx.fill();
       }
-      
-      // Boundary check and position update
-      if (x + radius > canvas.width || x - radius < 0) {
-        dx = -dx;
-      }
-      if (y + radius > canvas.height || y - radius < 0) {
-        dy = -dy;
-      }
-      
-      // Add slight gravity effect
-      dy += 0.05;
-      if (y + radius > canvas.height) {
-        dy = -dy * 0.8; // Bouncing effect with damping
-      }
-      
-      x += dx;
-      y += dy;
       
       requestAnimationFrame(animate);
     };
@@ -95,7 +94,7 @@ const BouncingQ: React.FC = () => {
   return (
     <canvas 
       ref={canvasRef} 
-      className="w-full h-full bg-black"
+      className="w-full h-full bg-[#1A1F2C]"
       style={{ display: 'block' }}
     />
   );
