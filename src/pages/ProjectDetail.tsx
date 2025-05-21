@@ -29,6 +29,14 @@ const projectsData: Project[] = [
     status: 'complete'
   },
   {
+    id: 'aimodel',
+    title: 'AI Language Model',
+    subtitle: 'Interactive AI Assistant with React',
+    description: 'A modern AI language assistant interface built with React. Features an interactive design with a bouncing "Q" animation representing the AI thinking process. This project demonstrates advanced animation techniques and responsive UI design principles.',
+    technologies: ['React', 'TypeScript', 'Animation'],
+    status: 'coming-soon'
+  },
+  {
     id: 'weather',
     title: 'Weather App',
     subtitle: 'React & OpenWeatherMap API',
