@@ -30,10 +30,10 @@ const projectsData: Project[] = [
   },
   {
     id: 'aimodel',
-    title: 'AI Language Model',
+    title: 'Qorix AI Assistant',
     subtitle: 'Interactive AI Assistant with React',
-    description: 'A modern AI language assistant interface built with React. Features an interactive design with a bouncing "Q" animation representing the AI thinking process. This project demonstrates advanced animation techniques and responsive UI design principles.',
-    technologies: ['React', 'TypeScript', 'Animation'],
+    description: 'Qorix AI Assistant is a modern, browser-based AI chat application built with TypeScript, React, and Tailwind CSS. It offers users an intuitive interface to interact with an AI assistant powered by the OpenRouter API, using the Deepseek model for intelligent conversations. Designed for privacy and simplicity, Qorix runs entirely client-side — with no backend or database — storing chat history, API keys, and settings securely in the browser\'s localStorage.\n\nUsers can ask questions, upload files for analysis, and manage their own API key directly in-app. Features include message history, file upload, rate limit indicators, dark/light mode support, and full mobile responsiveness. Qorix is ideal for developers and curious users who want a lightweight, flexible AI chat experience without relying on cloud-based user accounts or external storage.\n\nTo get started, users just need to sign up at OpenRouter.ai, create an API key, and paste it into the app settings. Simple, private, and fully in your control.',
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'OpenRouter API'],
     status: 'coming-soon'
   },
   {
@@ -92,6 +92,13 @@ const ProjectDetail: React.FC = () => {
                         <div className="text-white text-xl">PingPong Game Preview</div>
                       </div>
                     </div>
+                  ) : project.id === 'aimodel' ? (
+                    <div className="w-full h-full">
+                      {/* Display the BouncingQ animation for AI model */}
+                      <div className="w-full h-full">
+                        {/* This will be replaced with the actual component when rendered */}
+                      </div>
+                    </div>
                   ) : (
                     <div className="flex justify-center items-center text-white">
                       <i className="fas fa-cloud text-5xl"></i>
@@ -114,7 +121,7 @@ const ProjectDetail: React.FC = () => {
                 ))}
               </div>
               
-              <div className="prose prose-invert max-w-none mb-8">
+              <div className="prose prose-invert max-w-none mb-8 whitespace-pre-line">
                 <p>{project.description}</p>
               </div>
               

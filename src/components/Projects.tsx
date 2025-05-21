@@ -35,7 +35,7 @@ const Projects: React.FC = () => {
             </div>
           </div>
           
-          {/* AI Language Model Project */}
+          {/* Qorix AI Assistant Project */}
           <div className="bg-card rounded-lg overflow-hidden shadow-md border border-purple/10 flex flex-col h-full">
             <div className="w-full bg-black flex items-center justify-center aspect-[4/3] sm:aspect-video">
               <div className="w-full h-full">
@@ -44,12 +44,12 @@ const Projects: React.FC = () => {
             </div>
             <div className="p-4 sm:p-5 bg-[#1e2235] flex-grow">
               <p className="text-xs sm:text-sm text-gray-400">Interactive AI Assistant with React</p>
-              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">AI Language Model</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Qorix AI Assistant</h3>
               <div className="flex justify-between items-center">
                 <div className="flex gap-1 sm:gap-2 flex-wrap">
                   <span className="px-1 sm:px-2 py-0.5 sm:py-1 bg-purple/20 text-purple-light rounded text-xs">React</span>
                   <span className="px-1 sm:px-2 py-0.5 sm:py-1 bg-purple/20 text-purple-light rounded text-xs">TypeScript</span>
-                  <span className="px-1 sm:px-2 py-0.5 sm:py-1 bg-purple/20 text-purple-light rounded text-xs">Animation</span>
+                  <span className="px-1 sm:px-2 py-0.5 sm:py-1 bg-purple/20 text-purple-light rounded text-xs">Tailwind</span>
                 </div>
                 <Link 
                   to="/project/aimodel" 

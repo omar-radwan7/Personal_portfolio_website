@@ -29,7 +29,7 @@ const BouncingQ: React.FC = () => {
     // Animation parameters
     let time = 0;
     const amplitude = 30; // Height of bounce
-    const period = 3; // Speed of bounce (higher = slower)
+    const period = 5; // Slower bounce (higher = slower)
     
     // Animation function
     const animate = () => {
@@ -40,7 +40,7 @@ const BouncingQ: React.FC = () => {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       // Calculate y position with smooth sine wave for bouncing
-      time += 0.01;
+      time += 0.008; // Slower animation speed
       const y = canvas.height / 2 + Math.sin(time / period) * amplitude;
       
       // Draw shadow
