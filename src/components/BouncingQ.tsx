@@ -24,12 +24,12 @@ const BouncingQ: React.FC = () => {
     
     // Q parameters
     let x = canvas.width / 2;
-    const radius = Math.min(canvas.width, canvas.height) / 8; // Increased size
+    const radius = Math.min(canvas.width, canvas.height) / 6; // Even bigger Q
     
     // Animation parameters
     let time = 0;
     const amplitude = 30; // Height of bounce
-    const period = 5; // Slower bounce (higher = slower)
+    const period = 3; // Faster bounce (lower = faster)
     
     // Animation function
     const animate = () => {
@@ -40,7 +40,7 @@ const BouncingQ: React.FC = () => {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       // Calculate y position with smooth sine wave for bouncing
-      time += 0.008; // Slower animation speed
+      time += 0.012; // Faster animation speed
       const y = canvas.height / 2 + Math.sin(time / period) * amplitude;
       
       // Draw shadow
@@ -52,7 +52,7 @@ const BouncingQ: React.FC = () => {
       ctx.fill();
       
       // Draw Q letter
-      ctx.font = `bold ${radius * 2}px Arial`; // Bigger letter
+      ctx.font = `bold ${radius * 2.5}px Arial`; // Even bigger letter
       ctx.fillStyle = '#9b87f5';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -65,20 +65,6 @@ const BouncingQ: React.FC = () => {
       
       ctx.fillText('Q', x, y);
       ctx.shadowBlur = 0; // Reset shadow for other elements
-      
-      // Add smaller dots around Q
-      for (let i = 0; i < 5; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const distance = radius * (0.8 + Math.random() * 0.5);
-        const dotX = x + Math.cos(angle) * distance;
-        const dotY = y + Math.sin(angle) * distance;
-        const dotSize = radius * 0.12; // Slightly bigger dots
-        
-        ctx.beginPath();
-        ctx.arc(dotX, dotY, dotSize, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(155, 135, 245, 0.6)';
-        ctx.fill();
-      }
       
       requestAnimationFrame(animate);
     };
