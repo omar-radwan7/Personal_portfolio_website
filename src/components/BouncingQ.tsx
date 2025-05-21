@@ -1,8 +1,10 @@
 
 import React, { useEffect, useRef } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const BouncingQ: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -24,7 +26,7 @@ const BouncingQ: React.FC = () => {
     
     // Q parameters
     let x = canvas.width / 2;
-    const radius = Math.min(canvas.width, canvas.height) / 6; // Even bigger Q
+    const radius = Math.min(canvas.width, canvas.height) / (isMobile ? 8 : 6); // Responsive size based on device
     
     // Animation parameters
     let time = 0;
@@ -35,9 +37,12 @@ const BouncingQ: React.FC = () => {
     const animate = () => {
       if (!ctx || !canvas) return;
       
-      // Clear canvas
+      // Clear canvas and recenter x position on each frame
       ctx.fillStyle = '#1A1F2C'; // Darker purple background that fits website theme
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Update x position to always be at center
+      x = canvas.width / 2;
       
       // Calculate y position with smooth sine wave for bouncing
       time += 0.012; // Faster animation speed
@@ -52,7 +57,8 @@ const BouncingQ: React.FC = () => {
       ctx.fill();
       
       // Draw Q letter
-      ctx.font = `bold ${radius * 2.5}px Arial`; // Even bigger letter
+      const fontSize = isMobile ? radius * 3 : radius * 2.5; // Bigger on mobile
+      ctx.font = `bold ${fontSize}px Arial`;
       ctx.fillStyle = '#9b87f5';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -75,7 +81,7 @@ const BouncingQ: React.FC = () => {
     return () => {
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, []);
+  }, [isMobile]);
   
   return (
     <canvas 
