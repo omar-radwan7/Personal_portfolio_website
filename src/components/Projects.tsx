@@ -73,7 +73,7 @@ const Projects: React.FC = () => {
               </div>
             </div>
             <div className="p-4 sm:p-5 bg-[#1e2235] flex-grow">
-              <p className="text-xs sm:text-sm text-gray-400">React & OpenWeatherMap API</p>
+              <p className="text-xs sm:text-sm text-gray-400">Flutter & OpenWeatherMap API</p>
               <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Weather App</h3>
               <div className="flex justify-between items-center">
                 <div className="flex gap-1 sm:gap-2">
