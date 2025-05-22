@@ -32,21 +32,23 @@ const AboutMe: React.FC = () => {
         </Link>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* About Me Section */}
+          {/* About Me Section - Updated text */}
           <div className="lg:col-span-1">
             <div className="bg-card rounded-xl p-6 shadow-lg sticky top-24">
               <h1 className="text-3xl font-bold mb-6 title-gradient">About Me</h1>
               
               <div className="mb-6">
                 <p className="text-gray-300 leading-relaxed">
-                  Hello there, My name is Omar Radwan. I was born in Egypt on October 5th, 2004, and I graduated from Port Said American School.
+                  Hi, I'm Omar Radwan — a passionate student at the University of Europe specializing in Information Technology.
                 </p>
                 <p className="text-gray-300 leading-relaxed mt-4">
-                  I am passionate about continuous learning and have a deep interest in the field of Information Technology.
-                  My journey in software engineering is driven by curiosity and enthusiasm for creating and exploring new technologies.
+                  Born in Egypt on October 5th, 2004, I've always been driven by curiosity and a love for solving problems through technology. My journey into software engineering is fueled by a genuine enthusiasm for learning, building, and exploring innovative digital solutions.
                 </p>
                 <p className="text-gray-300 leading-relaxed mt-4">
-                  I am always eager to expand my skills and stay up to date with the latest advancements in the IT world.
+                  I'm particularly interested in areas like web development, AI, and cloud computing, and I actively seek opportunities to deepen my skills and stay current with industry trends. Whether it's writing clean code, contributing to open-source projects, or experimenting with new tools, I'm always pushing to grow as a developer.
+                </p>
+                <p className="text-gray-300 leading-relaxed mt-4">
+                  Let's build the future, one line of code at a time.
                 </p>
               </div>
               
