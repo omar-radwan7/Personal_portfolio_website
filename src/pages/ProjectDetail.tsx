@@ -34,7 +34,8 @@ const projectsData: Project[] = [
     subtitle: 'Interactive AI Assistant with React',
     description: 'Qorix AI Assistant is a modern, browser-based AI chat application built with TypeScript, React, and Tailwind CSS. It offers users an intuitive interface to interact with an AI assistant powered by the OpenRouter API, using the Deepseek model for intelligent conversations. Designed for privacy and simplicity, Qorix runs entirely client-side — with no backend or database — storing chat history, API keys, and settings securely in the browser\'s localStorage.\n\nUsers can ask questions, upload files for analysis, and manage their own API key directly in-app. Features include message history, file upload, rate limit indicators, dark/light mode support, and full mobile responsiveness. Qorix is ideal for developers and curious users who want a lightweight, flexible AI chat experience without relying on cloud-based user accounts or external storage.\n\nTo get started, users just need to sign up at OpenRouter.ai, create an API key, and paste it into the app settings. Simple, private, and fully in your control.',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'OpenRouter API'],
-    status: 'coming-soon'
+    githubLink: 'https://github.com/omar-radwan7/QorixAI_Language_Model',
+    status: 'complete'  // Changed from 'coming-soon' to 'complete'
   },
   {
     id: 'weather',
