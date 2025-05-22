@@ -61,7 +61,7 @@ const Projects: React.FC = () => {
             </div>
           </div>
           
-          {/* Weather App Project */}
+          {/* Weather App Project - Updated Flutter instead of React */}
           <div className="bg-card rounded-lg overflow-hidden shadow-md border border-purple/10 flex flex-col h-full">
             <div className="w-full bg-[#1c2133] flex items-center justify-center aspect-[4/3] sm:aspect-video">
               <div className="text-center">
@@ -77,7 +77,7 @@ const Projects: React.FC = () => {
               <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Weather App</h3>
               <div className="flex justify-between items-center">
                 <div className="flex gap-1 sm:gap-2">
-                  <span className="px-1 sm:px-2 py-0.5 sm:py-1 bg-purple/20 text-purple-light rounded text-xs">React</span>
+                  <span className="px-1 sm:px-2 py-0.5 sm:py-1 bg-purple/20 text-purple-light rounded text-xs">Flutter</span>
                   <span className="px-1 sm:px-2 py-0.5 sm:py-1 bg-purple/20 text-purple-light rounded text-xs">API</span>
                 </div>
                 <Link 

@@ -40,9 +40,9 @@ const projectsData: Project[] = [
   {
     id: 'weather',
     title: 'Weather App',
-    subtitle: 'React & OpenWeatherMap API',
+    subtitle: 'Flutter & OpenWeatherMap API',
     description: 'A responsive weather application that provides real-time weather information using the OpenWeatherMap API. Users can search for locations and view current weather conditions, forecasts, and meteorological data presented in an intuitive and visually appealing interface.',
-    technologies: ['React', 'API'],
+    technologies: ['Flutter', 'API'],
     status: 'coming-soon'
   }
 ];
