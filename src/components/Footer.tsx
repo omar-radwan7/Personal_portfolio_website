@@ -19,9 +19,6 @@ const Footer: React.FC = () => {
           <a href="https://github.com/omar-radwan7" target="_blank" rel="noopener noreferrer" className="social-icon">
             <i className="fab fa-github"></i>
           </a>
-          <a href="https://www.instagram.com/omarobrashy/?__pwa=1#" target="_blank" rel="noopener noreferrer" className="social-icon">
-            <i className="fab fa-instagram"></i>
-          </a>
         </div>
       </div>
     </footer>
