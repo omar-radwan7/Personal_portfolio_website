@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -39,16 +38,13 @@ const AboutMe: React.FC = () => {
               
               <div className="mb-6">
                 <p className="text-gray-300 leading-relaxed">
-                  Hi, I'm Omar Radwan — a passionate student at the University of Europe specializing in Information Technology.
+                  I'm Omar Radwan, a student at the University of Europe studying Information Technology.
                 </p>
                 <p className="text-gray-300 leading-relaxed mt-4">
-                  Born in Egypt on October 5th, 2004, I've always been driven by curiosity and a love for solving problems through technology. My journey into software engineering is fueled by a genuine enthusiasm for learning, building, and exploring innovative digital solutions.
+                  I was born in Egypt on October 5th, 2004. I've always had an interest in how technology works and how it can be used to solve real problems. That curiosity led me toward software development.
                 </p>
                 <p className="text-gray-300 leading-relaxed mt-4">
-                  I'm particularly interested in areas like web development, AI, and cloud computing, and I actively seek opportunities to deepen my skills and stay current with industry trends. Whether it's writing clean code, contributing to open-source projects, or experimenting with new tools, I'm always pushing to grow as a developer.
-                </p>
-                <p className="text-gray-300 leading-relaxed mt-4">
-                  Let's build the future, one line of code at a time.
+                  I focus on web development, AI, and cloud computing. I'm adaptable with AI tools and know how to use them to improve my work, whether it's writing code, learning new concepts, or building projects more efficiently.
                 </p>
               </div>
               
