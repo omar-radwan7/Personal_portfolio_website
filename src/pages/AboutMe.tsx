@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -71,7 +72,7 @@ const AboutMe: React.FC = () => {
                 {/* Personal Information */}
                 <div className="text-center mb-8">
                   <h3 className="text-xl font-semibold mb-2">Omar Radwan</h3>
-                  <p className="text-gray-400">Alfred Jung Straße, Berlin 10369</p>
+                  <p className="text-gray-400">Berlin, Germany</p>
                   <p className="text-gray-400">+491777588642 - omarobrashy2004@gmail.com</p>
                   <div className="mt-2">
                     <p className="text-gray-400">
