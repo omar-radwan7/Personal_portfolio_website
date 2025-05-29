@@ -10,24 +10,24 @@ const Projects: React.FC = () => {
       <div className="section-container px-4 sm:px-6">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-10 md:mb-12 title-gradient">Projects</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
           {/* Ping Pong Game Project */}
           <div className="bg-card rounded-lg overflow-hidden shadow-md border border-purple/10 flex flex-col h-full">
             <div className="w-full bg-black flex items-center justify-center aspect-video">
               <PingPongGame />
             </div>
-            <div className="p-6 bg-[#1e2235] flex-grow">
-              <p className="text-sm text-gray-400">PingPong game With HTML, CSS & JavaScript</p>
-              <h3 className="text-xl font-semibold mb-3">PingPong Game</h3>
+            <div className="p-4 bg-[#1e2235] flex-grow">
+              <p className="text-xs text-gray-400">PingPong game With HTML, CSS & JavaScript</p>
+              <h3 className="text-lg font-semibold mb-2">PingPong Game</h3>
               <div className="flex justify-between items-center">
-                <div className="flex gap-2 flex-wrap">
+                <div className="flex gap-1 flex-wrap">
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">HTML</span>
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">CSS</span>
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">JS</span>
                 </div>
                 <Link 
                   to="/project/pingpong" 
-                  className="text-purple-light hover:text-purple text-sm"
+                  className="text-purple-light hover:text-purple text-xs"
                 >
                   More Details
                 </Link>
@@ -42,18 +42,18 @@ const Projects: React.FC = () => {
                 <BouncingQ />
               </div>
             </div>
-            <div className="p-6 bg-[#1e2235] flex-grow">
-              <p className="text-sm text-gray-400">Interactive AI Assistant with React</p>
-              <h3 className="text-xl font-semibold mb-3">Qorix AI Assistant</h3>
+            <div className="p-4 bg-[#1e2235] flex-grow">
+              <p className="text-xs text-gray-400">Interactive AI Assistant with React</p>
+              <h3 className="text-lg font-semibold mb-2">Qorix AI Assistant</h3>
               <div className="flex justify-between items-center">
-                <div className="flex gap-2 flex-wrap">
+                <div className="flex gap-1 flex-wrap">
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">React</span>
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">TypeScript</span>
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">Tailwind</span>
                 </div>
                 <Link 
                   to="/project/aimodel" 
-                  className="text-purple-light hover:text-purple text-sm"
+                  className="text-purple-light hover:text-purple text-xs"
                 >
                   More Details
                 </Link>
@@ -66,23 +66,23 @@ const Projects: React.FC = () => {
             <div className="w-full bg-[#1c2133] flex items-center justify-center aspect-video">
               <div className="text-center">
                 <div className="flex justify-center items-center mb-2 text-white">
-                  <i className="fas fa-cloud text-4xl md:text-5xl"></i>
-                  <i className="fas fa-thermometer-half text-2xl md:text-3xl ml-2"></i>
+                  <i className="fas fa-cloud text-3xl md:text-4xl"></i>
+                  <i className="fas fa-thermometer-half text-xl md:text-2xl ml-2"></i>
                 </div>
-                <h3 className="text-lg font-semibold mb-1">Weather Application</h3>
+                <h3 className="text-sm font-semibold mb-1">Weather Application</h3>
               </div>
             </div>
-            <div className="p-6 bg-[#1e2235] flex-grow">
-              <p className="text-sm text-gray-400">Flutter & OpenWeatherMap API</p>
-              <h3 className="text-xl font-semibold mb-3">Weather App</h3>
+            <div className="p-4 bg-[#1e2235] flex-grow">
+              <p className="text-xs text-gray-400">Flutter & OpenWeatherMap API</p>
+              <h3 className="text-lg font-semibold mb-2">Weather App</h3>
               <div className="flex justify-between items-center">
-                <div className="flex gap-2">
+                <div className="flex gap-1">
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">Flutter</span>
                   <span className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">API</span>
                 </div>
                 <Link 
                   to="/project/weather" 
-                  className="text-purple-light hover:text-purple text-sm"
+                  className="text-purple-light hover:text-purple text-xs"
                 >
                   More Details
                 </Link>
