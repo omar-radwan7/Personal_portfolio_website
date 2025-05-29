@@ -10,7 +10,7 @@ const Projects: React.FC = () => {
       <div className="section-container px-4 sm:px-6">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-10 md:mb-12 title-gradient">Projects</h2>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
           {/* Ping Pong Game Project */}
           <div className="bg-card rounded-lg overflow-hidden shadow-md border border-purple/10 flex flex-col h-full">
             <div className="w-full bg-black flex items-center justify-center aspect-video">
@@ -61,8 +61,8 @@ const Projects: React.FC = () => {
             </div>
           </div>
           
-          {/* Weather App Project - Updated Flutter instead of React */}
-          <div className="bg-card rounded-lg overflow-hidden shadow-md border border-purple/10 flex flex-col h-full lg:col-span-2 lg:max-w-md lg:mx-auto">
+          {/* Weather App Project */}
+          <div className="bg-card rounded-lg overflow-hidden shadow-md border border-purple/10 flex flex-col h-full">
             <div className="w-full bg-[#1c2133] flex items-center justify-center aspect-video">
               <div className="text-center">
                 <div className="flex justify-center items-center mb-2 text-white">
