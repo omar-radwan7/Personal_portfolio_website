@@ -47,8 +47,8 @@ const Hero: React.FC = () => {
       ></div>
       
       <div className="section-container relative z-10">
-        <div className="flex items-center justify-between w-full">
-          <div className="max-w-3xl animate-fadeIn">
+        <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-8">
+          <div className="max-w-3xl animate-fadeIn flex-1">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
               Hello, I'm <span className="title-gradient">Omar</span>
             </h2>
@@ -87,8 +87,8 @@ const Hero: React.FC = () => {
             </div>
           </div>
           
-          {/* Robot positioned to the right */}
-          <div className="hidden lg:block ml-8">
+          {/* Robot positioned to the right - now visible on all screen sizes */}
+          <div className="flex-shrink-0 order-first lg:order-last">
             <RobotHead />
           </div>
         </div>
