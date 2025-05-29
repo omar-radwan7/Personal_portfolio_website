@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Sphere, Box, Cylinder } from '@react-three/drei';
 import * as THREE from 'three';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface RobotMeshProps {
   mousePosition: { x: number; y: number };
@@ -21,184 +22,128 @@ const RobotMesh: React.FC<RobotMeshProps> = ({ mousePosition }) => {
     const x = (mousePosition.x / window.innerWidth) * 2 - 1;
     const y = -(mousePosition.y / window.innerHeight) * 2 + 1;
     
-    // Move eyes to follow mouse
-    const eyeMovementRange = 0.15;
-    leftEyeRef.current.position.x = -0.25 + x * eyeMovementRange;
-    leftEyeRef.current.position.y = 0.1 + y * eyeMovementRange;
-    rightEyeRef.current.position.x = 0.25 + x * eyeMovementRange;
-    rightEyeRef.current.position.y = 0.1 + y * eyeMovementRange;
+    // Move eyes to follow mouse with correct positioning
+    const eyeMovementRange = 0.08;
+    leftEyeRef.current.position.x = -0.15 + x * eyeMovementRange;
+    leftEyeRef.current.position.y = 0.05 + y * eyeMovementRange;
+    rightEyeRef.current.position.x = 0.15 + x * eyeMovementRange;
+    rightEyeRef.current.position.y = 0.05 + y * eyeMovementRange;
     
     // Rotate head slightly
     headRef.current.rotation.y = x * 0.1;
     headRef.current.rotation.x = -y * 0.05;
     
     // Gentle floating animation
-    groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.1;
-    groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.05;
+    groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.05;
+    groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.03;
   });
 
   return (
     <group ref={groupRef} position={[0, 0, 0]}>
-      {/* Main Head (Round Helmet) */}
-      <mesh ref={headRef} position={[0, 1, 0]}>
-        <sphereGeometry args={[0.8, 32, 32]} />
-        <meshStandardMaterial color="#e8e8e8" metalness={0.1} roughness={0.3} />
+      {/* Main Head (Round like in the image) */}
+      <mesh ref={headRef} position={[0, 0.8, 0]}>
+        <sphereGeometry args={[0.5, 32, 32]} />
+        <meshStandardMaterial color="#f8f8f8" metalness={0.1} roughness={0.2} />
       </mesh>
       
-      {/* Head Inner Ring */}
-      <mesh position={[0, 1, 0]}>
-        <sphereGeometry args={[0.75, 32, 32]} />
-        <meshStandardMaterial color="#f5f5f5" metalness={0.2} roughness={0.2} />
+      {/* Face visor area */}
+      <mesh position={[0, 0.8, 0.35]}>
+        <sphereGeometry args={[0.4, 32, 32]} />
+        <meshStandardMaterial color="#2a2a3a" metalness={0.8} roughness={0.1} />
       </mesh>
       
-      {/* Dark Visor/Face Area */}
-      <mesh position={[0, 1, 0.1]}>
-        <sphereGeometry args={[0.65, 32, 32]} />
-        <meshStandardMaterial color="#1a1a2e" metalness={0.8} roughness={0.1} />
-      </mesh>
-      
-      {/* Eyes (Glowing Cyan) */}
-      <mesh ref={leftEyeRef} position={[-0.25, 1.1, 0.5]}>
-        <sphereGeometry args={[0.12, 16, 16]} />
+      {/* Eyes - positioned like in the reference image */}
+      <mesh ref={leftEyeRef} position={[-0.15, 0.85, 0.45]}>
+        <sphereGeometry args={[0.06, 16, 16]} />
         <meshStandardMaterial 
-          color="#00ffff" 
-          emissive="#00ffff" 
-          emissiveIntensity={0.8}
-          metalness={0.1}
-          roughness={0.1}
-        />
-      </mesh>
-      <mesh ref={rightEyeRef} position={[0.25, 1.1, 0.5]}>
-        <sphereGeometry args={[0.12, 16, 16]} />
-        <meshStandardMaterial 
-          color="#00ffff" 
-          emissive="#00ffff" 
-          emissiveIntensity={0.8}
-          metalness={0.1}
-          roughness={0.1}
-        />
-      </mesh>
-      
-      {/* Eye Glow Effect */}
-      <mesh position={[-0.25, 1.1, 0.52]}>
-        <sphereGeometry args={[0.15, 16, 16]} />
-        <meshStandardMaterial 
-          color="#00ffff" 
-          emissive="#00ffff" 
-          emissiveIntensity={0.3}
-          transparent
-          opacity={0.3}
-        />
-      </mesh>
-      <mesh position={[0.25, 1.1, 0.52]}>
-        <sphereGeometry args={[0.15, 16, 16]} />
-        <meshStandardMaterial 
-          color="#00ffff" 
-          emissive="#00ffff" 
-          emissiveIntensity={0.3}
-          transparent
-          opacity={0.3}
-        />
-      </mesh>
-      
-      {/* Antenna */}
-      <mesh position={[0, 1.9, 0]}>
-        <cylinderGeometry args={[0.03, 0.03, 0.3]} />
-        <meshStandardMaterial color="#333333" metalness={0.8} roughness={0.2} />
-      </mesh>
-      <mesh position={[0, 2.1, 0]}>
-        <sphereGeometry args={[0.08]} />
-        <meshStandardMaterial 
-          color="#00ffff" 
-          emissive="#00ffff" 
+          color="#40e0d0" 
+          emissive="#40e0d0" 
           emissiveIntensity={0.6}
-          metalness={0.1}
-          roughness={0.1}
+        />
+      </mesh>
+      <mesh ref={rightEyeRef} position={[0.15, 0.85, 0.45]}>
+        <sphereGeometry args={[0.06, 16, 16]} />
+        <meshStandardMaterial 
+          color="#40e0d0" 
+          emissive="#40e0d0" 
+          emissiveIntensity={0.6}
         />
       </mesh>
       
-      {/* Cute Smile */}
-      <mesh position={[0, 0.75, 0.6]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.02]} />
+      {/* Small antenna */}
+      <mesh position={[0, 1.35, 0]}>
+        <cylinderGeometry args={[0.02, 0.02, 0.15]} />
+        <meshStandardMaterial color="#666666" />
+      </mesh>
+      <mesh position={[0, 1.45, 0]}>
+        <sphereGeometry args={[0.04]} />
         <meshStandardMaterial 
-          color="#00ffff" 
-          emissive="#00ffff" 
+          color="#40e0d0" 
+          emissive="#40e0d0" 
           emissiveIntensity={0.4}
         />
       </mesh>
       
-      {/* Body (Main Torso) */}
+      {/* Body */}
       <mesh position={[0, 0, 0]}>
-        <cylinderGeometry args={[0.6, 0.7, 1.2]} />
-        <meshStandardMaterial color="#f0f0f0" metalness={0.3} roughness={0.4} />
+        <cylinderGeometry args={[0.35, 0.4, 0.8]} />
+        <meshStandardMaterial color="#e8e8e8" metalness={0.2} roughness={0.3} />
       </mesh>
       
-      {/* Body Panel */}
-      <mesh position={[0, 0.1, 0.65]}>
-        <cylinderGeometry args={[0.4, 0.4, 0.05]} />
-        <meshStandardMaterial color="#e0e0e0" metalness={0.5} roughness={0.3} />
+      {/* Chest panel */}
+      <mesh position={[0, 0.1, 0.38]}>
+        <cylinderGeometry args={[0.25, 0.25, 0.03]} />
+        <meshStandardMaterial color="#d0d0d0" metalness={0.4} roughness={0.2} />
       </mesh>
       
-      {/* Red Button on Chest */}
-      <mesh position={[0, 0.1, 0.7]}>
-        <sphereGeometry args={[0.08]} />
+      {/* Central button */}
+      <mesh position={[0, 0.1, 0.42]}>
+        <sphereGeometry args={[0.04]} />
         <meshStandardMaterial 
-          color="#ff3333" 
-          emissive="#ff0000" 
-          emissiveIntensity={0.3}
-          metalness={0.1}
-          roughness={0.1}
+          color="#ff4444" 
+          emissive="#ff2222" 
+          emissiveIntensity={0.2}
         />
       </mesh>
       
       {/* Arms */}
-      <mesh position={[-0.8, 0.3, 0]}>
-        <cylinderGeometry args={[0.15, 0.12, 0.8]} />
-        <meshStandardMaterial color="#00aaaa" metalness={0.6} roughness={0.3} />
+      <mesh position={[-0.5, 0.2, 0]}>
+        <cylinderGeometry args={[0.08, 0.07, 0.5]} />
+        <meshStandardMaterial color="#40e0d0" metalness={0.6} roughness={0.3} />
       </mesh>
-      <mesh position={[0.8, 0.3, 0]}>
-        <cylinderGeometry args={[0.15, 0.12, 0.8]} />
-        <meshStandardMaterial color="#00aaaa" metalness={0.6} roughness={0.3} />
+      <mesh position={[0.5, 0.2, 0]}>
+        <cylinderGeometry args={[0.08, 0.07, 0.5]} />
+        <meshStandardMaterial color="#40e0d0" metalness={0.6} roughness={0.3} />
       </mesh>
       
       {/* Hands */}
-      <mesh position={[-0.8, -0.2, 0]}>
-        <sphereGeometry args={[0.18]} />
-        <meshStandardMaterial color="#00aaaa" metalness={0.6} roughness={0.3} />
+      <mesh position={[-0.5, -0.1, 0]}>
+        <sphereGeometry args={[0.1]} />
+        <meshStandardMaterial color="#40e0d0" metalness={0.6} roughness={0.3} />
       </mesh>
-      <mesh position={[0.8, -0.2, 0]}>
-        <sphereGeometry args={[0.18]} />
-        <meshStandardMaterial color="#00aaaa" metalness={0.6} roughness={0.3} />
+      <mesh position={[0.5, -0.1, 0]}>
+        <sphereGeometry args={[0.1]} />
+        <meshStandardMaterial color="#40e0d0" metalness={0.6} roughness={0.3} />
       </mesh>
       
       {/* Legs */}
-      <mesh position={[-0.25, -1, 0]}>
-        <cylinderGeometry args={[0.18, 0.15, 1]} />
-        <meshStandardMaterial color="#00aaaa" metalness={0.6} roughness={0.3} />
+      <mesh position={[-0.15, -0.65, 0]}>
+        <cylinderGeometry args={[0.1, 0.08, 0.6]} />
+        <meshStandardMaterial color="#40e0d0" metalness={0.6} roughness={0.3} />
       </mesh>
-      <mesh position={[0.25, -1, 0]}>
-        <cylinderGeometry args={[0.18, 0.15, 1]} />
-        <meshStandardMaterial color="#00aaaa" metalness={0.6} roughness={0.3} />
+      <mesh position={[0.15, -0.65, 0]}>
+        <cylinderGeometry args={[0.1, 0.08, 0.6]} />
+        <meshStandardMaterial color="#40e0d0" metalness={0.6} roughness={0.3} />
       </mesh>
       
       {/* Feet */}
-      <mesh position={[-0.25, -1.7, 0.1]}>
-        <boxGeometry args={[0.3, 0.15, 0.5]} />
-        <meshStandardMaterial color="#333333" metalness={0.8} roughness={0.2} />
+      <mesh position={[-0.15, -1.05, 0.05]}>
+        <boxGeometry args={[0.18, 0.08, 0.25]} />
+        <meshStandardMaterial color="#444444" metalness={0.7} roughness={0.2} />
       </mesh>
-      <mesh position={[0.25, -1.7, 0.1]}>
-        <boxGeometry args={[0.3, 0.15, 0.5]} />
-        <meshStandardMaterial color="#333333" metalness={0.8} roughness={0.2} />
-      </mesh>
-      
-      {/* Floating Shadow */}
-      <mesh position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <circleGeometry args={[0.8]} />
-        <meshStandardMaterial 
-          color="#000000" 
-          transparent 
-          opacity={0.2}
-        />
+      <mesh position={[0.15, -1.05, 0.05]}>
+        <boxGeometry args={[0.18, 0.08, 0.25]} />
+        <meshStandardMaterial color="#444444" metalness={0.7} roughness={0.2} />
       </mesh>
     </group>
   );
@@ -206,6 +151,7 @@ const RobotMesh: React.FC<RobotMeshProps> = ({ mousePosition }) => {
 
 const Robot3D: React.FC = () => {
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -219,12 +165,12 @@ const Robot3D: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed top-20 right-8 w-72 h-96 z-10">
-      <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+    <div className={`fixed ${isMobile ? 'top-16 right-2 w-32 h-40' : 'top-20 right-8 w-48 h-64'} z-10`}>
+      <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
         <ambientLight intensity={0.4} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
-        <pointLight position={[-10, -10, -10]} intensity={0.3} color="#00ffff" />
-        <pointLight position={[0, 5, 5]} intensity={0.5} color="#ffffff" />
+        <pointLight position={[5, 5, 5]} intensity={0.8} />
+        <pointLight position={[-5, -5, -5]} intensity={0.2} color="#40e0d0" />
+        <pointLight position={[0, 3, 3]} intensity={0.4} color="#ffffff" />
         <RobotMesh mousePosition={mousePosition} />
       </Canvas>
     </div>
