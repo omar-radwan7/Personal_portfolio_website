@@ -40,7 +40,7 @@ const RobotHead: React.FC = () => {
   }, []);
 
   return (
-    <div className="robot-container ml-8">
+    <div className="robot-container">
       <div className="robot" ref={robotRef}>
         {/* Robot Head */}
         <div className="robot-head">
@@ -96,7 +96,7 @@ const RobotHead: React.FC = () => {
       {/* Glow effect */}
       <div className="robot-glow"></div>
 
-      <style jsx>{`
+      <style>{`
         .robot-container {
           position: relative;
           width: 400px;
@@ -400,12 +400,12 @@ const RobotHead: React.FC = () => {
         /* Responsive Design */
         @media (max-width: 768px) {
           .robot-container {
-            width: 300px;
-            height: 400px;
+            width: 250px;
+            height: 350px;
           }
           
           .robot {
-            scale: 1;
+            scale: 0.8;
           }
         }
       `}</style>
