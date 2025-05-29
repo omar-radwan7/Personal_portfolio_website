@@ -1,6 +1,5 @@
-
 import React, { useEffect, useRef } from 'react';
-import RobotHead from './RobotHead';
+import Robot3D from './Robot3D';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -46,13 +45,15 @@ const Hero: React.FC = () => {
         }}
       ></div>
       
+      {/* 3D Robot in the right corner */}
+      <Robot3D />
+      
       <div className="section-container relative z-10">
         <div className="max-w-3xl animate-fadeIn">
           <div className="flex items-center gap-4 mb-2">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
               Hello, I'm <span className="title-gradient">Omar</span>
             </h2>
-            <RobotHead />
           </div>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 opacity-90">
             Software Engineer
