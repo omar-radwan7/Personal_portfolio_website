@@ -3,26 +3,38 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const RobotHead: React.FC = () => {
   const robotRef = useRef<HTMLDivElement>(null);
+  const leftEyeRef = useRef<SVGCircleElement>(null);
+  const rightEyeRef = useRef<SVGCircleElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!robotRef.current) return;
+      if (!robotRef.current || !leftEyeRef.current || !rightEyeRef.current) return;
       
       const rect = robotRef.current.getBoundingClientRect();
       const robotCenterX = rect.left + rect.width / 2;
       const robotCenterY = rect.top + rect.height / 2;
       
-      // Calculate angle from robot to mouse
-      const angle = Math.atan2(e.clientY - robotCenterY, e.clientX - robotCenterX);
-      const rotationDegrees = (angle * 180) / Math.PI;
+      // Calculate relative mouse position
+      const relativeX = (e.clientX - robotCenterX) / rect.width;
+      const relativeY = (e.clientY - robotCenterY) / rect.height;
+      
+      // Limit eye movement range
+      const maxMovement = 2;
+      const eyeX = Math.max(-maxMovement, Math.min(maxMovement, relativeX * maxMovement));
+      const eyeY = Math.max(-maxMovement, Math.min(maxMovement, relativeY * maxMovement));
+      
+      // Apply eye movement
+      leftEyeRef.current.setAttribute('cx', String(22 + eyeX));
+      leftEyeRef.current.setAttribute('cy', String(28 + eyeY));
+      rightEyeRef.current.setAttribute('cx', String(42 + eyeX));
+      rightEyeRef.current.setAttribute('cy', String(28 + eyeY));
+      
+      // Slight head rotation based on mouse position
+      const headRotation = relativeX * 5; // Subtle rotation
+      robotRef.current.style.transform = `rotate(${headRotation}deg)`;
       
       setMousePosition({ x: e.clientX, y: e.clientY });
-      
-      // Apply rotation to the robot head
-      if (robotRef.current) {
-        robotRef.current.style.transform = `rotate(${rotationDegrees + 90}deg)`;
-      }
     };
 
     document.addEventListener('mousemove', handleMouseMove);
@@ -35,7 +47,7 @@ const RobotHead: React.FC = () => {
     <div className="relative">
       <div 
         ref={robotRef}
-        className="w-16 h-16 transition-transform duration-200 ease-out"
+        className="w-16 h-16 transition-transform duration-150 ease-out"
       >
         {/* Robot Head SVG */}
         <svg
@@ -73,22 +85,59 @@ const RobotHead: React.FC = () => {
             cy="8"
             r="2"
             fill="#9b87f5"
+            className="animate-pulse"
           />
           
-          {/* Robot eyes */}
+          {/* Eye sockets */}
           <circle
             cx="22"
             cy="28"
-            r="4"
-            fill="#00ff88"
-            className="animate-pulse"
+            r="6"
+            fill="#1a1a2e"
+            stroke="#6E59A5"
+            strokeWidth="1"
           />
           <circle
             cx="42"
             cy="28"
-            r="4"
+            r="6"
+            fill="#1a1a2e"
+            stroke="#6E59A5"
+            strokeWidth="1"
+          />
+          
+          {/* Robot eyes (pupils that move) */}
+          <circle
+            ref={leftEyeRef}
+            cx="22"
+            cy="28"
+            r="3"
             fill="#00ff88"
-            className="animate-pulse"
+            className="transition-all duration-150 ease-out"
+          />
+          <circle
+            ref={rightEyeRef}
+            cx="42"
+            cy="28"
+            r="3"
+            fill="#00ff88"
+            className="transition-all duration-150 ease-out"
+          />
+          
+          {/* Eye highlights */}
+          <circle
+            cx="23"
+            cy="27"
+            r="1"
+            fill="#ffffff"
+            opacity="0.8"
+          />
+          <circle
+            cx="43"
+            cy="27"
+            r="1"
+            fill="#ffffff"
+            opacity="0.8"
           />
           
           {/* Robot mouth */}
@@ -99,6 +148,17 @@ const RobotHead: React.FC = () => {
             height="4"
             rx="2"
             fill="#6E59A5"
+          />
+          
+          {/* Mouth highlight */}
+          <rect
+            x="28"
+            y="41"
+            width="8"
+            height="1"
+            rx="0.5"
+            fill="#9b87f5"
+            opacity="0.6"
           />
           
           {/* Gradient definition */}
