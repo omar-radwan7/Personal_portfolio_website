@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import RobotHead from './RobotHead';
+import DecryptedText from './DecryptedText';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -50,13 +51,32 @@ const Hero: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-8">
           <div className="max-w-3xl animate-fadeIn flex-1">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
-              Hello, I'm <span className="title-gradient">Omar</span>
+              <DecryptedText
+                text="Hello, I'm Omar"
+                animateOn="view"
+                speed={75}
+                maxIterations={15}
+                className="title-gradient"
+                revealDirection="left"
+              />
             </h2>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 opacity-90">
-              Software Engineer
+              <DecryptedText
+                text="Software Engineer"
+                animateOn="view"
+                speed={100}
+                maxIterations={20}
+                revealDirection="left"
+              />
             </h1>
             <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-xl">
-              Software Engineering Student With a Passion for Learning
+              <DecryptedText
+                text="Software Engineering Student With a Passion for Learning"
+                animateOn="view"
+                speed={50}
+                maxIterations={10}
+                revealDirection="center"
+              />
             </p>
             
             <div className="flex flex-wrap gap-4">
