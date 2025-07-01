@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -42,7 +41,7 @@ const projectsData: Project[] = [
     title: 'TradeWise',
     subtitle: 'Stock Market App with Real-time Data - Demo Version',
     description: 'TradeWise is a comprehensive stock market application that provides real-time financial data and market insights. Built with React and modern web technologies, this demo version showcases live stock data integration from Financial Model Prep API.\n\nKey Features:\n• Dark mode support for comfortable viewing\n• Real-time stock price data and market information\n• Interactive charts and financial visualizations\n• Clean, modern user interface\n• Responsive design for all devices\n• Live market data integration\n• Stock search and portfolio tracking\n\nThe application demonstrates proficiency in API integration, state management, and creating intuitive financial interfaces. TradeWise offers users a professional-grade experience for tracking market trends and making informed investment decisions.',
-    technologies: ['React', 'JavaScript', 'API Integration', 'Charts', 'CSS'],
+    technologies: ['HTML', 'CSS', 'JavaScript'],
     githubLink: 'https://github.com/omar-radwan7/Stock_Market_App',
     status: 'complete'
   },

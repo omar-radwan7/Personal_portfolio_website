@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PingPongGame from './PingPongGame';
@@ -80,9 +81,9 @@ const Projects: React.FC = () => {
               <h3 className="text-base font-semibold mb-2">TradeWise</h3>
               <div className="flex justify-between items-center">
                 <div className="flex gap-1 flex-wrap">
-                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">React</span>
-                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">API</span>
-                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Charts</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">HTML</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">CSS</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">JavaScript</span>
                 </div>
                 <Link
                   to="/project/tradewise"
@@ -130,3 +131,4 @@ const Projects: React.FC = () => {
 };
 
 export default Projects;
+
