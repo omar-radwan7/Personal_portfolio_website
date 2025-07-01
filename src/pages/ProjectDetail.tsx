@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -39,9 +40,9 @@ const projectsData: Project[] = [
   {
     id: 'tradewise',
     title: 'TradeWise',
-    subtitle: 'Stock Market App with Real-time Data - Demo Version',
-    description: 'TradeWise is a comprehensive stock market application that provides real-time financial data and market insights. Built with React and modern web technologies, this demo version showcases live stock data integration from Financial Model Prep API.\n\nKey Features:\n• Dark mode support for comfortable viewing\n• Real-time stock price data and market information\n• Interactive charts and financial visualizations\n• Clean, modern user interface\n• Responsive design for all devices\n• Live market data integration\n• Stock search and portfolio tracking\n\nThe application demonstrates proficiency in API integration, state management, and creating intuitive financial interfaces. TradeWise offers users a professional-grade experience for tracking market trends and making informed investment decisions.',
-    technologies: ['HTML', 'CSS', 'JavaScript'],
+    subtitle: 'Flutter Stock Market App with Real-time Data - Demo Version',
+    description: 'TradeWise is a comprehensive stock market application built with Flutter that provides real-time financial data and market insights. This demo version showcases live stock data integration from Financial Model Prep API.\n\nKey Features:\n• Dark mode support for comfortable viewing\n• Real-time stock price data and market information\n• Interactive charts and financial visualizations\n• Clean, modern user interface\n• Responsive design for all devices\n• Live market data integration\n• Stock search and portfolio tracking\n• Cross-platform compatibility (iOS/Android)\n\nBuilt with Flutter/Dart and utilizing various technologies including HTML, JavaScript, C++, CSS, and CMake for optimal performance. The application demonstrates proficiency in mobile app development, API integration, and creating intuitive financial interfaces. TradeWise offers users a professional-grade experience for tracking market trends and making informed investment decisions.',
+    technologies: ['Flutter', 'Dart', 'HTML', 'JavaScript', 'C++', 'CSS', 'CMake'],
     githubLink: 'https://github.com/omar-radwan7/Stock_Market_App',
     status: 'complete'
   },
@@ -107,6 +108,11 @@ const ProjectDetail: React.FC = () => {
                       <div className="w-full h-full">
                         {/* This will be replaced with the actual component when rendered */}
                       </div>
+                    </div>
+                  ) : project.id === 'tradewise' ? (
+                    <div className="flex justify-center items-center text-white">
+                      <i className="fas fa-cloud text-5xl"></i>
+                      <i className="fas fa-thermometer-half text-3xl ml-2"></i>
                     </div>
                   ) : (
                     <div className="flex justify-center items-center text-white">

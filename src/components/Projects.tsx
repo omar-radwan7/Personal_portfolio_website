@@ -69,21 +69,21 @@ const Projects: React.FC = () => {
             <div className="w-full bg-[#1c2133] flex items-center justify-center aspect-[16/10]">
               <div className="text-center text-white">
                 <div className="flex justify-center items-center mb-1">
-                  <i className="fas fa-chart-line text-3xl text-green-400"></i>
-                  <i className="fas fa-dollar-sign text-xl ml-2 text-yellow-400"></i>
+                  <i className="fas fa-cloud text-3xl"></i>
+                  <i className="fas fa-thermometer-half text-xl ml-2"></i>
                 </div>
                 <h3 className="text-sm font-semibold">TradeWise</h3>
                 <p className="text-xs text-gray-400 mt-1">Demo Version</p>
               </div>
             </div>
             <div className="p-4 bg-[#1e2235] flex-grow text-sm">
-              <p className="text-gray-400 mb-1">Stock Market App with Real-time Data</p>
+              <p className="text-gray-400 mb-1">Flutter Stock Market App with Real-time Data</p>
               <h3 className="text-base font-semibold mb-2">TradeWise</h3>
               <div className="flex justify-between items-center">
                 <div className="flex gap-1 flex-wrap">
-                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">HTML</span>
-                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">CSS</span>
-                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">JavaScript</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Flutter</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Dart</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">API</span>
                 </div>
                 <Link
                   to="/project/tradewise"
