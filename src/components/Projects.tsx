@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PingPongGame from './PingPongGame';
@@ -54,6 +55,37 @@ const Projects: React.FC = () => {
                 </div>
                 <Link
                   to="/project/aimodel"
+                  className="text-purple-light hover:text-purple text-xs"
+                >
+                  More Details
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* TradeWise Stock Market App */}
+          <div className="bg-card rounded-md overflow-hidden shadow border border-purple/10 flex flex-col h-full">
+            <div className="w-full bg-[#1c2133] flex items-center justify-center aspect-[16/10]">
+              <div className="text-center text-white">
+                <div className="flex justify-center items-center mb-1">
+                  <i className="fas fa-chart-line text-3xl text-green-400"></i>
+                  <i className="fas fa-dollar-sign text-xl ml-2 text-yellow-400"></i>
+                </div>
+                <h3 className="text-sm font-semibold">TradeWise</h3>
+                <p className="text-xs text-gray-400 mt-1">Demo Version</p>
+              </div>
+            </div>
+            <div className="p-4 bg-[#1e2235] flex-grow text-sm">
+              <p className="text-gray-400 mb-1">Stock Market App with Real-time Data</p>
+              <h3 className="text-base font-semibold mb-2">TradeWise</h3>
+              <div className="flex justify-between items-center">
+                <div className="flex gap-1 flex-wrap">
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">React</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">API</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Charts</span>
+                </div>
+                <Link
+                  to="/project/tradewise"
                   className="text-purple-light hover:text-purple text-xs"
                 >
                   More Details
