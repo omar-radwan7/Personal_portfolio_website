@@ -111,8 +111,8 @@ const ProjectDetail: React.FC = () => {
                     </div>
                   ) : project.id === 'tradewise' ? (
                     <div className="flex justify-center items-center text-white">
-                      <i className="fas fa-cloud text-5xl"></i>
-                      <i className="fas fa-thermometer-half text-3xl ml-2"></i>
+                      <i className="fas fa-chart-line text-5xl text-green-400 animate-pulse"></i>
+                      <i className="fas fa-dollar-sign text-3xl ml-2 text-yellow-400 animate-bounce"></i>
                     </div>
                   ) : (
                     <div className="flex justify-center items-center text-white">

@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PingPongGame from './PingPongGame';
@@ -69,8 +68,8 @@ const Projects: React.FC = () => {
             <div className="w-full bg-[#1c2133] flex items-center justify-center aspect-[16/10]">
               <div className="text-center text-white">
                 <div className="flex justify-center items-center mb-1">
-                  <i className="fas fa-cloud text-3xl"></i>
-                  <i className="fas fa-thermometer-half text-xl ml-2"></i>
+                  <i className="fas fa-chart-line text-3xl text-green-400 animate-pulse"></i>
+                  <i className="fas fa-dollar-sign text-xl ml-2 text-yellow-400 animate-bounce"></i>
                 </div>
                 <h3 className="text-sm font-semibold">TradeWise</h3>
                 <p className="text-xs text-gray-400 mt-1">Demo Version</p>
@@ -131,4 +130,3 @@ const Projects: React.FC = () => {
 };
 
 export default Projects;
-
