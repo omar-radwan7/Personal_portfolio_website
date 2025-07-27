@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -52,6 +51,14 @@ const projectsData: Project[] = [
     subtitle: 'Flutter & OpenWeatherMap API',
     description: 'A responsive weather application that provides real-time weather information using the OpenWeatherMap API. Users can search for locations and view current weather conditions, forecasts, and meteorological data presented in an intuitive and visually appealing interface.',
     technologies: ['Flutter', 'API'],
+    status: 'coming-soon'
+  },
+  {
+    id: 'nexovpn',
+    title: 'NexoVPN',
+    subtitle: 'Django/React VPN with WireGuard & Docker',
+    description: 'NexoVPN is a comprehensive VPN application featuring Django backend with React frontend, WireGuard protocols for secure connections, and Docker deployment. The application provides secure, private internet access with advanced features including whitelisted domains, real-time connection monitoring, and cloud architecture deployment.',
+    technologies: ['Python', 'Django', 'React', 'JavaScript', 'Docker', 'WireGuard'],
     status: 'coming-soon'
   }
 ];
@@ -113,6 +120,11 @@ const ProjectDetail: React.FC = () => {
                     <div className="flex justify-center items-center text-white">
                       <i className="fas fa-chart-line text-5xl text-green-400 animate-pulse"></i>
                       <i className="fas fa-dollar-sign text-3xl ml-2 text-yellow-400 animate-bounce"></i>
+                    </div>
+                  ) : project.id === 'nexovpn' ? (
+                    <div className="flex justify-center items-center text-white">
+                      <i className="fas fa-shield-alt text-5xl text-blue-400 animate-pulse"></i>
+                      <i className="fas fa-lock text-3xl ml-2 text-cyan-400 animate-bounce"></i>
                     </div>
                   ) : (
                     <div className="flex justify-center items-center text-white">

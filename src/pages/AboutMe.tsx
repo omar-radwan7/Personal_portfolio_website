@@ -192,26 +192,25 @@ const AboutMe: React.FC = () => {
                   </div>
                 </div>
                 
-                {/* Programming Languages */}
+                {/* Skills */}
                 <div>
-                  <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Programming Languages</h3>
-                  <div className="ml-0 md:ml-4 space-y-2">
+                  <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Skills</h3>
+                  
+                  {/* Programming Languages */}
+                  <div className="mb-4">
+                    <h4 className="font-medium mb-2 text-purple-light">Programming Languages</h4>
                     <p className="text-gray-300">Python • Java • C Programming</p>
                   </div>
-                </div>
-                
-                {/* Web Development */}
-                <div>
-                  <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Web Development</h3>
-                  <div className="ml-0 md:ml-4 space-y-2">
+                  
+                  {/* Web Development */}
+                  <div className="mb-4">
+                    <h4 className="font-medium mb-2 text-purple-light">Web Development</h4>
                     <p className="text-gray-300">Django • REST APIs • React.js • Vue.js • JavaScript • TypeScript CSS • User Experience Design</p>
                   </div>
-                </div>
-                
-                {/* Database & Cloud */}
-                <div>
-                  <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Database & Cloud</h3>
-                  <div className="ml-0 md:ml-4 space-y-2">
+                  
+                  {/* Database & Cloud */}
+                  <div>
+                    <h4 className="font-medium mb-2 text-purple-light">Database & Cloud</h4>
                     <p className="text-gray-300">PostgreSQL • AWS Cloud Services • Cloud fundamentals • Cloud Architecture</p>
                   </div>
                 </div>

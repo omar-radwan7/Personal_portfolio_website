@@ -123,7 +123,7 @@ const Projects: React.FC = () => {
             </div>
           </div>
 
-          {/* QuotiX VPN App */}
+          {/* NexoVPN App */}
           <div className="bg-card rounded-md overflow-hidden shadow border border-purple/10 flex flex-col h-full">
             <div className="w-full bg-[#1c2133] flex items-center justify-center aspect-[16/10]">
               <div className="text-center text-white">
@@ -131,21 +131,21 @@ const Projects: React.FC = () => {
                   <i className="fas fa-shield-alt text-3xl text-blue-400 animate-pulse"></i>
                   <i className="fas fa-lock text-xl ml-2 text-cyan-400 animate-bounce"></i>
                 </div>
-                <h3 className="text-sm font-semibold">QuotiX VPN</h3>
+                <h3 className="text-sm font-semibold">NexoVPN</h3>
                 <p className="text-xs text-gray-400 mt-1">Secure Connection</p>
               </div>
             </div>
             <div className="p-4 bg-[#1e2235] flex-grow text-sm">
-              <p className="text-gray-400 mb-1">Python VPN with Docker & Whitelisted Domains</p>
-              <h3 className="text-base font-semibold mb-2">QuotiX VPN</h3>
+              <p className="text-gray-400 mb-1">Django/React VPN with WireGuard & Docker</p>
+              <h3 className="text-base font-semibold mb-2">NexoVPN</h3>
               <div className="flex justify-between items-center">
                 <div className="flex gap-1 flex-wrap">
                   <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Python</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">React</span>
                   <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Docker</span>
-                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">SQLite</span>
                 </div>
                 <Link
-                  to="/project/vpn"
+                  to="/project/nexovpn"
                   className="text-purple-light hover:text-purple text-xs"
                 >
                   More Details
