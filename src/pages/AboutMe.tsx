@@ -72,8 +72,8 @@ const AboutMe: React.FC = () => {
                 {/* Personal Information */}
                 <div className="text-center mb-8">
                   <h3 className="text-xl font-semibold mb-2">Omar Radwan</h3>
-                  <p className="text-gray-400">Berlin, Germany</p>
-                  <p className="text-gray-400">+491777588642 - omarobrashy2004@gmail.com</p>
+                  <p className="text-gray-400">Alfred-Jung-Straße, Berlin 10369</p>
+                  <p className="text-gray-400">+4917758642 - omarobrashy2004@gmail.com</p>
                   <div className="mt-2">
                     <p className="text-gray-400">
                       GitHub: 
@@ -85,6 +85,12 @@ const AboutMe: React.FC = () => {
                       LinkedIn: 
                       <a href="https://www.linkedin.com/in/omar-radwan-99794a27a" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
                         www.linkedin.com/in/omar-radwan-99794a27a
+                      </a>
+                    </p>
+                    <p className="text-gray-400">
+                      Personal Portfolio: 
+                      <a href="https://www.omar-radwan.com" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
+                        www.omar-radwan.com
                       </a>
                     </p>
                   </div>
@@ -110,8 +116,9 @@ const AboutMe: React.FC = () => {
                       </div>
                       <p className="text-gray-400 mb-2">EBNY Real Estate – Cairo, Egypt</p>
                       <ul className="list-disc ml-5 text-gray-300">
-                        <li>Collaborated with team to gather requirements and implement custom solutions.</li>
-                        <li>Developed solutions using Python and SQL databases.</li>
+                        <li>Collaborated with teams to gather requirements and implement custom solutions.</li>
+                        <li>Designed database systems to store and manage property data.</li>
+                        <li>Verified and resolved bug reports and technical issues.</li>
                         <li>Developed solutions using Python and SQL databases.</li>
                       </ul>
                     </div>
@@ -123,28 +130,31 @@ const AboutMe: React.FC = () => {
                   <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Projects</h3>
                   <div className="ml-0 md:ml-4 space-y-4">
                     <div>
-                      <h4 className="font-medium">TradeWise - Stock Market App</h4>
+                      <h4 className="font-medium">Qorix AI Assistant</h4>
                       <p className="text-gray-300">
-                        Flutter-based stock trading app with real-time data integration.
+                        React/TypeScript AI chat app with OpenRouter API integration.
                       </p>
-                      <ul className="list-disc ml-5 text-gray-300 text-sm">
-                        <li>Integrated with trading APIs for real-time stock data</li>
-                        <li>Implemented user-friendly trading interface</li>
-                        <li>Developed solutions using Dart, Kotlin deployment</li>
-                        <li>Developed watchlist features to track top-performing stocks</li>
-                      </ul>
+                      <p className="text-gray-300 text-sm">
+                        Technologies: React, TypeScript, JavaScript, OpenRouter API
+                      </p>
                     </div>
                     <div>
-                      <h4 className="font-medium">QuotiX - VPN Application with Whitelisted domains and Docker deployment</h4>
+                      <h4 className="font-medium">NexoVPN</h4>
                       <p className="text-gray-300">
-                        Advanced VPN application with premium features and secure deployment.
+                        Django/React VPN application with WireGuard protocols and Docker deployment.
                       </p>
-                      <ul className="list-disc ml-5 text-gray-300 text-sm">
-                        <li>Integrated with VPN APIs for real-time connection</li>
-                        <li>Developed Docker-based VPN API and Docker deployment</li>
-                        <li>Developed solutions using Python and web technologies</li>
-                        <li>Developed solutions using Python and SQLite database</li>
-                      </ul>
+                      <p className="text-gray-300 text-sm">
+                        Technologies: Python (Django), JavaScript (React), Docker, WireGuard
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-medium">TradeWise</h4>
+                      <p className="text-gray-300">
+                        Flutter stock market app with real-time financial data and portfolio tracking.
+                      </p>
+                      <p className="text-gray-300 text-sm">
+                        Technologies: Flutter, Dart, Financial APIs
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -186,7 +196,7 @@ const AboutMe: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Programming Languages</h3>
                   <div className="ml-0 md:ml-4 space-y-2">
-                    <p className="text-gray-300">Python, C, Java, JavaScript, Dart, Kotlin</p>
+                    <p className="text-gray-300">Python • Java • C Programming</p>
                   </div>
                 </div>
                 
@@ -194,7 +204,7 @@ const AboutMe: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Web Development</h3>
                   <div className="ml-0 md:ml-4 space-y-2">
-                    <p className="text-gray-300">Django, REST API, HTML, CSS, JavaScript, ReactJS, Git, User Experience Design</p>
+                    <p className="text-gray-300">Django • REST APIs • React.js • Vue.js • JavaScript • TypeScript CSS • User Experience Design</p>
                   </div>
                 </div>
                 
@@ -202,7 +212,7 @@ const AboutMe: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Database & Cloud</h3>
                   <div className="ml-0 md:ml-4 space-y-2">
-                    <p className="text-gray-300">PostgreSQL, AWS Cloud Services, Cloud Architecture</p>
+                    <p className="text-gray-300">PostgreSQL • AWS Cloud Services • Cloud fundamentals • Cloud Architecture</p>
                   </div>
                 </div>
                 
