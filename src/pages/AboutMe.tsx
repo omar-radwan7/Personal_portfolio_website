@@ -72,8 +72,7 @@ const AboutMe: React.FC = () => {
                 {/* Personal Information */}
                 <div className="text-center mb-8">
                   <h3 className="text-xl font-semibold mb-2">Omar Radwan</h3>
-                  <p className="text-gray-400">Alfred-Jung-Straße, Berlin 10369</p>
-                  <p className="text-gray-400">+4917758642 - omarobrashy2004@gmail.com</p>
+                  <p className="text-gray-400">+491777588642 - omarobrashy2004@gmail.com</p>
                   <div className="mt-2">
                     <p className="text-gray-400">
                       GitHub: 
@@ -86,13 +85,6 @@ const AboutMe: React.FC = () => {
                       <a href="https://www.linkedin.com/in/omar-radwan-99794a27a" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
                         www.linkedin.com/in/omar-radwan-99794a27a
                       </a>
-                    </p>
-                    <p className="text-gray-400">
-                      Personal Portfolio: 
-                      <a href="https://www.omar-radwan.com" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
-                        www.omar-radwan.com
-                      </a>
-                    </p>
                   </div>
                 </div>
                 
