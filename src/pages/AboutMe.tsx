@@ -94,7 +94,8 @@ const AboutMe: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Professional Summary</h3>
                   <p className="text-gray-300">
-                    Aspiring software developer eager to learn and contribute. Quick learner with a strong foundation in coding and a focus on growth in dynamic environments.
+                    Aspiring Full Stack Software developer eager to learn and contribute. Quick learner with a 
+                    strong foundation in coding and a focus on growth in dynamic environments.
                   </p>
                 </div>
                 
@@ -109,9 +110,40 @@ const AboutMe: React.FC = () => {
                       </div>
                       <p className="text-gray-400 mb-2">EBNY Real Estate – Cairo, Egypt</p>
                       <ul className="list-disc ml-5 text-gray-300">
-                        <li>Collaborated with teams to gather requirements and implement custom solutions.</li>
-                        <li>Designed database systems to store and manage property data.</li>
-                        <li>Verified and resolved bug reports and technical issues.</li>
+                        <li>Collaborated with team to gather requirements and implement custom solutions.</li>
+                        <li>Developed solutions using Python and SQL databases.</li>
+                        <li>Developed solutions using Python and SQL databases.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Projects */}
+                <div>
+                  <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Projects</h3>
+                  <div className="ml-0 md:ml-4 space-y-4">
+                    <div>
+                      <h4 className="font-medium">TradeWise - Stock Market App</h4>
+                      <p className="text-gray-300">
+                        Flutter-based stock trading app with real-time data integration.
+                      </p>
+                      <ul className="list-disc ml-5 text-gray-300 text-sm">
+                        <li>Integrated with trading APIs for real-time stock data</li>
+                        <li>Implemented user-friendly trading interface</li>
+                        <li>Developed solutions using Dart, Kotlin deployment</li>
+                        <li>Developed watchlist features to track top-performing stocks</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-medium">QuotiX - VPN Application with Whitelisted domains and Docker deployment</h4>
+                      <p className="text-gray-300">
+                        Advanced VPN application with premium features and secure deployment.
+                      </p>
+                      <ul className="list-disc ml-5 text-gray-300 text-sm">
+                        <li>Integrated with VPN APIs for real-time connection</li>
+                        <li>Developed Docker-based VPN API and Docker deployment</li>
+                        <li>Developed solutions using Python and web technologies</li>
+                        <li>Developed solutions using Python and SQLite database</li>
                       </ul>
                     </div>
                   </div>
@@ -136,7 +168,7 @@ const AboutMe: React.FC = () => {
                   <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Certifications</h3>
                   <div className="ml-0 md:ml-4 space-y-4">
                     <div>
-                      <h4 className="font-medium">Meta Back-End Professional Developer Certificate</h4>
+                      <h4 className="font-medium">Meta Back End Professional Developer Certificate</h4>
                       <p className="text-gray-300">
                         Covers Python, SQL, APIs, Git, and Django, with a focus on building secure and scalable back-end systems.
                       </p>
@@ -150,25 +182,27 @@ const AboutMe: React.FC = () => {
                   </div>
                 </div>
                 
-                {/* Skills */}
+                {/* Programming Languages */}
                 <div>
-                  <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Skills</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div className="bg-muted rounded-lg p-3">
-                      <span className="text-purple-light">•</span> Python
-                    </div>
-                    <div className="bg-muted rounded-lg p-3">
-                      <span className="text-purple-light">•</span> Java basics
-                    </div>
-                    <div className="bg-muted rounded-lg p-3">
-                      <span className="text-purple-light">•</span> Front-end basics
-                    </div>
-                    <div className="bg-muted rounded-lg p-3">
-                      <span className="text-purple-light">•</span> C language
-                    </div>
-                    <div className="bg-muted rounded-lg p-3">
-                      <span className="text-purple-light">•</span> Cloud fundamentals
-                    </div>
+                  <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Programming Languages</h3>
+                  <div className="ml-0 md:ml-4 space-y-2">
+                    <p className="text-gray-300">Python, C, Java, JavaScript, Dart, Kotlin</p>
+                  </div>
+                </div>
+                
+                {/* Web Development */}
+                <div>
+                  <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Web Development</h3>
+                  <div className="ml-0 md:ml-4 space-y-2">
+                    <p className="text-gray-300">Django, REST API, HTML, CSS, JavaScript, ReactJS, Git, User Experience Design</p>
+                  </div>
+                </div>
+                
+                {/* Database & Cloud */}
+                <div>
+                  <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Database & Cloud</h3>
+                  <div className="ml-0 md:ml-4 space-y-2">
+                    <p className="text-gray-300">PostgreSQL, AWS Cloud Services, Cloud Architecture</p>
                   </div>
                 </div>
                 

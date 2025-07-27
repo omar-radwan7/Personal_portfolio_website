@@ -99,8 +99,8 @@ const Projects: React.FC = () => {
             <div className="w-full bg-[#1c2133] flex items-center justify-center aspect-[16/10]">
               <div className="text-center text-white">
                 <div className="flex justify-center items-center mb-1">
-                  <i className="fas fa-cloud text-3xl"></i>
-                  <i className="fas fa-thermometer-half text-xl ml-2"></i>
+                  <i className="fas fa-cloud text-3xl animate-pulse"></i>
+                  <i className="fas fa-thermometer-half text-xl ml-2 animate-bounce"></i>
                 </div>
                 <h3 className="text-sm font-semibold">Weather Application</h3>
               </div>
@@ -115,6 +115,37 @@ const Projects: React.FC = () => {
                 </div>
                 <Link
                   to="/project/weather"
+                  className="text-purple-light hover:text-purple text-xs"
+                >
+                  More Details
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* QuotiX VPN App */}
+          <div className="bg-card rounded-md overflow-hidden shadow border border-purple/10 flex flex-col h-full">
+            <div className="w-full bg-[#1c2133] flex items-center justify-center aspect-[16/10]">
+              <div className="text-center text-white">
+                <div className="flex justify-center items-center mb-1">
+                  <i className="fas fa-shield-alt text-3xl text-blue-400 animate-pulse"></i>
+                  <i className="fas fa-lock text-xl ml-2 text-cyan-400 animate-bounce"></i>
+                </div>
+                <h3 className="text-sm font-semibold">QuotiX VPN</h3>
+                <p className="text-xs text-gray-400 mt-1">Secure Connection</p>
+              </div>
+            </div>
+            <div className="p-4 bg-[#1e2235] flex-grow text-sm">
+              <p className="text-gray-400 mb-1">Python VPN with Docker & Whitelisted Domains</p>
+              <h3 className="text-base font-semibold mb-2">QuotiX VPN</h3>
+              <div className="flex justify-between items-center">
+                <div className="flex gap-1 flex-wrap">
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Python</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Docker</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">SQLite</span>
+                </div>
+                <Link
+                  to="/project/vpn"
                   className="text-purple-light hover:text-purple text-xs"
                 >
                   More Details
