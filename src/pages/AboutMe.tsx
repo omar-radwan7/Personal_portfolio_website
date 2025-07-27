@@ -85,6 +85,7 @@ const AboutMe: React.FC = () => {
                       <a href="https://www.linkedin.com/in/omar-radwan-99794a27a" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
                         www.linkedin.com/in/omar-radwan-99794a27a
                       </a>
+                    </p>
                   </div>
                 </div>
                 
