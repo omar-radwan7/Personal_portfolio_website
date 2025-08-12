@@ -108,10 +108,33 @@
   }
   
   .btn-primary {
-    @apply bg-purple hover:bg-purple-dark text-white font-medium py-2 px-6 rounded-md transition-colors duration-300;
+    @apply relative overflow-hidden text-foreground bg-purple/20 hover:bg-purple/30 border border-purple/30 shadow-lg backdrop-blur-xl font-medium py-2.5 px-6 rounded-lg transition-all duration-300;
   }
   
   .btn-outline {
-    @apply border border-purple text-purple hover:bg-purple hover:text-white font-medium py-2 px-6 rounded-md transition-colors duration-300;
+    @apply relative overflow-hidden text-purple border border-purple/40 hover:bg-purple/10 hover:text-foreground backdrop-blur-xl font-medium py-2.5 px-6 rounded-lg transition-all duration-300;
+  }
+
+  /* Glassmorphism utilities */
+  .glass-base {
+    @apply backdrop-blur-xl border border-purple/20;
+    box-shadow: 0 8px 30px hsl(var(--primary) / 0.15);
+    background: linear-gradient(135deg, hsl(var(--background) / 0.35), hsl(var(--primary) / 0.12));
+  }
+
+  .glass-card {
+    @apply glass-base rounded-xl;
+  }
+
+  .glass-nav {
+    @apply backdrop-blur-xl border-b border-purple/20;
+    box-shadow: 0 8px 30px hsl(var(--primary) / 0.18);
+    background: linear-gradient(135deg, hsl(var(--background) / 0.5), hsl(var(--primary) / 0.1));
+  }
+
+  .glass-section {
+    @apply backdrop-blur-xl border-t border-purple/20;
+    background: linear-gradient(180deg, hsl(var(--background) / 0.4), hsl(var(--background) / 0.2));
   }
 }
+

@@ -8,7 +8,7 @@ const Contact: React.FC = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 title-gradient">Let's work together</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-card rounded-xl p-6 card-hover">
+          <div className="bg-card glass-card p-6 card-hover">
             <div className="w-14 h-14 bg-purple/20 rounded-full flex items-center justify-center mb-6">
               <i className="fas fa-phone text-purple-light text-2xl"></i>
             </div>
@@ -16,7 +16,7 @@ const Contact: React.FC = () => {
             <p className="text-gray-400">+49 177 7588642</p>
           </div>
           
-          <div className="bg-card rounded-xl p-6 card-hover">
+          <div className="bg-card glass-card p-6 card-hover">
             <div className="w-14 h-14 bg-purple/20 rounded-full flex items-center justify-center mb-6">
               <i className="fas fa-envelope text-purple-light text-2xl"></i>
             </div>
