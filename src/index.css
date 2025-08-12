@@ -196,5 +196,20 @@
   .blob-pink {
     background: radial-gradient(circle at 60% 40%, hsl(295 85% 70%) 0%, hsl(330 85% 65%) 35%, transparent 70%);
   }
+  /* Rain animation */
+  @keyframes rain-fall {
+    0% { transform: translate3d(0, -140%, 0); opacity: 0; }
+    10% { opacity: 0.9; }
+    100% { transform: translate3d(-6px, 140%, 0); opacity: 0; }
+  }
+  .rain-scene { position: relative; overflow: hidden; }
+  .rain-drop {
+    position: absolute; top: -12%; width: 2px; background: hsl(210 95% 70% / 0.9);
+    border-radius: 9999px; left: var(--x, 50%);
+    height: 14px; opacity: 0; filter: drop-shadow(0 0 6px hsl(210 95% 70% / 0.35));
+    animation: rain-fall var(--d, 1.5s) linear infinite;
+    animation-delay: var(--delay, 0s);
+  }
 }
+
 
