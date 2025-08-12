@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import Footer from '@/components/Footer';
+import BouncingQ from '@/components/BouncingQ';
 
 // Project data structure
 export interface Project {
@@ -98,8 +99,8 @@ const ProjectDetail: React.FC = () => {
             Back to Projects
           </Link>
           
-          <div className="bg-card rounded-lg overflow-hidden shadow-md border border-purple/10">
-            <div className="w-full bg-black aspect-video flex items-center justify-center">
+          <div className="glass-panel rounded-2xl overflow-hidden shadow-md">
+            <div className="w-full bg-transparent aspect-video flex items-center justify-center">
               {project.image || (
                 <div className="text-center">
                   {project.id === 'pingpong' ? (
@@ -110,11 +111,8 @@ const ProjectDetail: React.FC = () => {
                       </div>
                     </div>
                   ) : project.id === 'aimodel' ? (
-                    <div className="w-full h-full">
-                      {/* Display the BouncingQ animation for AI model */}
-                      <div className="w-full h-full">
-                        {/* This will be replaced with the actual component when rendered */}
-                      </div>
+                    <div className="w-full h-full p-2">
+                      <BouncingQ />
                     </div>
                   ) : project.id === 'tradewise' ? (
                     <div className="flex justify-center items-center text-white">
@@ -136,7 +134,7 @@ const ProjectDetail: React.FC = () => {
               )}
             </div>
             
-            <div className="p-6 bg-[#1e2235]">
+            <div className="p-6 bg-transparent">
               <p className="text-sm text-gray-400 mb-2">{project.subtitle}</p>
               <h1 className="text-2xl sm:text-3xl font-bold mb-4">{project.title}</h1>
               
