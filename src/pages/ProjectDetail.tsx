@@ -5,7 +5,7 @@ import { ArrowRight, ExternalLink } from 'lucide-react';
 import Footer from '@/components/Footer';
 import BouncingQ from '@/components/BouncingQ';
 import PingPongGame from '@/components/PingPongGame';
-import RainCloud from '@/components/RainCloud';
+import ThunderCloud from '@/components/ThunderCloud';
 
 // Project data structure
 export interface Project {

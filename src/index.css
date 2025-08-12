@@ -224,5 +224,31 @@
     animation: splash var(--d, 1.6s) ease-out infinite;
     animation-delay: var(--delay, 0s);
   }
+  /* Thunder animation */
+  @keyframes lightning-flash {  
+    0%, 90%, 100% { opacity: 0; } 
+    92% { opacity: 1; } 
+    95% { opacity: 0.5; } 
+    97% { opacity: 1; } 
+    98% { opacity: 0; }
+  }
+  @keyframes bolt-strike {
+    0% { opacity: 0; transform: translateY(-120%) scaleY(0.9); }
+    15% { opacity: 1; }
+    35% { transform: translateY(0) scaleY(1); opacity: 1; }
+    55% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+  .thunder-scene { position: relative; overflow: hidden; }
+  .bolt { position: absolute; top: -20%; left: var(--x, 50%); width: 10px; transform-origin: top; 
+    filter: drop-shadow(0 0 14px hsl(55 100% 80% / 0.9)) drop-shadow(0 0 24px hsl(55 100% 80% / 0.6));
+    animation: bolt-strike var(--d, 2.6s) linear infinite; animation-delay: var(--delay, 0s);
+  }
+  .bolt svg { display: block; width: 10px; height: 160px; }
+  .flash-overlay { position: absolute; inset: 0; 
+    background: radial-gradient(ellipse at var(--x, 50%) 25%, hsl(55 100% 90% / 0.25), transparent 60%);
+    mix-blend-mode: screen; opacity: 0; pointer-events: none;
+    animation: lightning-flash var(--flash-d, 2.6s) linear infinite; animation-delay: var(--delay, 0s);
+  }
 }
 
