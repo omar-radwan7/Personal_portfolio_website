@@ -69,8 +69,8 @@ const NavBar: React.FC = () => {
     <>
       <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
         <div className={cn(
-          "mx-4 md:mx-6 lg:mx-auto max-w-6xl px-4 md:px-6 flex items-center justify-between rounded-full transition-all",
-          isScrolled ? "glass-nav py-2 shadow-lg" : "py-3"
+          "mx-4 md:mx-6 lg:mx-auto max-w-6xl px-5 md:px-8 flex items-center justify-between rounded-full transition-all",
+          isScrolled ? "glass-nav py-3.5 md:py-4 shadow-lg" : "py-4 md:py-5"
         )}>
           <Link to="/" className="text-2xl font-bold text-purple-light">Radwan</Link>
           
@@ -98,7 +98,7 @@ const NavBar: React.FC = () => {
                 <Link 
                   to="/" 
                   className={cn(
-                    "nav-link transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
+                    "nav-link text-sm md:text-base transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
                     (location.pathname === '/' ? isAnchorActive('home') : isActive('/')) && "text-purple-light after:scale-x-100"
                   )}
                 >
@@ -109,7 +109,7 @@ const NavBar: React.FC = () => {
                 <a 
                   href="/#services" 
                   className={cn(
-                    "nav-link transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
+                    "nav-link text-sm md:text-base transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
                     isAnchorActive('services') && "text-purple-light after:scale-x-100"
                   )}
                 >
@@ -120,7 +120,7 @@ const NavBar: React.FC = () => {
                 <a 
                   href="/#projects" 
                   className={cn(
-                    "nav-link transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
+                    "nav-link text-sm md:text-base transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
                     isAnchorActive('projects') && "text-purple-light after:scale-x-100"
                   )}
                 >
@@ -131,7 +131,7 @@ const NavBar: React.FC = () => {
                 <a 
                   href="/#contact" 
                   className={cn(
-                    "nav-link transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
+                    "nav-link text-sm md:text-base transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
                     isAnchorActive('contact') && "text-purple-light after:scale-x-100"
                   )}
                 >
