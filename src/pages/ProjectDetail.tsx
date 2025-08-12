@@ -123,21 +123,14 @@ const ProjectDetail: React.FC = () => {
                       <i className="fas fa-shield-alt text-5xl text-blue-400 animate-pulse"></i>
                       <i className="fas fa-lock text-3xl ml-2 text-cyan-400 animate-bounce"></i>
                     </div>
+                  ) : project.id === 'weather' ? (
+                    <div className="w-full h-full relative">
+                      <ThunderCloud />
+                    </div>
                   ) : (
-                    <div className="flex justify-center items-center text-foreground/90 relative overflow-hidden">
-                      <div className="relative">
-                        <i className="fas fa-cloud text-6xl text-blue-300 animate-pulse"></i>
-                        <div className="absolute top-12 left-1/2 transform -translate-x-1/2">
-                          <div className="flex space-x-1">
-                            <div className="w-1 h-8 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                            <div className="w-1 h-6 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '100ms' }}></div>
-                            <div className="w-1 h-10 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '200ms' }}></div>
-                            <div className="w-1 h-7 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                            <div className="w-1 h-9 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '400ms' }}></div>
-                          </div>
-                        </div>
-                      </div>
-                      <i className="fas fa-thermometer-half text-3xl ml-4 text-orange-400 animate-pulse"></i>
+                    <div className="flex justify-center items-center text-foreground/90">
+                      <i className="fas fa-cloud text-5xl"></i>
+                      <i className="fas fa-thermometer-half text-3xl ml-2"></i>
                     </div>
                   )}
                 </div>
