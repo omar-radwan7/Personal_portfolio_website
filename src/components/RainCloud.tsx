@@ -1,9 +1,9 @@
 import React from 'react';
 
 const RainCloud: React.FC = () => {
-  const drops = Array.from({ length: 42 });
+  const drops = Array.from({ length: 80 });
   return (
-    <div className="rain-scene relative w-full h-full overflow-hidden">
+    <div className="rain-scene relative w-full h-full overflow-hidden pointer-events-none">
       <div className="absolute inset-0">
         <div className="absolute left-1/2 -translate-x-1/2 top-6 w-44 sm:w-56">
           <svg viewBox="0 0 256 160" className="w-full h-auto" aria-label="Rain cloud icon">
@@ -33,14 +33,13 @@ const RainCloud: React.FC = () => {
             key={i}
             className="rain-drop"
             style={{
-              // CSS vars consumed by CSS in index.css
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
+              // @ts-ignore custom props
               '--x': `${x}%`,
               '--delay': `${delay}s`,
               '--d': `${dur}s`,
+              '--h': `${size}px`,
               height: `${size}px`,
-            }}
+            } as React.CSSProperties}
           />
         );
       })}

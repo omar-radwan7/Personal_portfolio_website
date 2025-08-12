@@ -198,18 +198,31 @@
   }
   /* Rain animation */
   @keyframes rain-fall {
-    0% { transform: translate3d(0, -140%, 0); opacity: 0; }
-    10% { opacity: 0.9; }
-    100% { transform: translate3d(-6px, 140%, 0); opacity: 0; }
+    0% { transform: translate3d(0, -140%, 0) rotate(-15deg); opacity: 0; }
+    15% { opacity: 1; }
+    100% { transform: translate3d(-10px, 140%, 0) rotate(-15deg); opacity: 0; }
+  }
+  @keyframes splash {
+    0%, 80% { transform: translate(-50%, 0) scale(0.6); opacity: 0; }
+    85% { opacity: 0.7; }
+    100% { transform: translate(-50%, 0) scale(1.25); opacity: 0; }
   }
   .rain-scene { position: relative; overflow: hidden; }
   .rain-drop {
-    position: absolute; top: -12%; width: 2px; background: hsl(210 95% 70% / 0.9);
-    border-radius: 9999px; left: var(--x, 50%);
-    height: 14px; opacity: 0; filter: drop-shadow(0 0 6px hsl(210 95% 70% / 0.35));
-    animation: rain-fall var(--d, 1.5s) linear infinite;
+    position: absolute; top: -12%; width: 2px; left: var(--x, 50%);
+    height: var(--h, 16px); opacity: 0;
+    background: linear-gradient(to bottom, hsl(210 95% 80% / 0.0), hsl(210 95% 70% / 0.95));
+    border-radius: 9999px; filter: drop-shadow(0 0 6px hsl(210 95% 70% / 0.35));
+    animation: rain-fall var(--d, 1.6s) linear infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  .rain-drop::after {
+    content: ''; position: absolute; left: 50%; bottom: -2px; width: 12px; height: 2px;
+    background: hsl(210 90% 70% / 0.45); border-radius: 9999px;
+    transform-origin: center; transform: translate(-50%, 0) scale(0.6);
+    filter: blur(0.2px);
+    animation: splash var(--d, 1.6s) ease-out infinite;
     animation-delay: var(--delay, 0s);
   }
 }
-
 
