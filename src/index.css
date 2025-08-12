@@ -118,12 +118,12 @@
   /* Glassmorphism utilities */
   .glass-base {
     @apply backdrop-blur-2xl backdrop-saturate-150 border border-purple/40 bg-clip-padding;
-    box-shadow: 0 12px 44px hsl(var(--primary) / 0.22);
+    box-shadow: 0 8px 25px hsl(var(--primary) / 0.12);
     background: linear-gradient(135deg, hsl(var(--background) / 0.12), hsl(var(--primary) / 0.05));
   }
 
   .glass-card {
-    @apply relative glass-base rounded-2xl hover:shadow-xl hover:shadow-purple/30 transition-shadow;
+    @apply relative glass-base rounded-2xl hover:shadow-lg hover:shadow-purple/15 transition-shadow;
   }
 
   .glass-nav {
