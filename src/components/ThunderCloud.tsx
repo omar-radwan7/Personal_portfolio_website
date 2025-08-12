@@ -83,27 +83,29 @@ const ThunderCloud: React.FC = () => {
         );
       })}
 
-      {/* Light Rain */}
-      {rainDrops.map((_, i) => {
-        const x = Math.random() * 100;
-        const delay = Math.random() * 1.5;
-        const dur = 1.0 + Math.random() * 0.6;
-        const size = 8 + Math.floor(Math.random() * 6);
-        return (
-          <span
-            key={`rain-${i}`}
-            className="light-rain-drop"
-            style={{
-              // @ts-ignore custom CSS props
-              '--x': `${x}%`,
-              '--delay': `${delay}s`,
-              '--d': `${dur}s`,
-              '--h': `${size}px`,
-              height: `${size}px`,
-            } as React.CSSProperties}
-          />
-        );
-      })}
+      {/* Light Rain - positioned under the cloud */}
+      <div className="absolute inset-0 z-0">
+        {rainDrops.map((_, i) => {
+          const x = Math.random() * 100;
+          const delay = Math.random() * 1.5;
+          const dur = 1.0 + Math.random() * 0.6;
+          const size = 8 + Math.floor(Math.random() * 6);
+          return (
+            <span
+              key={`rain-${i}`}
+              className="light-rain-drop"
+              style={{
+                // @ts-ignore custom CSS props
+                '--x': `${x}%`,
+                '--delay': `${delay}s`,
+                '--d': `${dur}s`,
+                '--h': `${size}px`,
+                height: `${size}px`,
+              } as React.CSSProperties}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
