@@ -116,11 +116,13 @@ const BouncingQ: React.FC = () => {
   }, [isMobile]);
   
   return (
-    <canvas 
-      ref={canvasRef} 
-      className="w-full h-full bg-[#1A1F2C]"
-      style={{ display: 'block' }}
-    />
+    <div className="w-full h-full overflow-hidden rounded-t-2xl">
+      <canvas 
+        ref={canvasRef} 
+        className="w-full h-full bg-[#1A1F2C]"
+        style={{ display: 'block' }}
+      />
+    </div>
   );
 };
 

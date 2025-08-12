@@ -100,8 +100,8 @@ const ProjectDetail: React.FC = () => {
             Back to Projects
           </Link>
           
-          <div className="glass-panel rounded-2xl overflow-hidden shadow-lg border border-border/50">
-            <div className="w-full aspect-video flex items-center justify-center bg-card/40">
+          <div className="glass-panel rounded-2xl overflow-hidden shadow-lg border border-border/30">
+            <div className="w-full aspect-video flex items-center justify-center bg-card/20 rounded-t-2xl overflow-hidden">
               {project.image || (
                 <div className="text-center w-full h-full flex items-center justify-center">
                   {project.id === 'pingpong' ? (
@@ -109,8 +109,10 @@ const ProjectDetail: React.FC = () => {
                       <PingPongGame />
                     </div>
                   ) : project.id === 'aimodel' ? (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <BouncingQ />
+                    <div className="w-full h-full flex items-center justify-center overflow-hidden">
+                      <div className="scale-75">
+                        <BouncingQ />
+                      </div>
                     </div>
                   ) : project.id === 'tradewise' ? (
                     <div className="flex justify-center items-center text-foreground/90">
@@ -123,16 +125,27 @@ const ProjectDetail: React.FC = () => {
                       <i className="fas fa-lock text-3xl ml-2 text-cyan-400 animate-bounce"></i>
                     </div>
                   ) : (
-                    <div className="flex justify-center items-center text-foreground/90">
-                      <i className="fas fa-cloud text-5xl"></i>
-                      <i className="fas fa-thermometer-half text-3xl ml-2"></i>
+                    <div className="flex justify-center items-center text-foreground/90 relative overflow-hidden">
+                      <div className="relative">
+                        <i className="fas fa-cloud text-6xl text-blue-300 animate-pulse"></i>
+                        <div className="absolute top-12 left-1/2 transform -translate-x-1/2">
+                          <div className="flex space-x-1">
+                            <div className="w-1 h-8 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                            <div className="w-1 h-6 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '100ms' }}></div>
+                            <div className="w-1 h-10 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '200ms' }}></div>
+                            <div className="w-1 h-7 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                            <div className="w-1 h-9 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '400ms' }}></div>
+                          </div>
+                        </div>
+                      </div>
+                      <i className="fas fa-thermometer-half text-3xl ml-4 text-orange-400 animate-pulse"></i>
                     </div>
                   )}
                 </div>
               )}
             </div>
             
-            <div className="p-6 bg-card/40">
+            <div className="p-6 bg-card/20 rounded-b-2xl">
               <p className="text-sm text-muted-foreground mb-2">{project.subtitle}</p>
               <h1 className="text-2xl sm:text-3xl font-bold mb-4">{project.title}</h1>
               
