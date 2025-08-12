@@ -100,7 +100,7 @@ const ProjectDetail: React.FC = () => {
             Back to Projects
           </Link>
           
-          <div className="glass-panel rounded-2xl overflow-hidden shadow-lg border border-border/30">
+          <div className={project.id === 'aimodel' ? "bg-card rounded-2xl overflow-hidden shadow-md border border-border/20" : "glass-panel rounded-2xl overflow-hidden shadow-lg border border-border/30"}>
             <div className="w-full aspect-video flex items-center justify-center bg-card/20 rounded-t-2xl overflow-hidden">
               {project.image || (
                 <div className="text-center w-full h-full flex items-center justify-center">
@@ -110,9 +110,7 @@ const ProjectDetail: React.FC = () => {
                     </div>
                   ) : project.id === 'aimodel' ? (
                     <div className="w-full h-full flex items-center justify-center overflow-hidden">
-                      <div className="scale-75">
-                        <BouncingQ />
-                      </div>
+                      <BouncingQ />
                     </div>
                   ) : project.id === 'tradewise' ? (
                     <div className="flex justify-center items-center text-foreground/90">

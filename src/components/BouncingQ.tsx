@@ -46,9 +46,8 @@ const BouncingQ: React.FC = () => {
     const draw = (now: number) => {
       const { w, h } = getDims();
 
-      // Clear background
-      ctx.fillStyle = '#1A1F2C';
-      ctx.fillRect(0, 0, w, h);
+      // Clear fully to keep canvas transparent and let parent background show
+      ctx.clearRect(0, 0, w, h);
 
       // Update phase with real delta time for ultra-smooth motion
       const dt = Math.min(0.05, (now - last) / 1000); // clamp to avoid jumps
@@ -119,7 +118,7 @@ const BouncingQ: React.FC = () => {
     <div className="w-full h-full overflow-hidden rounded-t-2xl">
       <canvas 
         ref={canvasRef} 
-        className="w-full h-full bg-[#1A1F2C]"
+        className="w-full h-full bg-transparent"
         style={{ display: 'block' }}
       />
     </div>
