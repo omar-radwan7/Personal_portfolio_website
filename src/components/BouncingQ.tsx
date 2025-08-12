@@ -12,73 +12,105 @@ const BouncingQ: React.FC = () => {
     
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    
-    // Set canvas dimensions to match container
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // High-DPI aware resize (crisp, smooth rendering)
     const resizeCanvas = () => {
-      if (canvas.parentElement) {
-        canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = canvas.parentElement.clientHeight;
-      }
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      const cssWidth = parent.clientWidth;
+      const cssHeight = parent.clientHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.style.width = cssWidth + 'px';
+      canvas.style.height = cssHeight + 'px';
+      canvas.width = Math.max(1, Math.floor(cssWidth * dpr));
+      canvas.height = Math.max(1, Math.floor(cssHeight * dpr));
+      // Draw using CSS pixels
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
-    
+
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-    
-    // Q parameters
-    let x = canvas.width / 2;
-    const radius = Math.min(canvas.width, canvas.height) / (isMobile ? 8 : 6); // Responsive size based on device
-    
+
     // Animation parameters
-    let time = 0;
-    const amplitude = 30; // Height of bounce
-    const period = 3; // Faster bounce (lower = faster)
-    
-    // Animation function
-    const animate = () => {
-      if (!ctx || !canvas) return;
-      
-      // Clear canvas and recenter x position on each frame
-      ctx.fillStyle = '#1A1F2C'; // Darker purple background that fits website theme
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-      // Update x position to always be at center
-      x = canvas.width / 2;
-      
-      // Calculate y position with smooth sine wave for bouncing
-      time += 0.012; // Faster animation speed
-      const y = canvas.height / 2 + Math.sin(time / period) * amplitude;
-      
-      // Draw shadow
-      const shadowY = canvas.height / 2 + 40;
-      const shadowSize = radius * (0.8 - Math.abs(Math.sin(time / period)) * 0.3);
+    let phase = 0; // radians
+    const period = 2.4; // seconds per full bounce
+    let last = performance.now();
+
+    const getDims = () => ({
+      w: canvas.clientWidth || canvas.width,
+      h: canvas.clientHeight || canvas.height,
+    });
+
+    const draw = (now: number) => {
+      const { w, h } = getDims();
+
+      // Clear background
+      ctx.fillStyle = '#1A1F2C';
+      ctx.fillRect(0, 0, w, h);
+
+      // Update phase with real delta time for ultra-smooth motion
+      const dt = Math.min(0.05, (now - last) / 1000); // clamp to avoid jumps
+      last = now;
+      phase += (2 * Math.PI * dt) / period;
+
+      const centerX = w / 2;
+      const centerY = h / 2;
+      const baseRadius = Math.min(w, h) / (isMobile ? 8 : 6);
+      const amplitude = Math.min(40, h * 0.08);
+      const s = Math.sin(phase);
+      const y = centerY + s * amplitude;
+      const scale = 1 + 0.03 * Math.sin(phase + Math.PI / 4);
+
+      // Shadow (soft, responsive)
+      const shadowY = centerY + amplitude + 40;
+      const squash = 0.8 - Math.abs(s) * 0.35;
+      const shadowRx = baseRadius * (0.9 * squash);
+      const shadowRy = shadowRx / 3.2;
+      const grad = ctx.createRadialGradient(centerX, shadowY, 1, centerX, shadowY, shadowRx);
+      grad.addColorStop(0, 'rgba(0,0,0,0.28)');
+      grad.addColorStop(1, 'rgba(0,0,0,0.0)');
+      ctx.fillStyle = grad;
       ctx.beginPath();
-      ctx.ellipse(x, shadowY, shadowSize, shadowSize / 3, 0, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+      ctx.ellipse(centerX, shadowY, shadowRx, shadowRy, 0, 0, Math.PI * 2);
       ctx.fill();
-      
-      // Draw Q letter
-      const fontSize = isMobile ? radius * 3 : radius * 2.5; // Bigger on mobile
-      ctx.font = `bold ${fontSize}px Arial`;
-      ctx.fillStyle = '#9b87f5';
+
+      // Letter Q with subtle scale pulse and glow
+      const fontSize = (isMobile ? baseRadius * 3 : baseRadius * 2.5) * scale;
+      ctx.font = `900 ${fontSize}px Inter, Arial, sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      
-      // Add glow effect
       ctx.shadowColor = '#9b87f5';
-      ctx.shadowBlur = 15;
+      ctx.shadowBlur = 18;
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
-      
-      ctx.fillText('Q', x, y);
-      ctx.shadowBlur = 0; // Reset shadow for other elements
-      
-      requestAnimationFrame(animate);
+      ctx.fillStyle = '#9b87f5';
+
+      ctx.save();
+      ctx.translate(centerX, y);
+      ctx.scale(scale, scale);
+      ctx.fillText('Q', 0, 0);
+      ctx.restore();
+
+      ctx.shadowBlur = 0;
     };
-    
-    // Start animation
-    animate();
-    
+
+    let raf = 0;
+    const animate = (now: number) => {
+      draw(now);
+      raf = requestAnimationFrame(animate);
+    };
+
+    if (prefersReduced) {
+      // Static render centered if user prefers reduced motion
+      draw(performance.now());
+    } else {
+      raf = requestAnimationFrame(animate);
+    }
+
     return () => {
+      cancelAnimationFrame(raf);
       window.removeEventListener('resize', resizeCanvas);
     };
   }, [isMobile]);
