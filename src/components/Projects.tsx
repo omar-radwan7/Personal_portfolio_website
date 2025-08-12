@@ -39,7 +39,7 @@ const Projects: React.FC = () => {
 
           {/* Qorix AI Assistant */}
           <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
-            <div className="w-full flex items-center justify-center aspect-[16/10] border-b border-foreground/10 bg-transparent">
+            <div className="w-full flex items-center justify-center aspect-[16/10] bg-transparent">
               <div className="w-full h-full p-2">
                 <BouncingQ />
               </div>
