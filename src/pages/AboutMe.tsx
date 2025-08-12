@@ -34,7 +34,7 @@ const AboutMe: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* About Me Section - Updated text */}
           <div className="lg:col-span-1">
-            <div className="bg-card rounded-xl p-6 shadow-lg sticky top-24">
+            <div className="glass-card p-6 sticky top-24">
               <h1 className="text-3xl font-bold mb-6 title-gradient">About Me</h1>
               
               <div className="mb-6">
@@ -65,7 +65,7 @@ const AboutMe: React.FC = () => {
           
           {/* CV Section */}
           <div className="lg:col-span-2">
-            <div className="bg-card rounded-xl p-6 md:p-8 shadow-lg">
+            <div className="glass-card p-6 md:p-8">
               <h2 className="text-2xl font-bold mb-8 text-center title-gradient">Curriculum Vitae</h2>
               
               <div className="space-y-8">
