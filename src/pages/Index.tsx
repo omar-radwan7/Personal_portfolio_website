@@ -58,7 +58,15 @@ const Index: React.FC = () => {
   }, [location]);
   
   return (
-    <div className="min-h-screen bg-navyDark">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Glass background with purple tint */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-navyDark"></div>
+        <div className="absolute inset-0 glass-section"></div>
+        <div className="blur-blob blob-purple top-0 left-0 opacity-30"></div>
+        <div className="blur-blob blob-cyan top-1/4 right-0 opacity-20"></div>
+        <div className="blur-blob blob-pink bottom-1/4 left-1/3 opacity-25"></div>
+      </div>
       <Hero />
       <Services />
       <Projects />

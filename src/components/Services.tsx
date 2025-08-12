@@ -27,8 +27,9 @@ const services: Service[] = [
 
 const Services: React.FC = () => {
   return (
-    <section id="services" className="py-20">
-      <div className="section-container">
+    <section id="services" className="py-20 relative">
+      <div className="glass-section absolute inset-0 opacity-60"></div>
+      <div className="section-container relative z-10">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 title-gradient">Services</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
