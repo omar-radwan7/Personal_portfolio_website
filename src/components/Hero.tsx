@@ -48,7 +48,11 @@ const Hero: React.FC = () => {
       ></div>
       
       <div className="section-container relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-8">
+        <div className="glass-panel p-6 md:p-10 relative overflow-hidden">
+          <div className="blur-blob blob-purple -top-16 -left-10"></div>
+          <div className="blur-blob blob-cyan top-10 -right-10"></div>
+          <div className="blur-blob blob-pink -bottom-20 left-1/3"></div>
+          <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-8">
           <div className="max-w-3xl animate-fadeIn flex-1">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
               <DecryptedText
@@ -110,6 +114,7 @@ const Hero: React.FC = () => {
           {/* Robot positioned to the right - now visible on all screen sizes */}
           <div className="flex-shrink-0 order-first lg:order-last">
             <RobotHead />
+          </div>
           </div>
         </div>
       </div>

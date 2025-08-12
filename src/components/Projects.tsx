@@ -12,7 +12,10 @@ const Projects: React.FC = () => {
           Projects
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
+        <div className="glass-panel p-6 md:p-8 relative overflow-hidden">
+          <div className="blur-blob blob-purple -top-20 -left-16"></div>
+          <div className="blur-blob blob-cyan bottom-0 -right-20"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto relative z-10">
           {/* Ping Pong Game */}
           <div className="glass-card rounded-md overflow-hidden flex flex-col h-full">
             <div className="w-full bg-black flex items-center justify-center aspect-[16/10]">
@@ -154,6 +157,7 @@ const Projects: React.FC = () => {
             </div>
           </div>
 
+          </div>
         </div>
       </div>
     </section>
