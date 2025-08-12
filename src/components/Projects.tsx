@@ -14,7 +14,7 @@ const Projects: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
           {/* Ping Pong Game */}
-          <div className="glass-card rounded-md overflow-hidden flex flex-col h-full">
+          <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
             <div className="w-full bg-black flex items-center justify-center aspect-[16/10]">
               <PingPongGame />
             </div>
@@ -38,7 +38,7 @@ const Projects: React.FC = () => {
           </div>
 
           {/* Qorix AI Assistant */}
-          <div className="glass-card rounded-md overflow-hidden flex flex-col h-full">
+          <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
             <div className="w-full flex items-center justify-center aspect-[16/10] border-b border-foreground/10 bg-transparent">
               <div className="w-full h-full p-2">
                 <BouncingQ />
@@ -64,7 +64,7 @@ const Projects: React.FC = () => {
           </div>
 
           {/* TradeWise Stock Market App */}
-          <div className="glass-card rounded-md overflow-hidden flex flex-col h-full">
+          <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
             <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
               <div className="text-center text-white">
                 <div className="flex justify-center items-center mb-1">
@@ -95,7 +95,7 @@ const Projects: React.FC = () => {
           </div>
 
           {/* Weather App */}
-          <div className="glass-card rounded-md overflow-hidden flex flex-col h-full">
+          <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
             <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
               <div className="text-center text-white">
                 <div className="flex justify-center items-center mb-1">
@@ -124,7 +124,7 @@ const Projects: React.FC = () => {
           </div>
 
           {/* NexoVPN App */}
-          <div className="glass-card rounded-md overflow-hidden flex flex-col h-full">
+          <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
             <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
               <div className="text-center text-white">
                 <div className="flex justify-center items-center mb-1">

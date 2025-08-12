@@ -35,7 +35,7 @@ const Services: React.FC = () => {
           {services.map((service, index) => (
             <div 
               key={index}
-              className="glass-card p-6 card-hover"
+              className="glass-card glass-clear p-6 card-hover"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="w-14 h-14 bg-purple/20 rounded-full flex items-center justify-center mb-6">
