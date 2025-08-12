@@ -27,8 +27,9 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
   
   return (
     <div 
+      key={location.pathname}
       className={cn(
-        'transition-all duration-300 ease-in-out',
+        'transition-all duration-300 ease-in-out animate-fade-in',
         transitionStage === 'fadeIn' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       )}
     >

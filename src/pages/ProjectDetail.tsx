@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import Footer from '@/components/Footer';
+import BouncingQ from '@/components/BouncingQ';
+import PingPongGame from '@/components/PingPongGame';
 
 // Project data structure
 export interface Project {
@@ -88,7 +90,7 @@ const ProjectDetail: React.FC = () => {
         <div className="max-w-4xl mx-auto px-4 py-12 sm:py-16">
           <Link 
             to="/#projects" 
-            className="inline-flex items-center text-purple-light hover:text-purple mb-6"
+            className="inline-flex items-center text-primary/80 hover:text-primary mb-6"
             onClick={(e) => {
               e.preventDefault();
               window.location.href = "/#projects";
@@ -98,36 +100,30 @@ const ProjectDetail: React.FC = () => {
             Back to Projects
           </Link>
           
-          <div className="bg-card rounded-lg overflow-hidden shadow-md border border-purple/10">
-            <div className="w-full bg-black aspect-video flex items-center justify-center">
+          <div className="glass-panel rounded-2xl overflow-hidden shadow-lg border border-border/50">
+            <div className="w-full aspect-video flex items-center justify-center bg-card/40">
               {project.image || (
-                <div className="text-center">
+                <div className="text-center w-full h-full flex items-center justify-center">
                   {project.id === 'pingpong' ? (
-                    <div className="w-full h-full bg-black">
-                      {/* Placeholder for PingPong game */}
-                      <div className="flex items-center justify-center h-full">
-                        <div className="text-white text-xl">PingPong Game Preview</div>
-                      </div>
+                    <div className="w-full h-full">
+                      <PingPongGame />
                     </div>
                   ) : project.id === 'aimodel' ? (
-                    <div className="w-full h-full">
-                      {/* Display the BouncingQ animation for AI model */}
-                      <div className="w-full h-full">
-                        {/* This will be replaced with the actual component when rendered */}
-                      </div>
+                    <div className="w-full h-full flex items-center justify-center">
+                      <BouncingQ />
                     </div>
                   ) : project.id === 'tradewise' ? (
-                    <div className="flex justify-center items-center text-white">
+                    <div className="flex justify-center items-center text-foreground/90">
                       <i className="fas fa-chart-line text-5xl text-green-400 animate-pulse"></i>
                       <i className="fas fa-dollar-sign text-3xl ml-2 text-yellow-400 animate-bounce"></i>
                     </div>
                   ) : project.id === 'nexovpn' ? (
-                    <div className="flex justify-center items-center text-white">
+                    <div className="flex justify-center items-center text-foreground/90">
                       <i className="fas fa-shield-alt text-5xl text-blue-400 animate-pulse"></i>
                       <i className="fas fa-lock text-3xl ml-2 text-cyan-400 animate-bounce"></i>
                     </div>
                   ) : (
-                    <div className="flex justify-center items-center text-white">
+                    <div className="flex justify-center items-center text-foreground/90">
                       <i className="fas fa-cloud text-5xl"></i>
                       <i className="fas fa-thermometer-half text-3xl ml-2"></i>
                     </div>
@@ -136,8 +132,8 @@ const ProjectDetail: React.FC = () => {
               )}
             </div>
             
-            <div className="p-6 bg-[#1e2235]">
-              <p className="text-sm text-gray-400 mb-2">{project.subtitle}</p>
+            <div className="p-6 bg-card/40">
+              <p className="text-sm text-muted-foreground mb-2">{project.subtitle}</p>
               <h1 className="text-2xl sm:text-3xl font-bold mb-4">{project.title}</h1>
               
               <div className="flex gap-2 flex-wrap mb-6">
@@ -154,14 +150,14 @@ const ProjectDetail: React.FC = () => {
               
               {project.status === 'complete' ? (
                 <Button 
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-purple hover:bg-purple-dark"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-primary hover:bg-primary/90"
                   onClick={() => window.open(project.githubLink, '_blank')}
                 >
                   Try It <ExternalLink className="h-4 w-4" />
                 </Button>
               ) : (
                 <Button 
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-600 cursor-not-allowed"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-muted text-muted-foreground hover:bg-muted cursor-not-allowed"
                   disabled
                 >
                   Coming Soon <ExternalLink className="h-4 w-4" />
