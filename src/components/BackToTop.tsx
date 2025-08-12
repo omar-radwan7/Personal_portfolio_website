@@ -30,7 +30,7 @@ const BackToTop: React.FC = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'} fixed bottom-6 right-6 z-50 bg-purple hover:bg-purple-dark text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300`}
+      className={`${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'} fixed bottom-6 right-6 z-50 glass-fab text-foreground w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300`}
       aria-label="Back to top"
     >
       <svg 

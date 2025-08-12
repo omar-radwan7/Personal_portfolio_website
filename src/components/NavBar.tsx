@@ -93,7 +93,7 @@ const NavBar: React.FC = () => {
         "fixed lg:static top-16 left-0 w-full lg:w-auto glass-nav rounded-2xl mx-4 lg:mx-0 lg:bg-transparent lg:backdrop-blur-0 transition-all duration-300 shadow-lg lg:shadow-none",
         mobileMenuOpen ? "block" : "hidden lg:block"
       )}>
-            <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-8 p-6 lg:p-0">
+            <ul className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-8 px-6 py-3 lg:p-0">
               <li>
                 <Link 
                   to="/" 

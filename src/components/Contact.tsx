@@ -11,23 +11,23 @@ const Contact: React.FC = () => {
           <div className="blur-blob blob-purple -top-16 -left-16"></div>
           <div className="blur-blob blob-cyan bottom-0 -right-16"></div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-            <div className="bg-card glass-card p-6 card-hover">
-              <div className="w-14 h-14 bg-purple/20 rounded-full flex items-center justify-center mb-6">
-                <i className="fas fa-phone text-purple-light text-2xl"></i>
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Phone</h3>
-              <p className="text-gray-400">+49 177 7588642</p>
+          <div className="glass-card glass-clear card-blobs p-6 card-hover">
+            <div className="w-14 h-14 bg-purple/20 rounded-full flex items-center justify-center mb-6">
+              <i className="fas fa-phone text-purple-light text-2xl"></i>
             </div>
+            <h3 className="text-xl font-semibold mb-3">Phone</h3>
+            <p className="text-gray-400">+49 177 7588642</p>
+          </div>
             
-            <div className="bg-card glass-card p-6 card-hover">
-              <div className="w-14 h-14 bg-purple/20 rounded-full flex items-center justify-center mb-6">
-                <i className="fas fa-envelope text-purple-light text-2xl"></i>
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Email</h3>
-              <a href="mailto:omarobrashy2004@gmail.com" className="text-gray-400 hover:text-purple-light transition-colors">
-                omarobrashy2004@gmail.com
-              </a>
+          <div className="glass-card glass-clear card-blobs p-6 card-hover">
+            <div className="w-14 h-14 bg-purple/20 rounded-full flex items-center justify-center mb-6">
+              <i className="fas fa-envelope text-purple-light text-2xl"></i>
             </div>
+            <h3 className="text-xl font-semibold mb-3">Email</h3>
+            <a href="mailto:omarobrashy2004@gmail.com" className="text-gray-400 hover:text-purple-light transition-colors">
+              omarobrashy2004@gmail.com
+            </a>
+          </div>
           </div>
         </div>
       </div>
