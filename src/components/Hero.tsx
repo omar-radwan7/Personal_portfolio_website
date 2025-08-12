@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="min-h-screen pt-20 pb-10 relative overflow-hidden flex items-center">
+    <section id="home" ref={heroRef} className="min-h-screen pt-20 pb-10 relative overflow-hidden flex items-center">
       {/* Background styling */}
       <div className="wave-animation" style={{top: '10%', left: '0'}}></div>
       <div className="wave-animation" style={{top: '30%', left: '10%'}}></div>

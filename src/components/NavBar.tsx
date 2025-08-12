@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 const NavBar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<'home' | 'services' | 'projects' | 'contact'>('home');
   const location = useLocation();
 
   useEffect(() => {
@@ -22,17 +23,55 @@ const NavBar: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
+  const isActive = (path: string) => location.pathname === path;
+  const isAnchorActive = (id: 'home' | 'services' | 'projects' | 'contact') =>
+    location.pathname === '/' && activeSection === id;
+
+  // Scrollspy for section highlights on the home page
+  useEffect(() => {
+    if (location.pathname !== '/') return;
+    const ids: Array<'services' | 'projects' | 'contact'> = ['services', 'projects', 'contact'];
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let topMost: { id: 'home' | 'services' | 'projects' | 'contact'; ratio: number } = { id: 'home', ratio: 0 };
+        entries.forEach((entry) => {
+          const id = entry.target.id as 'services' | 'projects' | 'contact';
+          if (entry.isIntersecting && entry.intersectionRatio > topMost.ratio) {
+            topMost = { id, ratio: entry.intersectionRatio };
+          }
+        });
+        if (topMost.ratio === 0) {
+          if (window.scrollY < 200) setActiveSection('home');
+        } else {
+          setActiveSection(topMost.id);
+        }
+      },
+      { threshold: [0.25, 0.5, 0.75], rootMargin: '-10% 0px -50% 0px' }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    const onScroll = () => {
+      if (window.scrollY < 200) setActiveSection('home');
+    };
+    window.addEventListener('scroll', onScroll);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [location.pathname]);
 
   return (
     <>
-      <header className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300",
-        isScrolled ? "glass-nav py-3" : "bg-transparent py-5"
-      )}>
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
+        <div className={cn(
+          "mx-4 md:mx-6 lg:mx-auto max-w-6xl px-4 md:px-6 flex items-center justify-between rounded-full transition-all",
+          isScrolled ? "glass-nav py-2 shadow-lg" : "py-3"
+        )}>
           <Link to="/" className="text-2xl font-bold text-purple-light">Radwan</Link>
           
           <div className="lg:hidden">
@@ -51,7 +90,7 @@ const NavBar: React.FC = () => {
           </div>
           
       <nav className={cn(
-        "fixed lg:static top-16 left-0 w-full lg:w-auto glass-nav lg:bg-transparent lg:backdrop-blur-0 transition-all duration-300 shadow-lg lg:shadow-none",
+        "fixed lg:static top-16 left-0 w-full lg:w-auto glass-nav rounded-2xl mx-4 lg:mx-0 lg:bg-transparent lg:backdrop-blur-0 transition-all duration-300 shadow-lg lg:shadow-none",
         mobileMenuOpen ? "block" : "hidden lg:block"
       )}>
             <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-8 p-6 lg:p-0">
@@ -59,9 +98,8 @@ const NavBar: React.FC = () => {
                 <Link 
                   to="/" 
                   className={cn(
-                    "nav-link transition-all duration-300", 
-                    isActive('/') && "text-purple-light after:scale-x-100",
-                    !isActive('/') && "hover:text-purple-light hover:translate-y-[-2px]"
+                    "nav-link transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
+                    (location.pathname === '/' ? isAnchorActive('home') : isActive('/')) && "text-purple-light after:scale-x-100"
                   )}
                 >
                   Home
@@ -70,7 +108,10 @@ const NavBar: React.FC = () => {
               <li>
                 <a 
                   href="/#services" 
-                  className="nav-link transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]"
+                  className={cn(
+                    "nav-link transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
+                    isAnchorActive('services') && "text-purple-light after:scale-x-100"
+                  )}
                 >
                   Services
                 </a>
@@ -78,7 +119,10 @@ const NavBar: React.FC = () => {
               <li>
                 <a 
                   href="/#projects" 
-                  className="nav-link transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]"
+                  className={cn(
+                    "nav-link transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
+                    isAnchorActive('projects') && "text-purple-light after:scale-x-100"
+                  )}
                 >
                   Projects
                 </a>
@@ -86,7 +130,10 @@ const NavBar: React.FC = () => {
               <li>
                 <a 
                   href="/#contact" 
-                  className="nav-link transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]"
+                  className={cn(
+                    "nav-link transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
+                    isAnchorActive('contact') && "text-purple-light after:scale-x-100"
+                  )}
                 >
                   Contact
                 </a>

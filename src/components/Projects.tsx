@@ -18,7 +18,7 @@ const Projects: React.FC = () => {
             <div className="w-full bg-black flex items-center justify-center aspect-[16/10]">
               <PingPongGame />
             </div>
-            <div className="p-4 bg-card/40 backdrop-blur-md flex-grow text-sm">
+            <div className="p-4 bg-background/20 backdrop-blur-xl border-t border-purple/20 flex-grow text-sm">
               <p className="text-gray-400 mb-1">PingPong game With HTML, CSS & JavaScript</p>
               <h3 className="text-base font-semibold mb-2">PingPong Game</h3>
               <div className="flex justify-between items-center">
@@ -44,7 +44,7 @@ const Projects: React.FC = () => {
                 <BouncingQ />
               </div>
             </div>
-            <div className="p-4 bg-card/40 backdrop-blur-md flex-grow text-sm">
+            <div className="p-4 bg-background/20 backdrop-blur-xl border-t border-purple/20 flex-grow text-sm">
               <p className="text-gray-400 mb-1">Interactive AI Assistant with React</p>
               <h3 className="text-base font-semibold mb-2">Qorix AI Assistant</h3>
               <div className="flex justify-between items-center">
@@ -65,7 +65,7 @@ const Projects: React.FC = () => {
 
           {/* TradeWise Stock Market App */}
           <div className="glass-card rounded-md overflow-hidden flex flex-col h-full">
-            <div className="w-full bg-background/40 backdrop-blur-md flex items-center justify-center aspect-[16/10]">
+            <div className="w-full bg-background/20 backdrop-blur-xl border-b border-purple/20 flex items-center justify-center aspect-[16/10]">
               <div className="text-center text-white">
                 <div className="flex justify-center items-center mb-1">
                   <i className="fas fa-chart-line text-3xl text-green-400 animate-pulse"></i>
@@ -75,7 +75,7 @@ const Projects: React.FC = () => {
                 <p className="text-xs text-gray-400 mt-1">Demo Version</p>
               </div>
             </div>
-            <div className="p-4 bg-card/40 backdrop-blur-md flex-grow text-sm">
+            <div className="p-4 bg-background/20 backdrop-blur-xl border-t border-purple/20 flex-grow text-sm">
               <p className="text-gray-400 mb-1">Flutter Stock Market App with Real-time Data</p>
               <h3 className="text-base font-semibold mb-2">TradeWise</h3>
               <div className="flex justify-between items-center">
@@ -96,7 +96,7 @@ const Projects: React.FC = () => {
 
           {/* Weather App */}
           <div className="glass-card rounded-md overflow-hidden flex flex-col h-full">
-            <div className="w-full bg-background/40 backdrop-blur-md flex items-center justify-center aspect-[16/10]">
+            <div className="w-full bg-background/20 backdrop-blur-xl border-b border-purple/20 flex items-center justify-center aspect-[16/10]">
               <div className="text-center text-white">
                 <div className="flex justify-center items-center mb-1">
                   <i className="fas fa-cloud text-3xl animate-pulse"></i>
@@ -105,7 +105,7 @@ const Projects: React.FC = () => {
                 <h3 className="text-sm font-semibold">Weather Application</h3>
               </div>
             </div>
-            <div className="p-4 bg-card/40 backdrop-blur-md flex-grow text-sm">
+            <div className="p-4 bg-background/20 backdrop-blur-xl border-t border-purple/20 flex-grow text-sm">
               <p className="text-gray-400 mb-1">Flutter & OpenWeatherMap API</p>
               <h3 className="text-base font-semibold mb-2">Weather App</h3>
               <div className="flex justify-between items-center">
@@ -125,7 +125,7 @@ const Projects: React.FC = () => {
 
           {/* NexoVPN App */}
           <div className="glass-card rounded-md overflow-hidden flex flex-col h-full">
-            <div className="w-full bg-background/40 backdrop-blur-md flex items-center justify-center aspect-[16/10]">
+            <div className="w-full bg-background/20 backdrop-blur-xl border-b border-purple/20 flex items-center justify-center aspect-[16/10]">
               <div className="text-center text-white">
                 <div className="flex justify-center items-center mb-1">
                   <i className="fas fa-shield-alt text-3xl text-blue-400 animate-pulse"></i>
@@ -135,7 +135,7 @@ const Projects: React.FC = () => {
                 <p className="text-xs text-gray-400 mt-1">Secure Connection</p>
               </div>
             </div>
-            <div className="p-4 bg-card/40 backdrop-blur-md flex-grow text-sm">
+            <div className="p-4 bg-background/20 backdrop-blur-xl border-t border-purple/20 flex-grow text-sm">
               <p className="text-gray-400 mb-1">Django/React VPN with WireGuard & Docker</p>
               <h3 className="text-base font-semibold mb-2">NexoVPN</h3>
               <div className="flex justify-between items-center">

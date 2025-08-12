@@ -117,19 +117,19 @@
 
   /* Glassmorphism utilities */
   .glass-base {
-    @apply backdrop-blur-xl border border-purple/20;
-    box-shadow: 0 8px 30px hsl(var(--primary) / 0.15);
-    background: linear-gradient(135deg, hsl(var(--background) / 0.35), hsl(var(--primary) / 0.12));
+    @apply backdrop-blur-2xl backdrop-saturate-150 border border-purple/40 bg-clip-padding;
+    box-shadow: 0 12px 44px hsl(var(--primary) / 0.22);
+    background: linear-gradient(135deg, hsl(var(--background) / 0.12), hsl(var(--primary) / 0.05));
   }
 
   .glass-card {
-    @apply glass-base rounded-xl;
+    @apply relative glass-base rounded-2xl hover:shadow-xl hover:shadow-purple/30 transition-shadow;
   }
 
   .glass-nav {
-    @apply backdrop-blur-xl border-b border-purple/20;
-    box-shadow: 0 8px 30px hsl(var(--primary) / 0.18);
-    background: linear-gradient(135deg, hsl(var(--background) / 0.5), hsl(var(--primary) / 0.1));
+    @apply backdrop-blur-2xl border border-purple/30 bg-clip-padding rounded-full;
+    box-shadow: 0 8px 30px hsl(var(--primary) / 0.22);
+    background: linear-gradient(135deg, hsl(var(--background) / 0.15), hsl(var(--primary) / 0.06));
   }
 
   .glass-section {
