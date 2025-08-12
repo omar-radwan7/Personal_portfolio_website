@@ -69,8 +69,8 @@ const NavBar: React.FC = () => {
     <>
       <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
         <div className={cn(
-          "mx-4 md:mx-6 lg:mx-auto max-w-6xl px-6 md:px-10 flex items-center justify-between rounded-full transition-all",
-          isScrolled ? "glass-nav py-4 md:py-5 shadow-lg" : "py-5 md:py-6"
+          "mx-4 md:mx-6 lg:mx-auto max-w-6xl px-4 md:px-6 flex items-center justify-between rounded-full transition-all",
+          isScrolled ? "glass-nav py-2 shadow-lg" : "py-3"
         )}>
           <Link to="/" className="text-2xl font-bold text-purple-light">Radwan</Link>
           
@@ -93,7 +93,7 @@ const NavBar: React.FC = () => {
         "fixed lg:static top-16 left-0 w-full lg:w-auto glass-nav rounded-2xl mx-4 lg:mx-0 lg:bg-transparent lg:backdrop-blur-0 transition-all duration-300 shadow-lg lg:shadow-none",
         mobileMenuOpen ? "block" : "hidden lg:block"
       )}>
-            <ul className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-6 px-6 py-3 lg:p-0">
+            <ul className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-8 px-8 py-4 lg:px-6 lg:py-2">
               <li>
                 <Link 
                   to="/" 
