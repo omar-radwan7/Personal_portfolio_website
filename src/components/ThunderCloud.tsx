@@ -5,8 +5,11 @@ const ThunderCloud: React.FC = () => {
   const flashes = Array.from({ length: 3 });
   const rainDrops = Array.from({ length: 25 });
 
+  console.log('ThunderCloud component rendering');
+  
   return (
-    <div className="thunder-scene relative w-full h-full overflow-hidden pointer-events-none">
+    <div className="thunder-scene relative w-full h-full overflow-hidden pointer-events-none bg-gradient-to-b from-slate-800/10 to-slate-700/20 border-2 border-red-500"
+         style={{ minHeight: '200px' }}>
       {/* Flashes */}
       {flashes.map((_, i) => {
         const delay = Math.random() * 2.5;
@@ -32,18 +35,20 @@ const ThunderCloud: React.FC = () => {
           <svg viewBox="0 0 256 160" className="w-full h-auto" aria-label="Thunder cloud icon">
             <defs>
               <linearGradient id="cloudGrad2" x1="0" x2="1">
-                <stop offset="0%" stopColor="hsl(240 10% 60% / 0.65)" />
-                <stop offset="100%" stopColor="hsl(240 10% 70% / 0.55)" />
+                <stop offset="0%" stopColor="hsl(240 10% 60% / 0.85)" />
+                <stop offset="100%" stopColor="hsl(240 10% 70% / 0.75)" />
               </linearGradient>
             </defs>
             <path
               d="M64 120c-30 0-48-16-48-40 0-22 16-40 40-44 6-20 26-34 48-34 26 0 48 18 54 42 22 2 42 18 42 42 0 22-18 34-42 34H64z"
               fill="url(#cloudGrad2)"
-              stroke="hsl(240 10% 80% / 0.25)"
+              stroke="hsl(240 10% 80% / 0.45)"
               strokeWidth="2"
             />
           </svg>
         </div>
+        {/* Debug text */}
+        <div className="absolute top-0 left-0 text-white text-xs bg-black/50 p-1 z-20">Thunder Active</div>
       </div>
 
       {/* Bolts - positioned under the cloud */}
