@@ -3,6 +3,7 @@ import React from 'react';
 const ThunderCloud: React.FC = () => {
   const bolts = Array.from({ length: 6 });
   const flashes = Array.from({ length: 3 });
+  const rainDrops = Array.from({ length: 25 });
 
   return (
     <div className="thunder-scene relative w-full h-full overflow-hidden pointer-events-none">
@@ -79,6 +80,28 @@ const ThunderCloud: React.FC = () => {
               />
             </svg>
           </div>
+        );
+      })}
+
+      {/* Light Rain */}
+      {rainDrops.map((_, i) => {
+        const x = Math.random() * 100;
+        const delay = Math.random() * 1.5;
+        const dur = 1.0 + Math.random() * 0.6;
+        const size = 8 + Math.floor(Math.random() * 6);
+        return (
+          <span
+            key={`rain-${i}`}
+            className="light-rain-drop"
+            style={{
+              // @ts-ignore custom CSS props
+              '--x': `${x}%`,
+              '--delay': `${delay}s`,
+              '--d': `${dur}s`,
+              '--h': `${size}px`,
+              height: `${size}px`,
+            } as React.CSSProperties}
+          />
         );
       })}
     </div>
