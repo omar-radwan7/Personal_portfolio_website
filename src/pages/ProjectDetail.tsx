@@ -72,18 +72,11 @@ const ProjectDetail: React.FC = () => {
   
   if (!project) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
-        {/* Glass background with purple tint */}
-        <div className="fixed inset-0 -z-10">
-          <div className="absolute inset-0 bg-navyDark"></div>
-          <div className="absolute inset-0 glass-section"></div>
-          <div className="blur-blob blob-purple top-1/4 left-1/4 opacity-25"></div>
-          <div className="blur-blob blob-cyan bottom-1/4 right-1/4 opacity-20"></div>
-        </div>
-        <div className="glass-panel p-8 text-center relative z-10 max-w-2xl mx-auto">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-4 title-gradient">Project Not Found</h1>
-          <p className="mb-6 text-gray-300">The project you are looking for doesn't exist or has been removed.</p>
-          <Link to="/" className="inline-flex items-center text-purple-light hover:text-purple transition-colors">
+      <div className="min-h-screen bg-navyDark flex flex-col items-center justify-center">
+        <div className="max-w-2xl mx-auto px-4 py-8 text-center">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-4">Project Not Found</h1>
+          <p className="mb-6">The project you are looking for doesn't exist or has been removed.</p>
+          <Link to="/" className="inline-flex items-center text-purple-light hover:text-purple">
             <ArrowRight className="mr-2 h-4 w-4 rotate-180" />
             Back to Home
           </Link>
@@ -93,16 +86,8 @@ const ProjectDetail: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden">
-      {/* Glass background with purple tint */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-navyDark"></div>
-        <div className="absolute inset-0 glass-section"></div>
-        <div className="blur-blob blob-purple top-0 left-0 opacity-20"></div>
-        <div className="blur-blob blob-cyan top-1/2 right-0 opacity-15"></div>
-        <div className="blur-blob blob-pink bottom-0 left-1/3 opacity-18"></div>
-      </div>
-      <div className="flex-grow relative z-10">
+    <div className="min-h-screen bg-navyDark flex flex-col">
+      <div className="flex-grow">
         <div className="max-w-4xl mx-auto px-4 py-12 sm:py-16">
           <Link 
             to="/#projects" 

@@ -3,9 +3,8 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="py-10 relative">
-      <div className="glass-section absolute inset-0 opacity-80"></div>
-      <div className="section-container relative z-10">
+    <footer className="py-10 glass-section">
+      <div className="section-container">
         <p className="text-center mb-6">
           CopyRights @ <span className="text-purple-light font-medium">Omar Radwan</span>
         </p>

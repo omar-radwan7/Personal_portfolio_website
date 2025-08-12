@@ -10,16 +10,8 @@ const AboutMe: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen relative overflow-hidden pt-20">
-      {/* Glass background with purple tint */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-navyDark"></div>
-        <div className="absolute inset-0 glass-section"></div>
-        <div className="blur-blob blob-purple top-0 left-0 opacity-20"></div>
-        <div className="blur-blob blob-cyan top-1/3 right-0 opacity-15"></div>
-        <div className="blur-blob blob-pink bottom-1/3 left-1/4 opacity-18"></div>
-      </div>
-      <div className="section-container py-10 md:py-16 relative z-10">
+    <div className="min-h-screen bg-navyDark pt-20">
+      <div className="section-container py-10 md:py-16">
         {/* Back to home button */}
         <Link to="/" className="inline-flex items-center text-purple-light hover:text-purple mb-8 transition-colors">
           <svg 
