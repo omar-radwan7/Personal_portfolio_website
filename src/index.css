@@ -149,11 +149,11 @@
     box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.06);
   }
 
-  /* Ultra-clear glass - almost invisible like the reference */
+  /* Ultra-clear glass - completely transparent like reference image */
   .glass-clear {
-    background: linear-gradient(135deg, hsl(var(--background) / 0.01), hsl(var(--primary) / 0.005));
-    border-color: hsl(var(--foreground) / 0.04);
-    backdrop-filter: blur(10px) saturate(120%);
+    background: linear-gradient(135deg, hsl(0 0% 100% / 0.003), hsl(0 0% 100% / 0.001));
+    border: 1px solid hsl(0 0% 100% / 0.02);
+    backdrop-filter: blur(8px) saturate(100%);
   }
 
   /* Floating action button (Back to Top) */
