@@ -123,29 +123,32 @@ const Projects: React.FC = () => {
             </div>
           </div>
 
-          {/* NexoVPN App */}
+          {/* Portfolio Builder */}
           <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
             <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
-              <div className="text-center text-white">
-                <div className="flex justify-center items-center mb-1">
-                  <i className="fas fa-shield-alt text-3xl text-blue-400 animate-pulse"></i>
-                  <i className="fas fa-lock text-xl ml-2 text-cyan-400 animate-bounce"></i>
+              <div className="text-center text-white relative">
+                <div className="flex justify-center items-center mb-1 relative">
+                  <i className="fas fa-layer-group text-3xl text-purple-light animate-pulse"></i>
+                  <i className="fas fa-magic text-xl ml-2 text-yellow-400 animate-bounce"></i>
+                  <div className="absolute -top-2 -right-2">
+                    <i className="fas fa-pencil-ruler text-lg text-cyan-400 animate-pulse" style={{ animationDelay: '0.3s' }}></i>
+                  </div>
                 </div>
-                <h3 className="text-sm font-semibold">NexoVPN</h3>
-                <p className="text-xs text-gray-400 mt-1">Secure Connection</p>
+                <h3 className="text-sm font-semibold">Portfolio Builder</h3>
+                <p className="text-xs text-gray-400 mt-1">Drag & Drop</p>
               </div>
             </div>
             <div className="p-4 flex-grow text-sm border-t border-foreground/10">
-              <p className="text-gray-400 mb-1">Django/React VPN with WireGuard & Docker</p>
-              <h3 className="text-base font-semibold mb-2">NexoVPN</h3>
+              <p className="text-gray-400 mb-1">No-code React portfolio builder with export</p>
+              <h3 className="text-base font-semibold mb-2">Portfolio Builder</h3>
               <div className="flex justify-between items-center">
                 <div className="flex gap-1 flex-wrap">
-                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Python</span>
                   <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">React</span>
-                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Docker</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Vite</span>
+                  <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Tailwind</span>
                 </div>
                 <Link
-                  to="/project/nexovpn"
+                  to="/project/portfolio-builder"
                   className="text-purple-light hover:text-purple text-xs"
                 >
                   More Details

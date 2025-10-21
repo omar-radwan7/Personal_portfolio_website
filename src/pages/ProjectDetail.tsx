@@ -57,12 +57,13 @@ const projectsData: Project[] = [
     status: 'coming-soon'
   },
   {
-    id: 'nexovpn',
-    title: 'NexoVPN',
-    subtitle: 'Django/React VPN with WireGuard & Docker',
-    description: 'NexoVPN is a comprehensive VPN application featuring Django backend with React frontend, WireGuard protocols for secure connections, and Docker deployment. The application provides secure, private internet access with advanced features including whitelisted domains, real-time connection monitoring, and cloud architecture deployment.',
-    technologies: ['Python', 'Django', 'React', 'JavaScript', 'Docker', 'WireGuard'],
-    status: 'coming-soon'
+    id: 'portfolio-builder',
+    title: 'Portfolio Builder',
+    subtitle: 'No-code React portfolio builder with drag-and-drop',
+    description: 'Portfolio Builder is a dynamic, frontend-only React + Tailwind experience for crafting and exporting bespoke portfolio layouts without AI or a backend. This innovative tool empowers users to create professional portfolios through an intuitive visual interface.\n\nKey Features:\n• Dual Mode System: Switch between Blocks mode (drag components) and Page mode (manage multiple pages)\n• Drag & Drop Interface: Easily add and arrange components including Text, Image, Project Cards, Skills sections, and Contact forms\n• Smart Auto-Style: One-click randomized layouts with beautiful color palettes, typography presets, spacing variations, and smooth animations\n• Live Preview & Editing: Real-time preview with inline content and style editors for each section\n• Multi-Page Management: Create and organize multiple pages for comprehensive portfolios\n• Theme Presets: Choose from curated design themes or customize your own\n• Per-Section Layout Controls: Fine-tune individual section layouts and styling\n• Customizable Components: Personalize hero sections, highlight features, and more\n• One-Click Export: Generate a complete, runnable React project as a downloadable ZIP file\n• No Backend Required: Everything runs entirely in the browser using Context API and useReducer for state management\n\nTechnical Implementation:\n• Built with React 18+ and Vite for optimal development experience\n• Styled with Tailwind CSS for rapid, responsive design\n• Uses JSZip and FileSaver.js for seamless project export\n• State management via Context API with useReducer pattern\n• Clean, modular architecture ensuring maintainability and scalability\n\nThe exported project includes:\n• Complete package.json with all necessary dependencies\n• Configured tailwind.config.js and postcss.config.js\n• Ready-to-run index.html, src/App.jsx, src/main.jsx, and src/tailwind.css\n• Simply extract, run npm install, and launch with npm run dev\n\nPerfect for developers, designers, and professionals who want to quickly create stunning portfolio websites without writing code from scratch.',
+    technologies: ['React', 'Vite', 'Tailwind CSS', 'Context API', 'JSZip', 'JavaScript'],
+    githubLink: 'https://github.com/omar-radwan7/Portfolio-Builder',
+    status: 'complete'
   }
 ];
 
@@ -118,10 +119,13 @@ const ProjectDetail: React.FC = () => {
                       <i className="fas fa-chart-line text-5xl text-green-400 animate-pulse"></i>
                       <i className="fas fa-dollar-sign text-3xl ml-2 text-yellow-400 animate-bounce"></i>
                     </div>
-                  ) : project.id === 'nexovpn' ? (
-                    <div className="flex justify-center items-center text-foreground/90">
-                      <i className="fas fa-shield-alt text-5xl text-blue-400 animate-pulse"></i>
-                      <i className="fas fa-lock text-3xl ml-2 text-cyan-400 animate-bounce"></i>
+                  ) : project.id === 'portfolio-builder' ? (
+                    <div className="flex justify-center items-center text-foreground/90 relative">
+                      <i className="fas fa-layer-group text-5xl text-purple-light animate-pulse"></i>
+                      <i className="fas fa-magic text-3xl ml-2 text-yellow-400 animate-bounce"></i>
+                      <div className="absolute -top-4 -right-4">
+                        <i className="fas fa-pencil-ruler text-2xl text-cyan-400 animate-pulse" style={{ animationDelay: '0.3s' }}></i>
+                      </div>
                     </div>
                   ) : project.id === 'weather' ? (
                     <div className="w-full h-full relative">

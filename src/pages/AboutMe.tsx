@@ -93,8 +93,9 @@ const AboutMe: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Professional Summary</h3>
                   <p className="text-gray-300">
-                    Aspiring Full Stack Software developer eager to learn and contribute. Quick learner with a 
-                    strong foundation in coding and a focus on growth in dynamic environments.
+                    Aspiring Full Stack Developer with strong foundations in JavaScript, TypeScript, React, C, Java and Python. 
+                    Skilled in building scalable web applications, integrating APIs, and delivering responsive designs. Quick learner 
+                    with proven ability to collaborate in cross-functional teams, troubleshoot issues, and adapt to evolving requirements.
                   </p>
                 </div>
                 
@@ -104,10 +105,22 @@ const AboutMe: React.FC = () => {
                   <div className="ml-0 md:ml-4">
                     <div className="mb-4">
                       <div className="flex justify-between items-center flex-wrap">
-                        <h4 className="font-medium">Software Developer Internship</h4>
+                        <h4 className="font-medium">Full Stack Developer Intern</h4>
+                        <span className="text-purple-light text-sm">09/2025 – Present</span>
+                      </div>
+                      <p className="text-gray-400 mb-2">The Egyptian Ministry of Networking & The Applied Innovation Center - Full Time-Remotely</p>
+                      <ul className="list-disc ml-5 text-gray-300">
+                        <li>Developing and deploying full stack features using React.js, Node.js, and PostgreSQL.</li>
+                        <li>Collaborating with designers and engineers in Agile sprints to deliver scalable solutions.</li>
+                        <li>Implementing responsive UI components and optimizing app performance.</li>
+                      </ul>
+                    </div>
+                    <div className="mb-4">
+                      <div className="flex justify-between items-center flex-wrap">
+                        <h4 className="font-medium">Data Engineer Internship</h4>
                         <span className="text-purple-light text-sm">05/2023 – 08/2023</span>
                       </div>
-                      <p className="text-gray-400 mb-2">EBNY Real Estate – Cairo, Egypt</p>
+                      <p className="text-gray-400 mb-2">EBNY Real Estate – Cairo, Egypt - Full Time-On-Sight</p>
                       <ul className="list-disc ml-5 text-gray-300">
                         <li>Collaborated with teams to gather requirements and implement custom solutions.</li>
                         <li>Designed database systems to store and manage property data.</li>
@@ -123,30 +136,30 @@ const AboutMe: React.FC = () => {
                   <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Projects</h3>
                   <div className="ml-0 md:ml-4 space-y-4">
                     <div>
-                      <h4 className="font-medium">Qorix AI Assistant</h4>
+                      <h4 className="font-medium">SSH Keys Portal</h4>
                       <p className="text-gray-300">
-                        React/TypeScript AI chat app with OpenRouter API integration.
+                        Web-based portal for managing SSH keys in HPC environments
                       </p>
                       <p className="text-gray-300 text-sm">
-                        Technologies: React, TypeScript, JavaScript, OpenRouter API
+                        Technologies: Python (FastAPI, SQLAlchemy), React, TypeScript, JWT/LDAP SSO
                       </p>
                     </div>
                     <div>
-                      <h4 className="font-medium">NexoVPN</h4>
+                      <h4 className="font-medium">Trading App</h4>
                       <p className="text-gray-300">
-                        Django/React VPN application with WireGuard protocols and Docker deployment.
+                        Flutter stock market app with real-time financial data and portfolio tracking
                       </p>
                       <p className="text-gray-300 text-sm">
-                        Technologies: Python (Django), JavaScript (React), Docker, WireGuard
+                        Technologies: Flutter, Dart, Docker, Nginx
                       </p>
                     </div>
                     <div>
-                      <h4 className="font-medium">TradeWise</h4>
+                      <h4 className="font-medium">Web Portfolio Builder</h4>
                       <p className="text-gray-300">
-                        Flutter stock market app with real-time financial data and portfolio tracking.
+                        No-code React portfolio builder with drag-and-drop sections and one-click export
                       </p>
                       <p className="text-gray-300 text-sm">
-                        Technologies: Flutter, Dart, Financial APIs
+                        Technologies: React, Vite, Tailwind, Context API
                       </p>
                     </div>
                   </div>
@@ -198,13 +211,19 @@ const AboutMe: React.FC = () => {
                   {/* Web Development */}
                   <div className="mb-4">
                     <h4 className="font-medium mb-2 text-purple-light">Web Development</h4>
-                    <p className="text-gray-300">Django • REST APIs • React.js • Vue.js • JavaScript • TypeScript CSS • User Experience Design</p>
+                    <p className="text-gray-300">REST APIs • React.js • Vue.js • JavaScript • TypeScript • CSS • Bootstrap • User Experience Design</p>
+                  </div>
+                  
+                  {/* Mobile Application */}
+                  <div className="mb-4">
+                    <h4 className="font-medium mb-2 text-purple-light">Mobile Application</h4>
+                    <p className="text-gray-300">Flutter • Kotlin • Golang</p>
                   </div>
                   
                   {/* Database & Cloud */}
                   <div>
                     <h4 className="font-medium mb-2 text-purple-light">Database & Cloud</h4>
-                    <p className="text-gray-300">PostgreSQL • AWS Cloud Services • Cloud fundamentals • Cloud Architecture</p>
+                    <p className="text-gray-300">PostgreSQL • AWS Cloud Services • Cloud fundamentals • Cloud Architecture • MongoDB • MySQL</p>
                   </div>
                 </div>
                 
@@ -227,7 +246,7 @@ const AboutMe: React.FC = () => {
                     <div className="flex items-center">
                       <div className="mr-4">
                         <div className="font-medium">German</div>
-                        <div className="text-gray-400 text-sm">A1</div>
+                        <div className="text-gray-400 text-sm">A2 (Still taking an Intensive German Course)</div>
                       </div>
                     </div>
                   </div>
