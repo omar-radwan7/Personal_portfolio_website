@@ -4,6 +4,7 @@ import Services from '@/components/Services';
 import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import PageTransition from '@/components/PageTransition';
 import { useLocation } from 'react-router-dom';
 
 const Index: React.FC = () => {
@@ -58,13 +59,15 @@ const Index: React.FC = () => {
   }, [location]);
   
   return (
-    <div className="min-h-screen bg-navyDark">
-      <Hero />
-      <Services />
-      <Projects />
-      <Contact />
-      <Footer />
-    </div>
+    <PageTransition>
+      <div className="min-h-screen bg-navyDark">
+        <Hero />
+        <Services />
+        <Projects />
+        <Contact />
+        <Footer />
+      </div>
+    </PageTransition>
   );
 };
 
