@@ -37,17 +37,17 @@ const AboutMe: React.FC = () => {
             <div className="glass-panel p-6 sticky top-24">
               <h1 className="text-3xl font-bold mb-6 title-gradient">About Me</h1>
               
-              <div className="mb-6">
-                <p className="text-gray-300 leading-relaxed">
-                  I'm Omar Radwan, a student at the University of Europe studying Information Technology.
-                </p>
-                <p className="text-gray-300 leading-relaxed mt-4">
-                  I was born in Egypt on October 5th, 2004. I've always had an interest in how technology works and how it can be used to solve real problems. That curiosity led me toward software development.
-                </p>
-                <p className="text-gray-300 leading-relaxed mt-4">
-                  I focus on web development, AI, and cloud computing. I'm adaptable with AI tools and know how to use them to improve my work, whether it's writing code, learning new concepts, or building projects more efficiently.
-                </p>
-              </div>
+                <div className="mb-6">
+                  <p className="text-gray-300 leading-relaxed">
+                    I'm Omar Radwan, a Full Stack Developer studying Software Engineering at the University of Europe for Applied Sciences.
+                  </p>
+                  <p className="text-gray-300 leading-relaxed mt-4">
+                    I was born in Egypt on October 5th, 2004. I've always had an interest in how technology works and how it can be used to solve real problems. That curiosity led me toward software development.
+                  </p>
+                  <p className="text-gray-300 leading-relaxed mt-4">
+                    I focus on web development, cloud computing, and building scalable applications. I'm adaptable with modern tools and technologies, whether it's building full-stack applications, designing APIs, or optimizing performance.
+                  </p>
+                </div>
               
               <div className="flex flex-wrap gap-2 mt-8">
                 <a href="https://www.linkedin.com/in/omar-radwan-99794a27a" target="_blank" rel="noopener noreferrer" className="social-icon">
@@ -72,6 +72,7 @@ const AboutMe: React.FC = () => {
                 {/* Personal Information */}
                 <div className="text-center mb-8">
                   <h3 className="text-xl font-semibold mb-2">Omar Radwan</h3>
+                  <p className="text-gray-400">Germany, Berlin, Alfred Jung Straße 10369</p>
                   <p className="text-gray-400">+491777588642 - omarobrashy2004@gmail.com</p>
                   <div className="mt-2">
                     <p className="text-gray-400">
@@ -84,6 +85,12 @@ const AboutMe: React.FC = () => {
                       LinkedIn: 
                       <a href="https://www.linkedin.com/in/omar-radwan-99794a27a" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
                         www.linkedin.com/in/omar-radwan-99794a27a
+                      </a>
+                    </p>
+                    <p className="text-gray-400">
+                      Portfolio: 
+                      <a href="https://www.omar-radwan.com" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
+                        www.omar-radwan.com
                       </a>
                     </p>
                   </div>
@@ -136,31 +143,28 @@ const AboutMe: React.FC = () => {
                   <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Projects</h3>
                   <div className="ml-0 md:ml-4 space-y-4">
                     <div>
-                      <h4 className="font-medium">SSH Keys Portal</h4>
-                      <p className="text-gray-300">
-                        Web-based portal for managing SSH keys in HPC environments
-                      </p>
-                      <p className="text-gray-300 text-sm">
-                        Technologies: Python (FastAPI, SQLAlchemy), React, TypeScript, JWT/LDAP SSO
-                      </p>
+                      <h4 className="font-medium">SSH Keys Portal – Web-based portal for managing SSH keys in HPC environments</h4>
+                      <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
+                        <li>Built an HPC-focused SSH Keys Management Portal for research clusters to securely onboard users, generate/import/rotate keys, enforce access policies, and auto-deploy keys to login/compute nodes.</li>
+                        <li>Backend: Python (FastAPI, SQLAlchemy), JWT/LDAP SSO, Paramiko/Cryptography; async workers handle provisioning and detailed audit trails.</li>
+                        <li>Frontend: React + TypeScript with Tailwind and i18n, delivering RBAC-driven admin and self-service workflows with compliance checks.</li>
+                        <li>Cross-platform developer experience via a universal Makefile and bootstrap scripts; reproducible setup, SQL migrations, and health/status endpoints.</li>
+                      </ul>
                     </div>
                     <div>
-                      <h4 className="font-medium">Trading App</h4>
-                      <p className="text-gray-300">
-                        Flutter stock market app with real-time financial data and portfolio tracking
-                      </p>
-                      <p className="text-gray-300 text-sm">
-                        Technologies: Flutter, Dart, Docker, Nginx
-                      </p>
+                      <h4 className="font-medium">Trading App – Flutter stock market app with real-time financial data and portfolio tracking</h4>
+                      <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
+                        <li>Built a cross-platform Stock Market app with Flutter (Dart) for Android, iOS, and Web.</li>
+                        <li>Implemented portfolio tracking, stock detail/list views, and curated market news using Provider state management and RESTful services.</li>
+                        <li>Containerized the web build with Docker + Nginx and streamlined runs with docker compose.</li>
+                        <li>Applied a clean, modular architecture (models, providers, services, widgets) to ensure maintainability and scalability.</li>
+                      </ul>
                     </div>
                     <div>
                       <h4 className="font-medium">Web Portfolio Builder</h4>
-                      <p className="text-gray-300">
-                        No-code React portfolio builder with drag-and-drop sections and one-click export
-                      </p>
-                      <p className="text-gray-300 text-sm">
-                        Technologies: React, Vite, Tailwind, Context API
-                      </p>
+                      <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
+                        <li>Built a no-code React portfolio builder (Vite + Tailwind) with dual modes (Blocks/Page), drag-and-drop sections, multi-page management, theme presets, per-section layout controls, customizable hero/highlights, and one-click export to a runnable React project (JSZip/FileSaver); state via Context + useReducer.</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -172,9 +176,16 @@ const AboutMe: React.FC = () => {
                     <div className="mb-4">
                       <div className="flex justify-between items-center flex-wrap">
                         <h4 className="font-medium">Bachelor of Science: Software Engineering</h4>
-                        <span className="text-purple-light text-sm">09/2023 – Current</span>
+                        <span className="text-purple-light text-sm">09/2023 – Present</span>
                       </div>
-                      <p className="text-gray-400">University of Europe for Applied Sciences – Potsdam, Brandenburg</p>
+                      <p className="text-gray-400">University of Europe for Applied Sciences – Potsdam, Germany</p>
+                    </div>
+                    <div className="mb-4">
+                      <div className="flex justify-between items-center flex-wrap">
+                        <h4 className="font-medium">High School Diploma: American Diploma</h4>
+                        <span className="text-purple-light text-sm">09/2020 – 07/2023</span>
+                      </div>
+                      <p className="text-gray-400">Port Said American School – Giza, Egypt</p>
                     </div>
                   </div>
                 </div>
@@ -192,7 +203,7 @@ const AboutMe: React.FC = () => {
                     <div>
                       <h4 className="font-medium">AWS Cloud Practitioner Essentials Certificate</h4>
                       <p className="text-gray-300">
-                        Foundational knowledge of AWS core services, cloud concepts, security, and pricing models.
+                        Foundational knowledge of AWS core services, cloud concepts & Architecture, security, and pricing models.
                       </p>
                     </div>
                   </div>
