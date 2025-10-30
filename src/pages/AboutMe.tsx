@@ -74,7 +74,6 @@ const AboutMe: React.FC = () => {
                   {/* Personal Information */}
                   <div className="text-center mb-8">
                     <h3 className="text-xl font-semibold mb-2">Omar Radwan</h3>
-                    <p className="text-gray-400">Germany, Berlin, Alfred Jung Straße 10369</p>
                     <p className="text-gray-400">+491777588642 - omarobrashy2004@gmail.com</p>
                     <div className="mt-2">
                       <p className="text-gray-400">
@@ -87,12 +86,6 @@ const AboutMe: React.FC = () => {
                         LinkedIn: 
                         <a href="https://www.linkedin.com/in/omar-radwan-99794a27a" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
                           www.linkedin.com/in/omar-radwan-99794a27a
-                        </a>
-                      </p>
-                      <p className="text-gray-400">
-                        Portfolio: 
-                        <a href="https://www.omar-radwan.com" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
-                          www.omar-radwan.com
                         </a>
                       </p>
                     </div>
@@ -165,6 +158,77 @@ const AboutMe: React.FC = () => {
                           <li>Verified and resolved bug reports and technical issues.</li>
                           <li>Developed solutions using Python and SQL databases.</li>
                         </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Projects */}
+                  <div>
+                    <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Projects</h3>
+                    <div className="ml-0 md:ml-4 space-y-4">
+                      <div>
+                        <h4 className="font-medium">SSH Keys Portal – Web-based portal for managing SSH keys in HPC environments</h4>
+                        <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
+                          <li>Built an HPC-focused SSH Keys Management Portal for research clusters to securely onboard users, generate/import/rotate keys, enforce access policies, and auto-deploy keys to login/compute nodes.</li>
+                          <li>Backend: Python (FastAPI, SQLAlchemy), JWT/LDAP SSO, Paramiko/Cryptography; async workers handle provisioning and detailed audit trails.</li>
+                          <li>Frontend: React + TypeScript with Tailwind and i18n, delivering RBAC-driven admin and self-service workflows with compliance checks.</li>
+                          <li>Cross-platform developer experience via a universal Makefile and bootstrap scripts; reproducible setup, SQL migrations, and health/status endpoints.</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-medium">Trading App – Flutter stock market app with real-time financial data and portfolio tracking</h4>
+                        <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
+                          <li>Built a cross-platform Stock Market app with Flutter (Dart) for Android, iOS, and Web.</li>
+                          <li>Implemented portfolio tracking, stock detail/list views, and curated market news using Provider state management and RESTful services.</li>
+                          <li>Containerized the web build with Docker + Nginx and streamlined runs with docker compose.</li>
+                          <li>Applied a clean, modular architecture (models, providers, services, widgets) to ensure maintainability and scalability.</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-medium">Web Portfolio Builder</h4>
+                        <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
+                          <li>Built a no-code React portfolio builder (Vite + Tailwind) with dual modes (Blocks/Page), drag-and-drop sections, multi-page management, theme presets, per-section layout controls, customizable hero/highlights, and one-click export to a runnable React project (JSZip/FileSaver); state via Context + useReducer.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Education */}
+                  <div>
+                    <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Education</h3>
+                    <div className="ml-0 md:ml-4">
+                      <div className="mb-4">
+                        <div className="flex justify-between items-center flex-wrap">
+                          <h4 className="font-medium">Bachelor of Science: Software Engineering</h4>
+                          <span className="text-purple-light text-sm">09/2023 – Present</span>
+                        </div>
+                        <p className="text-gray-400">University of Europe for Applied Sciences – Potsdam, Germany</p>
+                      </div>
+                      <div className="mb-4">
+                        <div className="flex justify-between items-center flex-wrap">
+                          <h4 className="font-medium">High School Diploma: American Diploma</h4>
+                          <span className="text-purple-light text-sm">09/2020 – 07/2023</span>
+                        </div>
+                        <p className="text-gray-400">Port Said American School – Giza, Egypt</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Certifications */}
+                  <div>
+                    <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Certifications</h3>
+                    <div className="ml-0 md:ml-4 space-y-4">
+                      <div>
+                        <h4 className="font-medium">Meta Back End Professional Developer Certificate</h4>
+                        <p className="text-gray-300">
+                          Covers Python, SQL, APIs, Git, and Django, with a focus on building secure and scalable back-end systems.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-medium">AWS Cloud Practitioner Essentials Certificate</h4>
+                        <p className="text-gray-300">
+                          Foundational knowledge of AWS core services, cloud concepts & Architecture, security, and pricing models.
+                        </p>
                       </div>
                     </div>
                   </div>
