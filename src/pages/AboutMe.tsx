@@ -108,7 +108,7 @@ const AboutMe: React.FC = () => {
                     {/* Programming Languages */}
                     <div className="mb-4">
                       <h4 className="font-medium mb-2 text-purple-light">Programming Languages</h4>
-                      <p className="text-gray-300">Python • Java • C Programming • C++</p>
+                      <p className="text-gray-300">Python • Java • C++</p>
                     </div>
                     
                     {/* Web Development */}
