@@ -108,13 +108,13 @@ const AboutMe: React.FC = () => {
                     {/* Programming Languages */}
                     <div className="mb-4">
                       <h4 className="font-medium mb-2 text-purple-light">Programming Languages</h4>
-                      <p className="text-gray-300">Python • Java • C Programming</p>
+                      <p className="text-gray-300">Python • Java • C Programming • C++</p>
                     </div>
                     
                     {/* Web Development */}
                     <div className="mb-4">
                       <h4 className="font-medium mb-2 text-purple-light">Web Development</h4>
-                      <p className="text-gray-300">REST APIs • React.js • Vue.js • JavaScript • TypeScript • CSS • Bootstrap • User Experience Design</p>
+                      <p className="text-gray-300">HTML5 • REST APIs • React.js • Vue.js • JavaScript • TypeScript • CSS • Bootstrap • User Experience Design</p>
                     </div>
                     
                     {/* Mobile Application */}
