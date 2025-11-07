@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import RobotHead from './RobotHead';
+import ComputerMachine from './ComputerMachine';
 import DecryptedText from './DecryptedText';
 
 const Hero: React.FC = () => {
@@ -113,7 +113,7 @@ const Hero: React.FC = () => {
           
           {/* Robot positioned to the right - now visible on all screen sizes */}
           <div className="flex-shrink-0 order-first lg:order-last">
-            <RobotHead />
+            <ComputerMachine />
           </div>
           </div>
         </div>
