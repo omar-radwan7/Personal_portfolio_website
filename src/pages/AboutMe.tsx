@@ -64,7 +64,19 @@ const AboutMe: React.FC = () => {
                   </p>
                 </div>
                 
-                <div className="flex flex-wrap gap-2 mt-8">
+                {/* Download CV Button */}
+                <a 
+                  href="/Omar_Radwan_CV.pdf" 
+                  download="Omar_Radwan_CV.pdf"
+                  className="block w-full mb-4"
+                >
+                  <Button className="w-full bg-gradient-to-r from-purple via-blue to-cyan hover:opacity-90 transition-opacity text-white font-semibold py-3 shadow-lg shadow-purple/30">
+                    <i className="fas fa-download mr-2"></i>
+                    Download CV
+                  </Button>
+                </a>
+
+                <div className="flex flex-wrap gap-2 mt-4">
                   <a href="https://www.linkedin.com/in/omar-radwan-99794a27a" target="_blank" rel="noopener noreferrer" className="social-icon">
                     <i className="fab fa-linkedin"></i>
                   </a>
