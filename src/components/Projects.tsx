@@ -24,37 +24,35 @@ const Projects: React.FC = () => {
 
         {/* Navigation Tabs */}
         <div className="flex justify-center mb-8 md:mb-12">
-          <div className="relative inline-flex gap-1 p-1.5 rounded-2xl bg-gradient-to-r from-purple/10 via-blue/10 to-cyan/10 backdrop-blur-sm border border-white/10">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
-              const isActive = activeTab === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`
-                    relative px-5 sm:px-8 py-3 sm:py-3.5 rounded-xl font-semibold text-sm sm:text-base
-                    transition-all duration-300 flex items-center gap-2.5 overflow-hidden group
-                    ${
-                      isActive
-                        ? 'bg-gradient-to-br from-purple via-blue to-cyan text-white shadow-xl shadow-purple/40 scale-105'
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
-                    }
-                  `}
-                >
-                  {isActive && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple/20 via-blue/20 to-cyan/20 animate-pulse"></div>
-                  )}
-                  <Icon className={`w-5 h-5 relative z-10 ${isActive ? 'animate-pulse' : 'group-hover:scale-110'} transition-transform duration-300`} />
-                  <span className="hidden sm:inline relative z-10">{tab.label}</span>
-                  <span className="sm:hidden relative z-10">{tab.label.split(' ')[0]}</span>
-                  {!isActive && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple/0 via-blue/5 to-cyan/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  )}
-                </button>
-              );
-            })}
-          </div>
+          <nav className="glass-nav rounded-full px-2 py-2 shadow-lg">
+            <ul className="flex flex-row items-center gap-2 sm:gap-4">
+              {tabs.map((tab) => {
+                const Icon = tab.icon;
+                const isActive = activeTab === tab.id;
+                return (
+                  <li key={tab.id}>
+                    <button
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`
+                        relative px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-medium text-sm sm:text-base
+                        transition-all duration-300 flex items-center gap-2
+                        nav-link
+                        ${
+                          isActive
+                            ? 'text-purple-light after:scale-x-100 bg-white/5'
+                            : 'text-gray-300 hover:text-purple-light hover:translate-y-[-2px]'
+                        }
+                      `}
+                    >
+                      <Icon className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 ${isActive ? '' : 'group-hover:scale-110'}`} />
+                      <span className="hidden sm:inline">{tab.label}</span>
+                      <span className="sm:hidden text-xs">{tab.label.split(' ')[0]}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
         </div>
 
         {/* Tab Content */}
