@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 
 const ComputerMachine: React.FC = () => {
   const computerRef = useRef<HTMLDivElement>(null);
-  const scanLineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -16,10 +15,10 @@ const ComputerMachine: React.FC = () => {
       const relativeX = (e.clientX - centerX) / rect.width;
       const relativeY = (e.clientY - centerY) / rect.height;
       
-      const tiltX = relativeY * 5;
-      const tiltY = relativeX * -5;
+      const tiltX = relativeY * 3;
+      const tiltY = relativeX * -3;
       
-      computerRef.current.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+      computerRef.current.style.transform = `perspective(1200px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-10px)`;
     };
 
     document.addEventListener('mousemove', handleMouseMove);
@@ -31,24 +30,22 @@ const ComputerMachine: React.FC = () => {
   return (
     <div className="computer-container">
       <div className="computer-machine" ref={computerRef}>
-        {/* Computer Screen */}
-        <div className="computer-screen">
+        {/* Main Computer Illustration */}
+        <div className="computer-illustration">
           <img 
-            src="/lovable-uploads/22613a69-c9ad-4df8-b776-728a1fb26cea.png" 
-            alt="Computer System"
-            className="screen-image"
+            src="/lovable-uploads/computer-illustration.png" 
+            alt="Computer Development System"
+            className="main-image"
           />
+          
+          {/* Animated Gears Overlay */}
+          <div className="gear gear-1"></div>
+          <div className="gear gear-2"></div>
+          <div className="gear gear-3"></div>
+          <div className="gear gear-4"></div>
+          
+          {/* Glow Effects */}
           <div className="screen-glow"></div>
-          <div className="scan-line" ref={scanLineRef}></div>
-          <div className="screen-flicker"></div>
-        </div>
-        
-        {/* Computer Stand/Base */}
-        <div className="computer-base">
-          <div className="base-neck"></div>
-          <div className="base-platform">
-            <div className="status-light"></div>
-          </div>
         </div>
       </div>
       
@@ -77,122 +74,118 @@ const ComputerMachine: React.FC = () => {
 
         .computer-machine {
           position: relative;
-          animation: float 4s ease-in-out infinite;
+          animation: slowBounce 4s ease-in-out infinite;
           transform-style: preserve-3d;
           transition: transform 0.3s ease-out;
         }
 
-        /* Computer Screen */
-        .computer-screen {
-          width: 320px;
-          height: 240px;
-          background: linear-gradient(145deg, #1a1a2e, #0f0f1e);
-          border-radius: 12px;
+        /* Computer Illustration */
+        .computer-illustration {
+          width: 400px;
+          height: 380px;
           position: relative;
-          overflow: hidden;
-          box-shadow: 
-            0 0 40px rgba(139, 92, 246, 0.4),
-            0 0 80px rgba(236, 72, 153, 0.2),
-            inset 0 2px 8px rgba(255, 255, 255, 0.05);
-          border: 2px solid rgba(139, 92, 246, 0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          filter: drop-shadow(0 20px 50px rgba(139, 92, 246, 0.3));
         }
 
-        .screen-image {
+        .main-image {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
           position: relative;
-          z-index: 1;
-          animation: screenPulse 3s ease-in-out infinite;
+          z-index: 2;
+        }
+
+        /* Animated Gears */
+        .gear {
+          position: absolute;
+          background: radial-gradient(circle, #d1d5db 30%, transparent 30%);
+          border-radius: 50%;
+          z-index: 3;
+          opacity: 0.9;
+        }
+
+        .gear::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 70%;
+          height: 70%;
+          background: 
+            conic-gradient(
+              from 0deg,
+              transparent 0deg 40deg,
+              #9ca3af 40deg 50deg,
+              transparent 50deg 90deg,
+              #9ca3af 90deg 100deg,
+              transparent 100deg 140deg,
+              #9ca3af 140deg 150deg,
+              transparent 150deg 190deg,
+              #9ca3af 190deg 200deg,
+              transparent 200deg 240deg,
+              #9ca3af 240deg 250deg,
+              transparent 250deg 290deg,
+              #9ca3af 290deg 300deg,
+              transparent 300deg 340deg,
+              #9ca3af 340deg 350deg,
+              transparent 350deg 360deg
+            );
+          border-radius: 50%;
+        }
+
+        .gear-1 {
+          width: 50px;
+          height: 50px;
+          top: 8%;
+          right: 10%;
+          animation: rotateGear 8s linear infinite;
+        }
+
+        .gear-2 {
+          width: 35px;
+          height: 35px;
+          bottom: 35%;
+          left: 8%;
+          animation: rotateGearReverse 6s linear infinite;
+        }
+
+        .gear-3 {
+          width: 42px;
+          height: 42px;
+          top: 12%;
+          left: 18%;
+          animation: rotateGear 10s linear infinite;
+        }
+
+        .gear-4 {
+          width: 38px;
+          height: 38px;
+          bottom: 30%;
+          right: 15%;
+          animation: rotateGearReverse 7s linear infinite;
         }
 
         .screen-glow {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 280px;
+          height: 200px;
           background: radial-gradient(
-            circle at 50% 50%,
-            rgba(139, 92, 246, 0.2) 0%,
-            transparent 60%
+            ellipse at center,
+            rgba(139, 92, 246, 0.25) 0%,
+            rgba(59, 130, 246, 0.15) 40%,
+            transparent 70%
           );
-          animation: glowPulse 2s ease-in-out infinite;
-          z-index: 2;
+          animation: glowPulse 3s ease-in-out infinite;
+          z-index: 1;
           pointer-events: none;
-        }
-
-        .scan-line {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(139, 92, 246, 0.8) 50%,
-            transparent 100%
-          );
-          box-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
-          animation: scanMove 3s linear infinite;
-          z-index: 3;
-          pointer-events: none;
-        }
-
-        .screen-flicker {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(139, 92, 246, 0.05);
-          animation: flicker 0.15s infinite;
-          z-index: 2;
-          pointer-events: none;
-          opacity: 0;
-        }
-
-        /* Computer Base */
-        .computer-base {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin-top: 10px;
-        }
-
-        .base-neck {
-          width: 60px;
-          height: 40px;
-          background: linear-gradient(145deg, #2d2d44, #1a1a2e);
-          border-radius: 8px;
-          position: relative;
-          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-        }
-
-        .base-platform {
-          width: 200px;
-          height: 30px;
-          background: linear-gradient(145deg, #374151, #1f2937);
-          border-radius: 15px;
-          margin-top: 5px;
-          position: relative;
-          box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.3),
-            inset 0 2px 8px rgba(255, 255, 255, 0.05);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .status-light {
-          width: 80px;
-          height: 4px;
-          background: linear-gradient(90deg, #ec4899, #8b5cf6);
-          border-radius: 2px;
-          animation: statusPulse 2s ease-in-out infinite;
-          box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+          border-radius: 20px;
         }
 
         /* Particles */
@@ -278,65 +271,41 @@ const ComputerMachine: React.FC = () => {
         }
 
         /* Animations */
-        @keyframes float {
+        @keyframes slowBounce {
           0%, 100% { 
             transform: translateY(0px);
           }
           50% { 
-            transform: translateY(-20px);
+            transform: translateY(-15px);
           }
         }
 
-        @keyframes screenPulse {
-          0%, 100% { 
-            filter: brightness(1);
+        @keyframes rotateGear {
+          0% { 
+            transform: rotate(0deg);
           }
-          50% { 
-            filter: brightness(1.1);
+          100% { 
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes rotateGearReverse {
+          0% { 
+            transform: rotate(360deg);
+          }
+          100% { 
+            transform: rotate(0deg);
           }
         }
 
         @keyframes glowPulse {
           0%, 100% { 
-            opacity: 0.3;
-            transform: scale(1);
+            opacity: 0.4;
+            transform: translate(-50%, -50%) scale(1);
           }
           50% { 
-            opacity: 0.6;
-            transform: scale(1.05);
-          }
-        }
-
-        @keyframes scanMove {
-          0% { 
-            top: 0;
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% { 
-            top: 100%;
-            opacity: 0;
-          }
-        }
-
-        @keyframes flicker {
-          0%, 100% { opacity: 0; }
-          50% { opacity: 0.1; }
-        }
-
-        @keyframes statusPulse {
-          0%, 100% { 
-            box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
-            opacity: 1;
-          }
-          50% { 
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.8);
             opacity: 0.7;
+            transform: translate(-50%, -50%) scale(1.08);
           }
         }
 
@@ -369,13 +338,19 @@ const ComputerMachine: React.FC = () => {
             height: 400px;
           }
           
-          .computer-screen {
-            width: 240px;
-            height: 180px;
+          .computer-illustration {
+            width: 280px;
+            height: 260px;
           }
 
-          .base-platform {
-            width: 150px;
+          .gear-1 {
+            width: 35px;
+            height: 35px;
+          }
+
+          .gear-2, .gear-3, .gear-4 {
+            width: 28px;
+            height: 28px;
           }
         }
       `}</style>
