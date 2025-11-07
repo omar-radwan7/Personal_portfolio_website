@@ -60,126 +60,76 @@ const ComputerMachine: React.FC = () => {
 
           {/* Background Gears */}
           {/* Top Left Gear */}
-          <g className="gear gear-1" transform="translate(80, 80)">
-            <circle cx="0" cy="0" r="22" fill="#4b5563" />
-            <circle cx="0" cy="0" r="14" fill="#374151" />
-            <rect x="-3" y="-28" width="6" height="12" fill="#4b5563" rx="2" />
-            <rect x="-3" y="16" width="6" height="12" fill="#4b5563" rx="2" />
-            <rect x="-28" y="-3" width="12" height="6" fill="#4b5563" rx="2" />
-            <rect x="16" y="-3" width="12" height="6" fill="#4b5563" rx="2" />
-            <circle cx="0" cy="0" r="6" fill="#6b7280" />
-          </g>
-
-          {/* Bottom Left Gear (small) */}
-          <g className="gear gear-2" transform="translate(110, 320)">
-            <circle cx="0" cy="0" r="16" fill="#4b5563" />
-            <circle cx="0" cy="0" r="10" fill="#374151" />
-            <rect x="-2" y="-20" width="4" height="8" fill="#4b5563" rx="1.5" />
-            <rect x="-2" y="12" width="4" height="8" fill="#4b5563" rx="1.5" />
-            <rect x="-20" y="-2" width="8" height="4" fill="#4b5563" rx="1.5" />
-            <rect x="12" y="-2" width="8" height="4" fill="#4b5563" rx="1.5" />
-            <circle cx="0" cy="0" r="4" fill="#6b7280" />
-          </g>
-
-          {/* Top Right Gear (large) */}
-          <g className="gear gear-3" transform="translate(420, 70)">
-            <circle cx="0" cy="0" r="28" fill="#4b5563" />
-            <circle cx="0" cy="0" r="18" fill="#374151" />
-            <rect x="-4" y="-35" width="8" height="14" fill="#4b5563" rx="2" />
-            <rect x="-4" y="21" width="8" height="14" fill="#4b5563" rx="2" />
-            <rect x="-35" y="-4" width="14" height="8" fill="#4b5563" rx="2" />
-            <rect x="21" y="-4" width="14" height="8" fill="#4b5563" rx="2" />
-            <circle cx="0" cy="0" r="8" fill="#6b7280" />
-          </g>
-
-          {/* Bottom Right Gear */}
-          <g className="gear gear-4" transform="translate(390, 310)">
-            <circle cx="0" cy="0" r="20" fill="#4b5563" />
-            <circle cx="0" cy="0" r="12" fill="#374151" />
-            <rect x="-2.5" y="-25" width="5" height="10" fill="#4b5563" rx="2" />
-            <rect x="-2.5" y="15" width="5" height="10" fill="#4b5563" rx="2" />
-            <rect x="-25" y="-2.5" width="10" height="5" fill="#4b5563" rx="2" />
-            <rect x="15" y="-2.5" width="10" height="5" fill="#4b5563" rx="2" />
+          <g className="gear gear-1" transform="translate(120, 100)">
+            <circle cx="0" cy="0" r="18" fill="#4b5563" opacity="0.6" />
+            <circle cx="0" cy="0" r="11" fill="#374151" />
+            <rect x="-2" y="-23" width="4" height="10" fill="#4b5563" opacity="0.6" rx="1.5" />
+            <rect x="-2" y="13" width="4" height="10" fill="#4b5563" opacity="0.6" rx="1.5" />
+            <rect x="-23" y="-2" width="10" height="4" fill="#4b5563" opacity="0.6" rx="1.5" />
+            <rect x="13" y="-2" width="10" height="4" fill="#4b5563" opacity="0.6" rx="1.5" />
             <circle cx="0" cy="0" r="5" fill="#6b7280" />
           </g>
 
-          {/* Left Side Code Lines */}
-          <g className="code-lines-left">
-            <line x1="40" y1="180" x2="100" y2="180" stroke="#8b5cf6" strokeWidth="4" className="line-1" strokeLinecap="round" />
-            <line x1="40" y1="200" x2="100" y2="200" stroke="#8b5cf6" strokeWidth="4" className="line-2" strokeLinecap="round" />
-            <line x1="40" y1="220" x2="100" y2="220" stroke="#8b5cf6" strokeWidth="4" className="line-3" strokeLinecap="round" />
-            <line x1="40" y1="240" x2="100" y2="240" stroke="#8b5cf6" strokeWidth="4" className="line-4" strokeLinecap="round" />
+          {/* Top Right Gear */}
+          <g className="gear gear-3" transform="translate(380, 90)">
+            <circle cx="0" cy="0" r="22" fill="#4b5563" opacity="0.6" />
+            <circle cx="0" cy="0" r="14" fill="#374151" />
+            <rect x="-3" y="-28" width="6" height="12" fill="#4b5563" opacity="0.6" rx="2" />
+            <rect x="-3" y="16" width="6" height="12" fill="#4b5563" opacity="0.6" rx="2" />
+            <rect x="-28" y="-3" width="12" height="6" fill="#4b5563" opacity="0.6" rx="2" />
+            <rect x="16" y="-3" width="12" height="6" fill="#4b5563" opacity="0.6" rx="2" />
+            <circle cx="0" cy="0" r="6" fill="#6b7280" />
           </g>
 
-          {/* Left Code Window with Gear Icon */}
-          <g className="left-code-window">
-            <rect x="130" y="150" width="80" height="100" rx="8" fill="url(#codeWindowGrad)" opacity="0.95" />
-            {/* Code lines inside */}
-            <line x1="140" y1="165" x2="170" y2="165" stroke="#06b6d4" strokeWidth="2" />
-            <line x1="140" y1="175" x2="185" y2="175" stroke="#06b6d4" strokeWidth="2" />
-            <line x1="140" y1="185" x2="175" y2="185" stroke="#06b6d4" strokeWidth="2" />
-            <line x1="140" y1="195" x2="180" y2="195" stroke="#06b6d4" strokeWidth="2" />
-            <line x1="140" y1="205" x2="165" y2="205" stroke="#06b6d4" strokeWidth="2" />
-            
-            {/* Small gear icon in window */}
-            <g className="small-gear" transform="translate(165, 225)">
-              <circle cx="0" cy="0" r="12" fill="#06b6d4" opacity="0.8" />
-              <circle cx="0" cy="0" r="7" fill="#0891b2" />
-              <rect x="-1.5" y="-15" width="3" height="6" fill="#06b6d4" rx="1" />
-              <rect x="-1.5" y="9" width="3" height="6" fill="#06b6d4" rx="1" />
-              <rect x="-15" y="-1.5" width="6" height="3" fill="#06b6d4" rx="1" />
-              <rect x="9" y="-1.5" width="6" height="3" fill="#06b6d4" rx="1" />
-              <circle cx="0" cy="0" r="3" fill="#67e8f9" />
-            </g>
-          </g>
-
-          {/* Main Monitor */}
-          <rect x="220" y="130" width="200" height="150" rx="12" fill="url(#monitorGrad)" className="monitor-base" />
+          {/* Main Monitor Frame */}
+          <rect x="180" y="130" width="240" height="160" rx="15" fill="#1e293b" className="monitor-frame" />
+          <rect x="190" y="140" width="220" height="130" rx="8" fill="#0f172a" className="monitor-bezel" />
           
           {/* Screen */}
-          <rect x="232" y="142" width="176" height="110" rx="6" fill="url(#screenGrad)" className="screen" />
+          <rect x="200" y="150" width="200" height="110" rx="6" fill="url(#screenGrad)" className="screen" />
           
-          {/* Code lines on screen */}
-          <g className="screen-code">
-            <line x1="245" y1="160" x2="280" y2="160" stroke="#10b981" strokeWidth="2" />
-            <line x1="245" y1="170" x2="295" y2="170" stroke="#10b981" strokeWidth="2" />
-            <line x1="245" y1="180" x2="275" y2="180" stroke="#10b981" strokeWidth="2" />
-            <line x1="245" y1="190" x2="290" y2="190" stroke="#10b981" strokeWidth="2" />
-            <line x1="245" y1="200" x2="285" y2="200" stroke="#10b981" strokeWidth="2" />
-            <line x1="245" y1="210" x2="270" y2="210" stroke="#10b981" strokeWidth="2" />
-            <line x1="245" y1="220" x2="295" y2="220" stroke="#10b981" strokeWidth="2" />
-          </g>
-
-          {/* Code Brackets Icon */}
-          <g className="code-icon">
-            <circle cx="320" cy="200" r="28" fill="#3b82f6" opacity="0.3" />
-            <text x="320" y="212" fontSize="36" fill="#60a5fa" filter="url(#glow)" fontWeight="bold" textAnchor="middle">&lt;/&gt;</text>
-          </g>
-
-          {/* Bottom UI Buttons */}
-          <g className="ui-buttons">
-            <rect x="240" y="260" width="35" height="12" rx="2" fill="#3b82f6" opacity="0.7" />
-            <rect x="285" y="260" width="35" height="12" rx="2" fill="#3b82f6" opacity="0.7" />
-            <rect x="330" y="260" width="35" height="12" rx="2" fill="#3b82f6" opacity="0.7" />
+          {/* Screen Content */}
+          <g className="screen-content">
+            {/* Code Editor Window */}
+            <rect x="210" y="160" width="90" height="60" rx="4" fill="#1e3a8a" opacity="0.8" />
+            <line x1="215" y1="170" x2="245" y2="170" stroke="#10b981" strokeWidth="2" strokeLinecap="round" />
+            <line x1="215" y1="180" x2="260" y2="180" stroke="#10b981" strokeWidth="2" strokeLinecap="round" />
+            <line x1="215" y1="190" x2="240" y2="190" stroke="#10b981" strokeWidth="2" strokeLinecap="round" />
+            <line x1="215" y1="200" x2="255" y2="200" stroke="#10b981" strokeWidth="2" strokeLinecap="round" />
+            
+            {/* Code Symbol */}
+            <g className="code-icon">
+              <circle cx="340" cy="195" r="22" fill="#3b82f6" opacity="0.2" />
+              <text x="340" y="205" fontSize="28" fill="#60a5fa" filter="url(#glow)" fontWeight="bold" textAnchor="middle">&lt;/&gt;</text>
+            </g>
+            
+            {/* Small UI Elements */}
+            <rect x="210" y="230" width="25" height="20" rx="3" fill="#3b82f6" opacity="0.6" className="ui-element" />
+            <rect x="245" y="230" width="25" height="20" rx="3" fill="#8b5cf6" opacity="0.6" className="ui-element" />
+            <rect x="280" y="230" width="25" height="20" rx="3" fill="#06b6d4" opacity="0.6" className="ui-element" />
           </g>
 
           {/* Monitor Stand */}
-          <path d="M 285 280 L 295 280 L 300 310 L 280 310 Z" fill="#1e293b" />
-          <ellipse cx="290" cy="310" rx="35" ry="8" fill="#0f172a" />
+          <rect x="270" y="290" width="60" height="8" rx="4" fill="#334155" className="stand-neck" />
+          <path d="M 280 298 L 285 298 L 288 330 L 282 330 Z" fill="#1e293b" />
+          <path d="M 315 298 L 320 298 L 318 330 L 312 330 Z" fill="#1e293b" />
+          <ellipse cx="300" cy="330" rx="45" ry="10" fill="#0f172a" className="stand-base" />
+          <ellipse cx="300" cy="328" rx="40" ry="8" fill="#1e293b" />
 
-          {/* Right Side Cloud with Download */}
+          {/* Floating Elements */}
+          {/* Cloud Icon */}
           <g className="cloud-icon">
-            <path d="M 430 200 Q 430 185 445 185 Q 460 185 460 200 Q 475 200 475 220 Q 475 235 460 235 L 430 235 Q 415 235 415 220 Q 415 200 430 200" 
-                  fill="url(#cloudGrad)" opacity="0.95" />
-            <path d="M 445 210 L 445 225 M 438 218 L 445 225 L 452 218" 
-                  stroke="white" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M 440 170 Q 440 158 452 158 Q 464 158 464 170 Q 476 170 476 186 Q 476 198 464 198 L 440 198 Q 428 198 428 186 Q 428 170 440 170" 
+                  fill="url(#cloudGrad)" opacity="0.9" />
+            <path d="M 452 178 L 452 190 M 446 184 L 452 190 L 458 184" 
+                  stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
           </g>
 
-          {/* Right Side Checkmark Box */}
+          {/* Success Checkmark */}
           <g className="checkmark-box">
-            <rect x="425" y="260" width="45" height="45" rx="8" fill="#10b981" opacity="0.95" />
-            <path d="M 433 280 L 443 290 L 460 273" 
-                  stroke="white" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+            <circle cx="460" cy="250" r="20" fill="#10b981" opacity="0.9" />
+            <path d="M 452 250 L 458 256 L 470 244" 
+                  stroke="white" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
           </g>
         </svg>
 
@@ -235,10 +185,6 @@ const ComputerMachine: React.FC = () => {
           animation: screenGlow 2s ease-in-out infinite;
         }
 
-        .left-code-window {
-          animation: windowFloat 3s ease-in-out infinite;
-        }
-
         .code-icon {
           animation: codePulse 2s ease-in-out infinite;
         }
@@ -247,50 +193,35 @@ const ComputerMachine: React.FC = () => {
           animation: checkPulse 2s ease-in-out infinite 0.5s;
         }
 
-        .code-lines-left .line-1 {
-          animation: lineGlow 2s ease-in-out infinite;
-        }
-
-        .code-lines-left .line-2 {
-          animation: lineGlow 2s ease-in-out infinite 0.2s;
-        }
-
-        .code-lines-left .line-3 {
-          animation: lineGlow 2s ease-in-out infinite 0.4s;
-        }
-
-        .code-lines-left .line-4 {
-          animation: lineGlow 2s ease-in-out infinite 0.6s;
-        }
-
         .cloud-icon {
           animation: cloudFloat 3s ease-in-out infinite;
         }
 
-        .small-gear {
-          animation: rotateGear 4s linear infinite;
-          transform-origin: 165px 225px;
+        .ui-element {
+          animation: uiPulse 2s ease-in-out infinite;
+        }
+
+        .ui-element:nth-child(2) {
+          animation-delay: 0.2s;
+        }
+
+        .ui-element:nth-child(3) {
+          animation-delay: 0.4s;
+        }
+
+        .stand-base {
+          animation: standPulse 3s ease-in-out infinite;
         }
 
         /* Gear Animations */
         .gear-1 {
           animation: rotateGear 8s linear infinite;
-          transform-origin: 80px 80px;
-        }
-
-        .gear-2 {
-          animation: rotateGearReverse 6s linear infinite;
-          transform-origin: 110px 320px;
+          transform-origin: 120px 100px;
         }
 
         .gear-3 {
-          animation: rotateGear 10s linear infinite;
-          transform-origin: 420px 70px;
-        }
-
-        .gear-4 {
-          animation: rotateGearReverse 7s linear infinite;
-          transform-origin: 390px 310px;
+          animation: rotateGearReverse 10s linear infinite;
+          transform-origin: 380px 90px;
         }
 
         /* Particles */
@@ -421,43 +352,43 @@ const ComputerMachine: React.FC = () => {
           }
         }
 
-        @keyframes windowFloat {
-          0%, 100% { 
-            transform: translateY(0);
-          }
-          50% { 
-            transform: translateY(-5px);
-          }
-        }
-
         @keyframes codePulse {
           0%, 100% { 
             opacity: 1;
             transform: scale(1);
           }
           50% { 
+            opacity: 0.9;
+            transform: scale(1.03);
+          }
+        }
+
+        @keyframes uiPulse {
+          0%, 100% { 
+            opacity: 0.6;
+          }
+          50% { 
+            opacity: 0.9;
+          }
+        }
+
+        @keyframes standPulse {
+          0%, 100% { 
+            opacity: 1;
+          }
+          50% { 
             opacity: 0.85;
-            transform: scale(1.05);
           }
         }
 
         @keyframes checkPulse {
           0%, 100% { 
-            opacity: 0.95;
+            opacity: 0.9;
             transform: scale(1);
           }
           50% { 
             opacity: 1;
-            transform: scale(1.08);
-          }
-        }
-
-        @keyframes lineGlow {
-          0%, 100% { 
-            opacity: 0.5;
-          }
-          50% { 
-            opacity: 1;
+            transform: scale(1.1);
           }
         }
 
