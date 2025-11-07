@@ -1,22 +1,22 @@
 import React from 'react';
 
 const techStack = [
-  { name: 'HTML', icon: 'fab fa-html5', color: '#E44D26' },
-  { name: 'CSS', icon: 'fab fa-css3-alt', color: '#1572B6' },
+  { name: 'C++', icon: 'fas fa-code', color: '#00599C' },
+  { name: 'Java', icon: 'fab fa-java', color: '#007396' },
+  { name: 'Python', icon: 'fab fa-python', color: '#3776AB' },
+  { name: 'TypeScript', icon: 'fas fa-code', color: '#3178C6' },
   { name: 'JavaScript', icon: 'fab fa-js', color: '#F7DF1E' },
   { name: 'React', icon: 'fab fa-react', color: '#61DAFB' },
   { name: 'Node.js', icon: 'fab fa-node', color: '#339933' },
-  { name: 'Python', icon: 'fab fa-python', color: '#3776AB' },
-  { name: 'Java', icon: 'fab fa-java', color: '#007396' },
-  { name: 'Git', icon: 'fab fa-git-alt', color: '#F05032' },
-  { name: 'GitHub', icon: 'fab fa-github', color: '#181717' },
-  { name: 'TypeScript', icon: 'fas fa-code', color: '#3178C6' },
-  { name: 'Tailwind CSS', icon: 'fas fa-wind', color: '#06B6D4' },
   { name: 'Flutter', icon: 'fas fa-mobile-alt', color: '#02569B' },
-  { name: 'Firebase', icon: 'fas fa-fire', color: '#FFCA28' },
   { name: 'SQL', icon: 'fas fa-database', color: '#4479A1' },
   { name: 'Docker', icon: 'fab fa-docker', color: '#2496ED' },
-  { name: 'Linux', icon: 'fab fa-linux', color: '#FCC624' },
+  { name: 'Firebase', icon: 'fas fa-fire', color: '#FFCA28' },
+  { name: 'Tailwind CSS', icon: 'fas fa-wind', color: '#06B6D4' },
+  { name: 'HTML', icon: 'fab fa-html5', color: '#E44D26' },
+  { name: 'CSS', icon: 'fab fa-css3-alt', color: '#1572B6' },
+  { name: 'Git', icon: 'fab fa-git-alt', color: '#F05032' },
+  { name: 'GitHub', icon: 'fab fa-github', color: '#181717' },
 ];
 
 const TechStack: React.FC = () => {
