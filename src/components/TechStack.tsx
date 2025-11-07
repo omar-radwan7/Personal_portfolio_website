@@ -1,7 +1,17 @@
 import React from 'react';
+import cppLogo from '@/assets/cpp-logo.png';
+import golangLogo from '@/assets/golang-logo.png';
 
-const techStack = [
-  { name: 'C++', icon: 'fas fa-code', color: '#00599C' },
+type TechItem = {
+  name: string;
+  color: string;
+  logo?: string;
+  icon?: string;
+};
+
+const techStack: TechItem[] = [
+  { name: 'C++', logo: cppLogo, color: '#00599C' },
+  { name: 'Golang', logo: golangLogo, color: '#00ADD8' },
   { name: 'Java', icon: 'fab fa-java', color: '#007396' },
   { name: 'Python', icon: 'fab fa-python', color: '#3776AB' },
   { name: 'TypeScript', icon: 'fas fa-code', color: '#3178C6' },
@@ -28,10 +38,18 @@ const TechStack: React.FC = () => {
           className="glass-card glass-clear rounded-lg p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-purple/20 group"
         >
           <div className="relative">
-            <i
-              className={`${tech.icon} text-4xl md:text-5xl transition-all duration-300 group-hover:scale-110`}
-              style={{ color: tech.color }}
-            ></i>
+            {tech.logo ? (
+              <img 
+                src={tech.logo} 
+                alt={tech.name}
+                className="w-12 h-12 md:w-16 md:h-16 object-contain transition-all duration-300 group-hover:scale-110"
+              />
+            ) : (
+              <i
+                className={`${tech.icon} text-4xl md:text-5xl transition-all duration-300 group-hover:scale-110`}
+                style={{ color: tech.color }}
+              ></i>
+            )}
             <div
               className="absolute inset-0 blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300"
               style={{ backgroundColor: tech.color }}
