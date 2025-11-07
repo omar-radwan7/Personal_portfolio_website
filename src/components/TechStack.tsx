@@ -34,7 +34,7 @@ const techCategories: TechCategory[] = [
       { name: 'TypeScript', icon: 'fas fa-code', color: '#3178C6' },
       { name: 'CSS', icon: 'fab fa-css3-alt', color: '#1572B6' },
       { name: 'Bootstrap', icon: 'fab fa-bootstrap', color: '#7952B3' },
-      { name: 'UX Design', icon: 'fas fa-paint-brush', color: '#ec4899' },
+      { name: 'User Experience Design', icon: 'fas fa-paint-brush', color: '#ec4899' },
     ]
   },
   {
