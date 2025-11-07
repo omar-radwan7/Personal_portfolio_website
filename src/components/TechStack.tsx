@@ -42,8 +42,7 @@ const TechStack: React.FC = () => {
               <img 
                 src={tech.logo} 
                 alt={tech.name}
-                className="w-12 h-12 md:w-16 md:h-16 object-contain transition-all duration-300 group-hover:scale-110 mix-blend-lighten"
-                style={{ filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3))' }}
+                className="w-12 h-12 md:w-16 md:h-16 object-contain transition-all duration-300 group-hover:scale-110"
               />
             ) : (
               <i
