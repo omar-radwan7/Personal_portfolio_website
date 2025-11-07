@@ -59,8 +59,19 @@ const ComputerMachine: React.FC = () => {
           </defs>
 
           {/* Background Gears */}
-          {/* Top Left Gear */}
-          <g className="gear gear-1" transform="translate(120, 100)">
+          {/* Left Gear */}
+          <g className="gear gear-1" transform="translate(120, 150)">
+            <circle cx="0" cy="0" r="20" fill="#4b5563" opacity="0.6" />
+            <circle cx="0" cy="0" r="12" fill="#374151" />
+            <rect x="-2" y="-25" width="4" height="10" fill="#4b5563" opacity="0.6" rx="1.5" />
+            <rect x="-2" y="15" width="4" height="10" fill="#4b5563" opacity="0.6" rx="1.5" />
+            <rect x="-25" y="-2" width="10" height="4" fill="#4b5563" opacity="0.6" rx="1.5" />
+            <rect x="15" y="-2" width="10" height="4" fill="#4b5563" opacity="0.6" rx="1.5" />
+            <circle cx="0" cy="0" r="5" fill="#6b7280" />
+          </g>
+
+          {/* Right Gear */}
+          <g className="gear gear-2" transform="translate(380, 150)">
             <circle cx="0" cy="0" r="18" fill="#4b5563" opacity="0.6" />
             <circle cx="0" cy="0" r="11" fill="#374151" />
             <rect x="-2" y="-23" width="4" height="10" fill="#4b5563" opacity="0.6" rx="1.5" />
@@ -70,15 +81,20 @@ const ComputerMachine: React.FC = () => {
             <circle cx="0" cy="0" r="5" fill="#6b7280" />
           </g>
 
-          {/* Top Right Gear */}
-          <g className="gear gear-3" transform="translate(380, 90)">
-            <circle cx="0" cy="0" r="22" fill="#4b5563" opacity="0.6" />
-            <circle cx="0" cy="0" r="14" fill="#374151" />
-            <rect x="-3" y="-28" width="6" height="12" fill="#4b5563" opacity="0.6" rx="2" />
-            <rect x="-3" y="16" width="6" height="12" fill="#4b5563" opacity="0.6" rx="2" />
-            <rect x="-28" y="-3" width="12" height="6" fill="#4b5563" opacity="0.6" rx="2" />
-            <rect x="16" y="-3" width="12" height="6" fill="#4b5563" opacity="0.6" rx="2" />
-            <circle cx="0" cy="0" r="6" fill="#6b7280" />
+          {/* Mobile Phone */}
+          <g className="mobile-phone">
+            <rect x="80" y="240" width="60" height="110" rx="8" fill="#1e293b" />
+            <rect x="85" y="245" width="50" height="95" rx="4" fill="#0f172a" />
+            <rect x="88" y="250" width="44" height="70" rx="2" fill="#1e3a8a" />
+            {/* Mobile screen content */}
+            <rect x="92" y="255" width="18" height="12" rx="2" fill="#3b82f6" opacity="0.8" />
+            <rect x="92" y="270" width="36" height="3" rx="1.5" fill="#10b981" opacity="0.7" />
+            <rect x="92" y="277" width="28" height="3" rx="1.5" fill="#10b981" opacity="0.7" />
+            <rect x="92" y="284" width="32" height="3" rx="1.5" fill="#10b981" opacity="0.7" />
+            <rect x="92" y="295" width="15" height="15" rx="2" fill="#8b5cf6" opacity="0.6" className="mobile-icon" />
+            <rect x="110" y="295" width="15" height="15" rx="2" fill="#06b6d4" opacity="0.6" className="mobile-icon" />
+            {/* Home button */}
+            <circle cx="110" cy="330" r="4" fill="#374151" />
           </g>
 
           {/* Main Monitor Frame */}
@@ -131,6 +147,20 @@ const ComputerMachine: React.FC = () => {
             <path d="M 452 250 L 458 256 L 470 244" 
                   stroke="white" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
           </g>
+
+          {/* Database Icon */}
+          <g className="database-icon">
+            <ellipse cx="70" cy="100" rx="25" ry="10" fill="#8b5cf6" opacity="0.8" />
+            <rect x="45" y="100" width="50" height="25" fill="#8b5cf6" opacity="0.8" />
+            <ellipse cx="70" cy="110" rx="25" ry="10" fill="#6d28d9" opacity="0.9" />
+            <ellipse cx="70" cy="125" rx="25" ry="10" fill="#7c3aed" opacity="0.9" />
+          </g>
+
+          {/* Lightning Bolt */}
+          <g className="lightning-bolt">
+            <path d="M 435 310 L 425 330 L 435 330 L 430 345 L 445 325 L 435 325 Z" 
+                  fill="#fbbf24" opacity="0.9" />
+          </g>
         </svg>
 
         {/* Floating particles */}
@@ -160,9 +190,9 @@ const ComputerMachine: React.FC = () => {
 
         .computer-machine {
           position: relative;
-          animation: slowBounce 4s ease-in-out infinite;
+          animation: dynamicBounce 2s ease-in-out infinite;
           transform-style: preserve-3d;
-          transition: transform 0.3s ease-out;
+          transition: transform 0.2s ease-out;
           width: 100%;
           height: 100%;
           display: flex;
@@ -178,27 +208,27 @@ const ComputerMachine: React.FC = () => {
 
         /* Animated Elements */
         .monitor-base {
-          animation: subtlePulse 3s ease-in-out infinite;
+          animation: subtlePulse 1.5s ease-in-out infinite;
         }
 
         .screen {
-          animation: screenGlow 2s ease-in-out infinite;
+          animation: screenGlow 1s ease-in-out infinite;
         }
 
         .code-icon {
-          animation: codePulse 2s ease-in-out infinite;
+          animation: codePulse 1.2s ease-in-out infinite;
         }
 
         .checkmark-box {
-          animation: checkPulse 2s ease-in-out infinite 0.5s;
+          animation: checkPulse 1s ease-in-out infinite 0.3s;
         }
 
         .cloud-icon {
-          animation: cloudFloat 3s ease-in-out infinite;
+          animation: cloudFloat 1.5s ease-in-out infinite;
         }
 
         .ui-element {
-          animation: uiPulse 2s ease-in-out infinite;
+          animation: uiPulse 1s ease-in-out infinite;
         }
 
         .ui-element:nth-child(2) {
@@ -210,18 +240,34 @@ const ComputerMachine: React.FC = () => {
         }
 
         .stand-base {
-          animation: standPulse 3s ease-in-out infinite;
+          animation: standPulse 1.5s ease-in-out infinite;
+        }
+
+        .mobile-phone {
+          animation: mobileFloat 2s ease-in-out infinite;
+        }
+
+        .mobile-icon {
+          animation: iconPulse 1.5s ease-in-out infinite;
+        }
+
+        .database-icon {
+          animation: databasePulse 1.8s ease-in-out infinite;
+        }
+
+        .lightning-bolt {
+          animation: lightningFlash 1s ease-in-out infinite;
         }
 
         /* Gear Animations */
         .gear-1 {
-          animation: rotateGear 8s linear infinite;
-          transform-origin: 120px 100px;
+          animation: rotateGear 4s linear infinite;
+          transform-origin: 120px 150px;
         }
 
-        .gear-3 {
-          animation: rotateGearReverse 10s linear infinite;
-          transform-origin: 380px 90px;
+        .gear-2 {
+          animation: rotateGearReverse 5s linear infinite;
+          transform-origin: 380px 150px;
         }
 
         /* Particles */
@@ -307,12 +353,12 @@ const ComputerMachine: React.FC = () => {
         }
 
         /* Keyframe Animations */
-        @keyframes slowBounce {
+        @keyframes dynamicBounce {
           0%, 100% { 
-            transform: translateY(0px);
+            transform: translateY(0px) scale(1);
           }
           50% { 
-            transform: translateY(-20px);
+            transform: translateY(-15px) scale(1.02);
           }
         }
 
@@ -407,8 +453,50 @@ const ComputerMachine: React.FC = () => {
             opacity: 0.4;
           }
           50% { 
-            transform: translate(15px, -35px) scale(1.4);
+            transform: translate(20px, -40px) scale(1.6);
             opacity: 1;
+          }
+        }
+
+        @keyframes mobileFloat {
+          0%, 100% { 
+            transform: translateY(0) rotate(0deg);
+          }
+          50% { 
+            transform: translateY(-12px) rotate(-2deg);
+          }
+        }
+
+        @keyframes iconPulse {
+          0%, 100% { 
+            opacity: 0.6;
+            transform: scale(1);
+          }
+          50% { 
+            opacity: 1;
+            transform: scale(1.15);
+          }
+        }
+
+        @keyframes databasePulse {
+          0%, 100% { 
+            opacity: 0.8;
+            transform: translateY(0);
+          }
+          50% { 
+            opacity: 1;
+            transform: translateY(-8px);
+          }
+        }
+
+        @keyframes lightningFlash {
+          0%, 100% { 
+            opacity: 0.9;
+            filter: brightness(1);
+          }
+          50% { 
+            opacity: 1;
+            filter: brightness(1.5) drop-shadow(0 0 8px #fbbf24);
           }
         }
 
