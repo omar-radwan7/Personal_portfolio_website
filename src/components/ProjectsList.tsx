@@ -14,15 +14,13 @@ const ProjectsList: React.FC = () => {
         <div className="p-4 flex-grow text-sm border-t border-foreground/10">
           <p className="text-gray-400 mb-1">PingPong game With HTML, CSS & JavaScript</p>
           <h3 className="text-base font-semibold mb-2">PingPong Game</h3>
-          <div className="flex justify-between items-center">
-            <div className="flex gap-1 flex-wrap">
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">HTML</span>
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">CSS</span>
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">JS</span>
-            </div>
+          <div className="flex gap-1 flex-wrap items-center">
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">HTML</span>
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">CSS</span>
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">JS</span>
             <Link
               to="/project/pingpong"
-              className="text-purple-light hover:text-purple text-xs"
+              className="px-2 py-0.5 bg-cyan/20 text-cyan-400 hover:bg-cyan/30 rounded text-xs transition-colors"
             >
               More Details
             </Link>
@@ -40,15 +38,13 @@ const ProjectsList: React.FC = () => {
         <div className="p-4 flex-grow text-sm border-t border-foreground/10">
           <p className="text-gray-400 mb-1">Interactive AI Assistant with React</p>
           <h3 className="text-base font-semibold mb-2">Qorix AI Assistant</h3>
-          <div className="flex justify-between items-center">
-            <div className="flex gap-1 flex-wrap">
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">React</span>
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">TypeScript</span>
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Tailwind</span>
-            </div>
+          <div className="flex gap-1 flex-wrap items-center">
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">React</span>
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">TypeScript</span>
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Tailwind</span>
             <Link
               to="/project/aimodel"
-              className="text-purple-light hover:text-purple text-xs"
+              className="px-2 py-0.5 bg-cyan/20 text-cyan-400 hover:bg-cyan/30 rounded text-xs transition-colors"
             >
               More Details
             </Link>
@@ -71,15 +67,13 @@ const ProjectsList: React.FC = () => {
         <div className="p-4 flex-grow text-sm border-t border-foreground/10">
           <p className="text-gray-400 mb-1">Flutter Stock Market App with Real-time Data</p>
           <h3 className="text-base font-semibold mb-2">TradeWise</h3>
-          <div className="flex justify-between items-center">
-            <div className="flex gap-1 flex-wrap">
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Flutter</span>
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Dart</span>
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">API</span>
-            </div>
+          <div className="flex gap-1 flex-wrap items-center">
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Flutter</span>
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Dart</span>
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">API</span>
             <Link
               to="/project/tradewise"
-              className="text-purple-light hover:text-purple text-xs"
+              className="px-2 py-0.5 bg-cyan/20 text-cyan-400 hover:bg-cyan/30 rounded text-xs transition-colors"
             >
               More Details
             </Link>
@@ -101,14 +95,12 @@ const ProjectsList: React.FC = () => {
         <div className="p-4 flex-grow text-sm border-t border-foreground/10">
           <p className="text-gray-400 mb-1">Flutter & OpenWeatherMap API</p>
           <h3 className="text-base font-semibold mb-2">Weather App</h3>
-          <div className="flex justify-between items-center">
-            <div className="flex gap-1">
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Flutter</span>
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">API</span>
-            </div>
+          <div className="flex gap-1 flex-wrap items-center">
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Flutter</span>
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">API</span>
             <Link
               to="/project/weather"
-              className="text-purple-light hover:text-purple text-xs"
+              className="px-2 py-0.5 bg-cyan/20 text-cyan-400 hover:bg-cyan/30 rounded text-xs transition-colors"
             >
               More Details
             </Link>
@@ -134,15 +126,13 @@ const ProjectsList: React.FC = () => {
         <div className="p-4 flex-grow text-sm border-t border-foreground/10">
           <p className="text-gray-400 mb-1">No-code React portfolio builder with export</p>
           <h3 className="text-base font-semibold mb-2">Portfolio Builder</h3>
-          <div className="flex justify-between items-center">
-            <div className="flex gap-1 flex-wrap">
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">React</span>
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Vite</span>
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Tailwind</span>
-            </div>
+          <div className="flex gap-1 flex-wrap items-center">
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">React</span>
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Vite</span>
+            <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Tailwind</span>
             <Link
               to="/project/portfolio-builder"
-              className="text-purple-light hover:text-purple text-xs"
+              className="px-2 py-0.5 bg-cyan/20 text-cyan-400 hover:bg-cyan/30 rounded text-xs transition-colors"
             >
               More Details
             </Link>
