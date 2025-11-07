@@ -175,6 +175,39 @@ const ComputerMachine: React.FC = () => {
 
         {/* Ambient glow */}
         <div className="ambient-glow"></div>
+
+        {/* Flying Robot */}
+        <div className="flying-robot">
+          <svg viewBox="0 0 100 120" className="robot-svg">
+            {/* Robot Head */}
+            <rect x="30" y="10" width="40" height="40" rx="8" fill="#4f46e5" />
+            <circle cx="40" cy="25" r="5" fill="#fff" />
+            <circle cx="60" cy="25" r="5" fill="#fff" />
+            <circle cx="40" cy="25" r="2" fill="#4f46e5" className="robot-eye-pupil" />
+            <circle cx="60" cy="25" r="2" fill="#4f46e5" className="robot-eye-pupil" />
+            {/* Antenna */}
+            <line x1="50" y1="10" x2="50" y2="3" stroke="#6b7280" strokeWidth="2" />
+            <circle cx="50" cy="3" r="3" fill="#ef4444" className="robot-antenna-ball" />
+            
+            {/* Robot Body */}
+            <rect x="25" y="52" width="50" height="50" rx="10" fill="#6366f1" />
+            
+            {/* Screen */}
+            <rect x="35" y="62" width="30" height="20" rx="4" fill="#1f2937" />
+            <rect x="38" y="66" width="24" height="2" rx="1" fill="#10b981" className="screen-line" />
+            <rect x="38" y="71" width="20" height="2" rx="1" fill="#10b981" className="screen-line" />
+            <rect x="38" y="76" width="18" height="2" rx="1" fill="#10b981" className="screen-line" />
+            
+            {/* Arms */}
+            <rect x="15" y="60" width="8" height="25" rx="4" fill="#4f46e5" />
+            <rect x="77" y="60" width="8" height="25" rx="4" fill="#4f46e5" />
+            
+            {/* Jetpack flames */}
+            <path d="M 40 102 L 35 112 L 40 108 Z" fill="#ff6b35" opacity="0.8" className="flame flame-1" />
+            <path d="M 50 102 L 48 112 L 52 112 Z" fill="#ffa500" opacity="0.8" className="flame flame-2" />
+            <path d="M 60 102 L 65 112 L 60 108 Z" fill="#ff6b35" opacity="0.8" className="flame flame-3" />
+          </svg>
+        </div>
       </div>
 
       <style>{`
@@ -508,6 +541,134 @@ const ComputerMachine: React.FC = () => {
           50% { 
             transform: translate(-50%, -50%) scale(1.2);
             opacity: 0.5;
+          }
+        }
+
+        /* Flying Robot Styles */
+        .flying-robot {
+          position: absolute;
+          width: 60px;
+          height: 70px;
+          animation: orbitAroundComputer 8s linear infinite;
+          transform-origin: center;
+          z-index: 10;
+          filter: drop-shadow(0 4px 12px rgba(79, 70, 229, 0.4));
+        }
+
+        .robot-svg {
+          width: 100%;
+          height: 100%;
+          animation: robotBob 1.5s ease-in-out infinite;
+        }
+
+        .robot-eye-pupil {
+          animation: eyeMove 3s ease-in-out infinite;
+        }
+
+        .robot-antenna-ball {
+          animation: antennaBlink 1s ease-in-out infinite;
+        }
+
+        .screen-line {
+          animation: screenFlicker 2s ease-in-out infinite;
+        }
+
+        .screen-line:nth-child(2) {
+          animation-delay: 0.3s;
+        }
+
+        .screen-line:nth-child(3) {
+          animation-delay: 0.6s;
+        }
+
+        .flame {
+          animation: flameFlicker 0.3s ease-in-out infinite;
+        }
+
+        .flame-1 {
+          animation-delay: 0s;
+        }
+
+        .flame-2 {
+          animation-delay: 0.1s;
+        }
+
+        .flame-3 {
+          animation-delay: 0.2s;
+        }
+
+        @keyframes orbitAroundComputer {
+          0% {
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, 0) scale(0.8);
+          }
+          25% {
+            top: 50%;
+            left: 85%;
+            transform: translate(-50%, -50%) scale(1);
+          }
+          50% {
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -100%) scale(0.9);
+          }
+          75% {
+            top: 50%;
+            left: 15%;
+            transform: translate(-50%, -50%) scale(1);
+          }
+          100% {
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, 0) scale(0.8);
+          }
+        }
+
+        @keyframes robotBob {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-4px);
+          }
+        }
+
+        @keyframes eyeMove {
+          0%, 100% {
+            cx: 40;
+          }
+          50% {
+            cx: 42;
+          }
+        }
+
+        @keyframes antennaBlink {
+          0%, 50%, 100% {
+            opacity: 1;
+          }
+          25%, 75% {
+            opacity: 0.3;
+          }
+        }
+
+        @keyframes screenFlicker {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.6;
+          }
+        }
+
+        @keyframes flameFlicker {
+          0%, 100% {
+            opacity: 0.8;
+            transform: scaleY(1);
+          }
+          50% {
+            opacity: 0.5;
+            transform: scaleY(0.7);
           }
         }
 
