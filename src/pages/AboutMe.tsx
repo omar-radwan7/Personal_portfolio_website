@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
+import profilePic from '@/assets/profile-pic.jpg';
 
 const AboutMe: React.FC = () => {
   useEffect(() => {
@@ -39,6 +40,18 @@ const AboutMe: React.FC = () => {
               <div className="glass-panel p-6 sticky top-24">
                 <h1 className="text-3xl font-bold mb-6 title-gradient">About Me</h1>
                 
+                {/* Profile Picture */}
+                <div className="flex justify-center mb-6">
+                  <div className="relative group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple via-blue to-cyan rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                    <img 
+                      src={profilePic} 
+                      alt="Omar Radwan" 
+                      className="relative w-48 h-48 rounded-full object-cover border-4 border-purple/30 shadow-2xl group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                </div>
+
                 <div className="mb-6">
                   <p className="text-gray-300 leading-relaxed">
                     I'm Omar Radwan, a Full Stack Developer studying Software Engineering at the University of Europe for Applied Sciences.
