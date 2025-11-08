@@ -5,37 +5,47 @@ const RobotHead: React.FC = () => {
   const robotRef = useRef<HTMLDivElement>(null);
   const leftEyeRef = useRef<HTMLDivElement>(null);
   const rightEyeRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const rafRef = useRef<number>();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!robotRef.current || !leftEyeRef.current || !rightEyeRef.current) return;
       
-      const rect = robotRef.current.getBoundingClientRect();
-      const robotCenterX = rect.left + rect.width / 2;
-      const robotCenterY = rect.top + rect.height / 2;
-      
-      // Calculate relative mouse position
-      const relativeX = (e.clientX - robotCenterX) / rect.width;
-      const relativeY = (e.clientY - robotCenterY) / rect.height;
-      
-      // Limit eye movement range
-      const maxMovement = 3;
-      const eyeX = Math.max(-maxMovement, Math.min(maxMovement, relativeX * maxMovement));
-      const eyeY = Math.max(-maxMovement, Math.min(maxMovement, relativeY * maxMovement));
-      
-      // Apply eye movement to the blue pupils
-      if (leftEyeRef.current && rightEyeRef.current) {
-        leftEyeRef.current.style.transform = `translate(${eyeX}px, ${eyeY}px)`;
-        rightEyeRef.current.style.transform = `translate(${eyeX}px, ${eyeY}px)`;
+      // Cancel any pending animation frame
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
       }
       
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      // Use requestAnimationFrame for smooth, optimized updates
+      rafRef.current = requestAnimationFrame(() => {
+        if (!robotRef.current || !leftEyeRef.current || !rightEyeRef.current) return;
+        
+        const rect = robotRef.current.getBoundingClientRect();
+        const robotCenterX = rect.left + rect.width / 2;
+        const robotCenterY = rect.top + rect.height / 2;
+        
+        // Calculate relative mouse position
+        const relativeX = (e.clientX - robotCenterX) / rect.width;
+        const relativeY = (e.clientY - robotCenterY) / rect.height;
+        
+        // Limit eye movement range
+        const maxMovement = 3;
+        const eyeX = Math.max(-maxMovement, Math.min(maxMovement, relativeX * maxMovement));
+        const eyeY = Math.max(-maxMovement, Math.min(maxMovement, relativeY * maxMovement));
+        
+        // Apply eye movement with GPU acceleration (translate3d)
+        const transform = `translate3d(${eyeX}px, ${eyeY}px, 0)`;
+        leftEyeRef.current.style.transform = transform;
+        rightEyeRef.current.style.transform = transform;
+      });
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
   }, []);
 
@@ -111,6 +121,7 @@ const RobotHead: React.FC = () => {
           animation: float 3s ease-in-out infinite;
           transform-style: preserve-3d;
           scale: 1.3;
+          will-change: transform;
         }
 
         /* Robot Head */
@@ -152,7 +163,8 @@ const RobotHead: React.FC = () => {
           height: 6px;
           background: #4f46e5;
           border-radius: 50%;
-          transition: transform 0.1s ease-out;
+          transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+          will-change: transform;
         }
 
         .robot-antenna {
