@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PingPongGame from './PingPongGame';
 import BouncingQ from './BouncingQ';
+import CloudStorageAnimation from './CloudStorageAnimation';
 
 const ProjectsList: React.FC = () => {
   return (
@@ -142,6 +143,32 @@ const ProjectsList: React.FC = () => {
             </div>
             <Link
               to="/project/portfolio-builder"
+              className="px-3 py-1.5 bg-gradient-to-r from-purple to-blue hover:from-purple-light hover:to-blue-light rounded-md text-xs font-medium text-white transition-all shadow-md hover:shadow-lg"
+            >
+              More Details →
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* LocalCloud */}
+      <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
+        <div className="w-full flex items-center justify-center aspect-[16/10] bg-transparent">
+          <div className="w-full h-full">
+            <CloudStorageAnimation />
+          </div>
+        </div>
+        <div className="p-4 flex-grow text-sm border-t border-foreground/10">
+          <p className="text-gray-400 mb-1">Local Cloud Storage Emulator - Fullstack</p>
+          <h3 className="text-base font-semibold mb-2">LocalCloud</h3>
+          <div className="flex gap-2 flex-wrap items-center justify-between">
+            <div className="flex gap-1 flex-wrap">
+              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Node.js</span>
+              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Next.js</span>
+              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">TypeScript</span>
+            </div>
+            <Link
+              to="/project/localcloud"
               className="px-3 py-1.5 bg-gradient-to-r from-purple to-blue hover:from-purple-light hover:to-blue-light rounded-md text-xs font-medium text-white transition-all shadow-md hover:shadow-lg"
             >
               More Details →

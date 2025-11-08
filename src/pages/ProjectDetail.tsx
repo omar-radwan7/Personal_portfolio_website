@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import BouncingQ from '@/components/BouncingQ';
 import PingPongGame from '@/components/PingPongGame';
 import ThunderCloud from '@/components/ThunderCloud';
+import CloudStorageAnimation from '@/components/CloudStorageAnimation';
 
 // Project data structure
 export interface Project {
@@ -63,6 +64,15 @@ const projectsData: Project[] = [
     description: 'Portfolio Builder is a dynamic, frontend-only React + Tailwind experience for crafting and exporting bespoke portfolio layouts without AI or a backend. This innovative tool empowers users to create professional portfolios through an intuitive visual interface.\n\nKey Features:\n• Dual Mode System: Switch between Blocks mode (drag components) and Page mode (manage multiple pages)\n• Drag & Drop Interface: Easily add and arrange components including Text, Image, Project Cards, Skills sections, and Contact forms\n• Smart Auto-Style: One-click randomized layouts with beautiful color palettes, typography presets, spacing variations, and smooth animations\n• Live Preview & Editing: Real-time preview with inline content and style editors for each section\n• Multi-Page Management: Create and organize multiple pages for comprehensive portfolios\n• Theme Presets: Choose from curated design themes or customize your own\n• Per-Section Layout Controls: Fine-tune individual section layouts and styling\n• Customizable Components: Personalize hero sections, highlight features, and more\n• One-Click Export: Generate a complete, runnable React project as a downloadable ZIP file\n• No Backend Required: Everything runs entirely in the browser using Context API and useReducer for state management\n\nTechnical Implementation:\n• Built with React 18+ and Vite for optimal development experience\n• Styled with Tailwind CSS for rapid, responsive design\n• Uses JSZip and FileSaver.js for seamless project export\n• State management via Context API with useReducer pattern\n• Clean, modular architecture ensuring maintainability and scalability\n\nThe exported project includes:\n• Complete package.json with all necessary dependencies\n• Configured tailwind.config.js and postcss.config.js\n• Ready-to-run index.html, src/App.jsx, src/main.jsx, and src/tailwind.css\n• Simply extract, run npm install, and launch with npm run dev\n\nPerfect for developers, designers, and professionals who want to quickly create stunning portfolio websites without writing code from scratch.',
     technologies: ['React', 'Vite', 'Tailwind CSS', 'Context API', 'JSZip', 'JavaScript'],
     githubLink: 'https://github.com/omar-radwan7/Portfolio-Builder',
+    status: 'complete'
+  },
+  {
+    id: 'localcloud',
+    title: 'LocalCloud',
+    subtitle: 'Local Cloud Storage Emulator',
+    description: 'A fullstack application that works like Dropbox but runs entirely on your local machine. Upload files, manage versions, use a recycle bin, and organize everything with a clean web interface.\n\nProject Idea:\nThis is a complete cloud storage system that you can run locally without any external services. It includes user authentication, file uploads with drag-and-drop, automatic versioning when you update files, a recycle bin for deleted items, and a modern React interface. All your files are persisted directly in the local SQLite database (no loose files on disk) so the project stays self-contained and portable.\n\nFeatures:\n• User authentication with secure password hashing\n• Upload and download files with progress tracking\n• Drag-and-drop file uploads\n• Create nested folders to organise files\n• Automatic file versioning when you replace files\n• Recycle bin with restore and permanent delete options\n• Search through your files\n• Storage usage visualization with configurable quotas\n• View and download previous versions of any file\n• User profile management\n• Duplicate file detection with content hashing\n• Optional Python microservice for advanced file analysis\n\nTech Stack:\n• Backend: Node.js, Express, TypeScript, Prisma ORM, SQLite, JWT, bcrypt\n• Frontend: Next.js 16, React, TypeScript, TailwindCSS, Axios\n• Optional Python Service: FastAPI, Pillow, PyPDF2, python-docx (for advanced file processing)',
+    technologies: ['Node.js', 'Express', 'Next.js', 'React', 'TypeScript', 'Prisma', 'SQLite', 'TailwindCSS'],
+    githubLink: 'https://github.com/omar-radwan7/LocalCloud?tab=readme-ov-file#localcloud',
     status: 'complete'
   }
 ];
@@ -130,6 +140,10 @@ const ProjectDetail: React.FC = () => {
                   ) : project.id === 'weather' ? (
                     <div className="w-full h-full relative">
                       <ThunderCloud />
+                    </div>
+                  ) : project.id === 'localcloud' ? (
+                    <div className="w-full h-full">
+                      <CloudStorageAnimation />
                     </div>
                   ) : (
                     <div className="flex justify-center items-center text-foreground/90">
