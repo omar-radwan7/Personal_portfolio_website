@@ -5,7 +5,6 @@ import DecryptedText from './DecryptedText';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
-  const rafIdRef = useRef<number | null>(null);
 
   useEffect(() => {
     let ticking = false;
@@ -68,8 +67,8 @@ const Hero: React.FC = () => {
               <DecryptedText
                 text="Hello, I'm Omar"
                 animateOn="view"
-                speed={75}
-                maxIterations={15}
+                speed={100}
+                maxIterations={12}
                 className="title-gradient"
                 revealDirection="left"
               />
@@ -78,8 +77,8 @@ const Hero: React.FC = () => {
               <DecryptedText
                 text="Software Engineer"
                 animateOn="view"
-                speed={100}
-                maxIterations={20}
+                speed={120}
+                maxIterations={15}
                 revealDirection="left"
               />
             </h1>
@@ -87,8 +86,8 @@ const Hero: React.FC = () => {
               <DecryptedText
                 text="Software Engineering Student With a Passion for Learning"
                 animateOn="view"
-                speed={50}
-                maxIterations={10}
+                speed={80}
+                maxIterations={8}
                 revealDirection="center"
               />
             </p>

@@ -4,23 +4,31 @@ const ComputerMachine: React.FC = () => {
   const computerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleMouseMove = (e: MouseEvent) => {
-      if (!computerRef.current) return;
-      
-      const rect = computerRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      
-      const relativeX = (e.clientX - centerX) / rect.width;
-      const relativeY = (e.clientY - centerY) / rect.height;
-      
-      const tiltX = relativeY * 2;
-      const tiltY = relativeX * -2;
-      
-      computerRef.current.style.transform = `perspective(1200px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+      if (!ticking && computerRef.current) {
+        window.requestAnimationFrame(() => {
+          if (!computerRef.current) return;
+          
+          const rect = computerRef.current.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          
+          const relativeX = (e.clientX - centerX) / rect.width;
+          const relativeY = (e.clientY - centerY) / rect.height;
+          
+          const tiltX = relativeY * 2;
+          const tiltY = relativeX * -2;
+          
+          computerRef.current.style.transform = `perspective(1200px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
     };
