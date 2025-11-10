@@ -103,6 +103,20 @@ export default {
                 'pulse': {
                     '0%, 100%': { opacity: '1' },
                     '50%': { opacity: '0.5' }
+                },
+                'liquid-morph': {
+                    '0%, 100%': { 
+                        borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
+                        transform: 'rotate(0deg)'
+                    },
+                    '50%': { 
+                        borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%',
+                        transform: 'rotate(180deg)'
+                    }
+                },
+                'liquid-shimmer': {
+                    '0%': { backgroundPosition: '-200% center' },
+                    '100%': { backgroundPosition: '200% center' }
                 }
 			},
 			animation: {
@@ -112,7 +126,9 @@ export default {
                 'fadeIn': 'fadeIn 0.5s ease-in-out forwards',
                 'slideUp': 'slideUp 0.5s ease-in-out forwards',
                 'slideRight': 'slideRight 0.5s ease-in-out forwards',
-                'pulse': 'pulse 2s ease-in-out infinite'
+                'pulse': 'pulse 2s ease-in-out infinite',
+                'liquid-morph': 'liquid-morph 20s ease-in-out infinite',
+                'liquid-shimmer': 'liquid-shimmer 3s linear infinite'
 			},
             backgroundImage: {
                 'waves': "url('/waves.svg')",

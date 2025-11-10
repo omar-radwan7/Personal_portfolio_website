@@ -92,75 +92,294 @@
   }
   
   .title-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-light via-purple to-purple-dark font-bold;
+    @apply bg-clip-text text-transparent font-bold;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(210 100% 70%) 50%,
+      hsl(var(--primary)) 100%
+    );
+    background-size: 200% auto;
+    animation: liquid-shimmer 3s linear infinite;
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:shadow-purple/20 hover:-translate-y-1;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 60px hsl(var(--primary) / 0.3),
+      0 0 100px hsl(var(--primary) / 0.15);
   }
   
   .nav-link {
-    @apply relative text-foreground hover:text-purple-light transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-purple-light after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100;
+    @apply relative text-foreground transition-all duration-500;
+    position: relative;
+  }
+  
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-[2px] origin-bottom-right scale-x-0 transition-transform duration-500;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)),
+      hsl(210 100% 70%),
+      hsl(var(--primary))
+    );
+    background-size: 200% auto;
+    animation: liquid-shimmer 2s linear infinite;
+    filter: blur(0.5px);
+    box-shadow: 0 0 8px hsl(var(--primary) / 0.6);
+  }
+  
+  .nav-link:hover {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+  
+  .nav-link:hover::after {
+    @apply origin-bottom-left scale-x-100;
   }
   
   .social-icon {
-    @apply text-foreground hover:text-purple-light transition-colors duration-300 text-2xl;
+    @apply text-foreground text-2xl;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  
+  .social-icon:hover {
+    color: hsl(var(--primary));
+    transform: translateY(-4px) scale(1.15);
+    filter: drop-shadow(0 0 12px hsl(var(--primary) / 0.6));
   }
   
   .btn-primary {
-    @apply relative overflow-hidden text-foreground bg-purple/20 hover:bg-purple/30 border border-purple/30 shadow-lg backdrop-blur-xl font-medium py-2.5 px-6 rounded-lg transition-all duration-300;
+    @apply relative overflow-hidden text-foreground font-medium py-2.5 px-6 rounded-full;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.2),
+      hsl(210 100% 70% / 0.25),
+      hsl(var(--primary) / 0.2)
+    );
+    background-size: 200% 200%;
+    animation: liquid-gradient 8s ease infinite;
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--primary) / 0.4);
+    box-shadow: 
+      0 4px 20px hsl(var(--primary) / 0.25),
+      inset 0 1px 0 hsl(0 0% 100% / 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 
+      0 8px 32px hsl(var(--primary) / 0.4),
+      inset 0 1px 0 hsl(0 0% 100% / 0.15);
   }
   
   .btn-outline {
-    @apply relative overflow-hidden text-purple border border-purple/40 hover:bg-purple/10 hover:text-foreground backdrop-blur-xl font-medium py-2.5 px-6 rounded-lg transition-all duration-300;
+    @apply relative overflow-hidden text-foreground font-medium py-2.5 px-6 rounded-full;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--background) / 0.1),
+      hsl(var(--primary) / 0.05),
+      hsl(var(--background) / 0.1)
+    );
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--primary) / 0.5);
+    box-shadow: 
+      0 4px 20px hsl(var(--primary) / 0.15),
+      inset 0 1px 0 hsl(0 0% 100% / 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-outline:hover {
+    transform: translateY(-2px) scale(1.05);
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.15),
+      hsl(210 100% 70% / 0.1),
+      hsl(var(--primary) / 0.15)
+    );
+    box-shadow: 
+      0 8px 32px hsl(var(--primary) / 0.3),
+      inset 0 1px 0 hsl(0 0% 100% / 0.12);
   }
 
-  /* Glassmorphism utilities */
+  /* Liquid Glass Design System */
+  
+  /* Animated gradient background */
+  @keyframes liquid-gradient {
+    0%, 100% { 
+      background-position: 0% 50%;
+      filter: hue-rotate(0deg);
+    }
+    50% { 
+      background-position: 100% 50%;
+      filter: hue-rotate(30deg);
+    }
+  }
+  
+  @keyframes liquid-float {
+    0%, 100% { 
+      transform: translate(0, 0) rotate(0deg);
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    25% {
+      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+    50% { 
+      transform: translate(20px, -20px) rotate(180deg);
+      border-radius: 40% 50% 60% 50% / 70% 50% 50% 30%;
+    }
+    75% {
+      border-radius: 70% 30% 50% 50% / 30% 70% 50% 50%;
+    }
+  }
+  
+  @keyframes glass-shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  /* Base liquid glass effect */
   .glass-base {
-    @apply backdrop-blur-2xl backdrop-saturate-150 border border-purple/40 bg-clip-padding;
-    box-shadow: 0 8px 25px hsl(var(--primary) / 0.12);
-    background: linear-gradient(135deg, hsl(var(--background) / 0.12), hsl(var(--primary) / 0.05));
+    @apply backdrop-blur-3xl backdrop-saturate-200 border bg-clip-padding;
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--background) / 0.05),
+      hsl(var(--primary) / 0.08),
+      hsl(var(--background) / 0.03)
+    );
+    background-size: 200% 200%;
+    animation: liquid-gradient 15s ease infinite;
+    border: 1px solid;
+    border-image: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.3),
+      hsl(210 100% 70% / 0.2),
+      hsl(var(--primary) / 0.3)
+    ) 1;
+    box-shadow: 
+      0 8px 32px hsl(var(--primary) / 0.15),
+      inset 0 1px 0 hsl(0 0% 100% / 0.1),
+      0 0 80px hsl(var(--primary) / 0.08);
+  }
+  
+  .glass-base::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      hsl(0 0% 100% / 0.03) 50%,
+      transparent 100%
+    );
+    background-size: 200% 200%;
+    animation: glass-shimmer 3s linear infinite;
+    pointer-events: none;
   }
 
+  /* Enhanced liquid glass card */
   .glass-card {
-    @apply relative glass-base rounded-2xl hover:shadow-lg hover:shadow-purple/15 transition-shadow;
+    @apply glass-base rounded-3xl;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .glass-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+      0 16px 48px hsl(var(--primary) / 0.25),
+      inset 0 1px 0 hsl(0 0% 100% / 0.15),
+      0 0 120px hsl(var(--primary) / 0.15);
   }
 
+  /* Liquid glass navigation */
   .glass-nav {
-    @apply backdrop-blur-2xl border border-purple/30 bg-clip-padding rounded-full;
-    box-shadow: 0 8px 30px hsl(var(--primary) / 0.22);
-    background: linear-gradient(135deg, hsl(var(--background) / 0.15), hsl(var(--primary) / 0.06));
+    @apply backdrop-blur-3xl border bg-clip-padding rounded-full;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--background) / 0.1),
+      hsl(var(--primary) / 0.12),
+      hsl(var(--background) / 0.08)
+    );
+    background-size: 200% 200%;
+    animation: liquid-gradient 12s ease infinite;
+    border: 1px solid;
+    border-image: linear-gradient(
+      90deg,
+      hsl(var(--primary) / 0.4),
+      hsl(210 100% 70% / 0.3),
+      hsl(var(--primary) / 0.4)
+    ) 1;
+    box-shadow: 
+      0 8px 40px hsl(var(--primary) / 0.3),
+      inset 0 1px 0 hsl(0 0% 100% / 0.12);
   }
 
+  /* Liquid glass section background */
   .glass-section {
-    @apply backdrop-blur-xl border-t border-purple/20;
-    background: linear-gradient(180deg, hsl(var(--background) / 0.4), hsl(var(--background) / 0.2));
+    @apply backdrop-blur-2xl border-t;
+    background: linear-gradient(
+      180deg,
+      hsl(var(--background) / 0.3),
+      hsl(var(--primary) / 0.05),
+      hsl(var(--background) / 0.2)
+    );
+    background-size: 100% 200%;
+    animation: liquid-gradient 20s ease infinite;
+    border-color: hsl(var(--primary) / 0.15);
   }
 
+  /* Enhanced liquid glass panel */
   .glass-panel {
-    @apply glass-base rounded-2xl;
+    @apply glass-base rounded-3xl;
+    overflow: hidden;
   }
+  
   .glass-panel::after {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
     pointer-events: none;
-    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.06);
+    box-shadow: inset 0 2px 0 hsl(0 0% 100% / 0.1);
+    background: radial-gradient(
+      circle at 30% 20%,
+      hsl(0 0% 100% / 0.05),
+      transparent 50%
+    );
   }
 
-  /* Ultra-clear glass - completely transparent like reference image */
-  .glass-clear {
-    background: linear-gradient(135deg, hsl(0 0% 100% / 0.003), hsl(0 0% 100% / 0.001));
-    border: 1px solid hsl(0 0% 100% / 0.02);
-    backdrop-filter: blur(8px) saturate(100%);
-  }
-
-  /* Floating action button (Back to Top) */
+  /* Liquid glass FAB */
   .glass-fab {
-    @apply backdrop-blur-2xl border border-purple/40 bg-clip-padding;
-    background: linear-gradient(140deg, hsl(var(--background) / 0.08), hsl(var(--primary) / 0.06));
-    box-shadow: 0 8px 30px hsl(var(--primary) / 0.28), inset 0 1px 0 hsl(0 0% 100% / 0.35);
+    @apply backdrop-blur-3xl border bg-clip-padding;
+    background: linear-gradient(
+      140deg,
+      hsl(var(--background) / 0.12),
+      hsl(var(--primary) / 0.15),
+      hsl(var(--background) / 0.08)
+    );
+    background-size: 200% 200%;
+    animation: liquid-gradient 10s ease infinite;
+    border: 1px solid hsl(var(--primary) / 0.4);
+    box-shadow: 
+      0 8px 32px hsl(var(--primary) / 0.35),
+      inset 0 1px 0 hsl(0 0% 100% / 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .glass-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 
+      0 12px 48px hsl(var(--primary) / 0.45),
+      inset 0 1px 0 hsl(0 0% 100% / 0.25);
   }
 
   /* Colored blobs inside a single card */
@@ -178,23 +397,45 @@
     filter: blur(12px);
   }
 
+  /* Liquid blobs with organic animation */
   .blur-blob {
     position: absolute;
     width: 320px;
     height: 320px;
-    filter: blur(40px);
-    opacity: 0.6;
-    border-radius: 9999px;
+    filter: blur(60px);
+    opacity: 0.5;
     mix-blend-mode: screen;
+    animation: liquid-float 20s ease-in-out infinite;
   }
+  
   .blob-purple {
-    background: radial-gradient(circle at 30% 30%, hsl(var(--primary)) 0%, hsl(var(--accent)) 40%, transparent 70%);
+    background: radial-gradient(
+      circle at 30% 30%,
+      hsl(var(--primary) / 0.8) 0%,
+      hsl(var(--accent) / 0.6) 40%,
+      transparent 70%
+    );
+    animation-delay: 0s;
   }
+  
   .blob-cyan {
-    background: radial-gradient(circle at 70% 70%, hsl(210 100% 70%) 0%, hsl(190 100% 65%) 35%, transparent 70%);
+    background: radial-gradient(
+      circle at 70% 70%,
+      hsl(210 100% 70% / 0.8) 0%,
+      hsl(190 100% 65% / 0.6) 35%,
+      transparent 70%
+    );
+    animation-delay: -7s;
   }
+  
   .blob-pink {
-    background: radial-gradient(circle at 60% 40%, hsl(295 85% 70%) 0%, hsl(330 85% 65%) 35%, transparent 70%);
+    background: radial-gradient(
+      circle at 60% 40%,
+      hsl(295 85% 70% / 0.8) 0%,
+      hsl(330 85% 65% / 0.6) 35%,
+      transparent 70%
+    );
+    animation-delay: -14s;
   }
   /* Rain animation */
   @keyframes rain-fall {
