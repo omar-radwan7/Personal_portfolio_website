@@ -107,7 +107,21 @@ const NavBar: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="/#services" 
+                  href="/#services"
+                  onClick={(e) => {
+                    if (location.pathname === '/') {
+                      e.preventDefault();
+                      const element = document.getElementById('services');
+                      if (element) {
+                        const lenis = (window as any).lenis;
+                        const navHeight = 80;
+                        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                        if (lenis) {
+                          lenis.scrollTo(elementPosition - navHeight);
+                        }
+                      }
+                    }
+                  }}
                   className={cn(
                     "nav-link text-sm md:text-base transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
                     isAnchorActive('services') && "text-purple-light after:scale-x-100"
@@ -118,7 +132,21 @@ const NavBar: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="/#projects" 
+                  href="/#projects"
+                  onClick={(e) => {
+                    if (location.pathname === '/') {
+                      e.preventDefault();
+                      const element = document.getElementById('projects');
+                      if (element) {
+                        const lenis = (window as any).lenis;
+                        const navHeight = 80;
+                        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                        if (lenis) {
+                          lenis.scrollTo(elementPosition - navHeight);
+                        }
+                      }
+                    }
+                  }}
                   className={cn(
                     "nav-link text-sm md:text-base transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
                     isAnchorActive('projects') && "text-purple-light after:scale-x-100"
@@ -129,7 +157,21 @@ const NavBar: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="/#contact" 
+                  href="/#contact"
+                  onClick={(e) => {
+                    if (location.pathname === '/') {
+                      e.preventDefault();
+                      const element = document.getElementById('contact');
+                      if (element) {
+                        const lenis = (window as any).lenis;
+                        const navHeight = 80;
+                        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                        if (lenis) {
+                          lenis.scrollTo(elementPosition - navHeight);
+                        }
+                      }
+                    }
+                  }}
                   className={cn(
                     "nav-link text-sm md:text-base transition-all duration-300 hover:text-purple-light hover:translate-y-[-2px]",
                     isAnchorActive('contact') && "text-purple-light after:scale-x-100"

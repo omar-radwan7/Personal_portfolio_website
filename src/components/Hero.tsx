@@ -93,10 +93,32 @@ const Hero: React.FC = () => {
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <a href="#projects" className="btn-primary">
+              <a 
+                href="#projects" 
+                className="btn-primary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.getElementById('projects');
+                  if (element) {
+                    const lenis = (window as any).lenis;
+                    const navHeight = 80;
+                    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                    if (lenis) {
+                      lenis.scrollTo(elementPosition - navHeight);
+                    }
+                  }
+                }}
+              >
                 View my Work
               </a>
-              <a href="/about" className="btn-outline">
+              <a 
+                href="/about" 
+                className="btn-outline"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = '/about';
+                }}
+              >
                 View My CV
               </a>
             </div>
