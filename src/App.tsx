@@ -41,6 +41,20 @@ const App = () => {
 
     // Expose lenis to window for anchor links
     (window as any).lenis = lenis;
+    
+    // Handle smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = (this as HTMLAnchorElement).getAttribute('href')?.slice(1);
+        if (targetId) {
+          const target = document.getElementById(targetId);
+          if (target) {
+            lenis.scrollTo(target, { offset: -80, duration: 1.2 });
+          }
+        }
+      });
+    });
 
     return () => {
       lenis.destroy();

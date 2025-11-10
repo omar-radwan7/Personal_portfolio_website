@@ -11,30 +11,6 @@ const Index: React.FC = () => {
   const location = useLocation();
   
   useEffect(() => {
-    // Smooth scrolling for anchor links using Lenis
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest('a');
-      
-      if (anchor && anchor.hash && anchor.hash.startsWith('#')) {
-        e.preventDefault();
-        const id = anchor.hash.slice(1);
-        const element = document.getElementById(id);
-        
-        if (element) {
-          const navHeight = 80;
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-          const lenis = (window as any).lenis;
-          
-          if (lenis) {
-            lenis.scrollTo(elementPosition - navHeight);
-          }
-        }
-      }
-    };
-    
-    document.addEventListener('click', handleAnchorClick);
-    
     // Handle direct navigation to hash
     if (location.hash) {
       setTimeout(() => {
@@ -42,20 +18,13 @@ const Index: React.FC = () => {
         const element = document.getElementById(id);
         
         if (element) {
-          const navHeight = 80;
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
           const lenis = (window as any).lenis;
-          
           if (lenis) {
-            lenis.scrollTo(elementPosition - navHeight);
+            lenis.scrollTo(element, { offset: -80, duration: 1.2 });
           }
         }
       }, 500);
     }
-    
-    return () => {
-      document.removeEventListener('click', handleAnchorClick);
-    };
   }, [location]);
   
   return (
