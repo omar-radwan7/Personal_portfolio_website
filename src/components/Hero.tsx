@@ -5,35 +5,50 @@ import DecryptedText from './DecryptedText';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const rafIdRef = useRef<number | null>(null);
 
   useEffect(() => {
+    let mouseX = 0;
+    let mouseY = 0;
+
     const handleMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
+
+    const updateWaves = () => {
       if (!heroRef.current) return;
-      const { clientX, clientY } = e;
-      const rect = heroRef.current.getBoundingClientRect();
       
-      const x = (clientX - rect.left) / rect.width - 0.5;
-      const y = (clientY - rect.top) / rect.height - 0.5;
+      const rect = heroRef.current.getBoundingClientRect();
+      const x = (mouseX - rect.left) / rect.width - 0.5;
+      const y = (mouseY - rect.top) / rect.height - 0.5;
       
       const waves = heroRef.current.querySelectorAll<HTMLDivElement>('.wave-animation');
       waves.forEach((wave, index) => {
         const factor = (index + 1) * 5;
-        wave.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+        wave.style.transform = `translate3d(${x * factor}px, ${y * factor}px, 0)`;
       });
+
+      rafIdRef.current = requestAnimationFrame(updateWaves);
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousemove', handleMouseMove, { passive: true });
+    rafIdRef.current = requestAnimationFrame(updateWaves);
+
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
     };
   }, []);
 
   return (
     <section id="home" ref={heroRef} className="min-h-screen pt-20 pb-10 relative overflow-hidden flex items-center">
       {/* Background styling */}
-      <div className="wave-animation" style={{top: '10%', left: '0'}}></div>
-      <div className="wave-animation" style={{top: '30%', left: '10%'}}></div>
-      <div className="wave-animation" style={{bottom: '20%', right: '5%'}}></div>
+      <div className="wave-animation" style={{top: '10%', left: '0', willChange: 'transform'}}></div>
+      <div className="wave-animation" style={{top: '30%', left: '10%', willChange: 'transform'}}></div>
+      <div className="wave-animation" style={{bottom: '20%', right: '5%', willChange: 'transform'}}></div>
       
       {/* Background image behind the name and title */}
       <div 
