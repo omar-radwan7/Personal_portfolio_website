@@ -159,41 +159,40 @@
     @apply relative overflow-hidden text-foreground font-medium py-2.5 px-6 rounded-full;
     background: linear-gradient(
       135deg,
-      hsl(var(--primary) / 0.12),
-      hsl(210 100% 70% / 0.15),
-      hsl(var(--primary) / 0.12)
+      hsl(var(--primary) / 0.2),
+      hsl(210 100% 70% / 0.25),
+      hsl(var(--primary) / 0.2)
     );
     background-size: 200% 200%;
     animation: liquid-gradient 8s ease infinite;
     backdrop-filter: blur(20px);
-    border: 1px solid hsl(var(--primary) / 0.2);
+    border: 1px solid hsl(var(--primary) / 0.4);
     box-shadow: 
-      0 4px 20px hsl(var(--primary) / 0.15),
-      inset 0 1px 0 hsl(0 0% 100% / 0.04);
+      0 4px 20px hsl(var(--primary) / 0.25),
+      inset 0 1px 0 hsl(0 0% 100% / 0.1);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .btn-primary:hover {
     transform: translateY(-2px) scale(1.05);
-    border: 1px solid hsl(var(--primary) / 0.3);
     box-shadow: 
-      0 8px 32px hsl(var(--primary) / 0.25),
-      inset 0 1px 0 hsl(0 0% 100% / 0.06);
+      0 8px 32px hsl(var(--primary) / 0.4),
+      inset 0 1px 0 hsl(0 0% 100% / 0.15);
   }
   
   .btn-outline {
     @apply relative overflow-hidden text-foreground font-medium py-2.5 px-6 rounded-full;
     background: linear-gradient(
       135deg,
-      hsl(var(--background) / 0.05),
-      hsl(var(--primary) / 0.03),
-      hsl(var(--background) / 0.05)
+      hsl(var(--background) / 0.1),
+      hsl(var(--primary) / 0.05),
+      hsl(var(--background) / 0.1)
     );
     backdrop-filter: blur(20px);
-    border: 1px solid hsl(var(--primary) / 0.25);
+    border: 1px solid hsl(var(--primary) / 0.5);
     box-shadow: 
-      0 4px 20px hsl(var(--primary) / 0.08),
-      inset 0 1px 0 hsl(0 0% 100% / 0.03);
+      0 4px 20px hsl(var(--primary) / 0.15),
+      inset 0 1px 0 hsl(0 0% 100% / 0.08);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
@@ -201,14 +200,13 @@
     transform: translateY(-2px) scale(1.05);
     background: linear-gradient(
       135deg,
-      hsl(var(--primary) / 0.08),
-      hsl(210 100% 70% / 0.06),
-      hsl(var(--primary) / 0.08)
+      hsl(var(--primary) / 0.15),
+      hsl(210 100% 70% / 0.1),
+      hsl(var(--primary) / 0.15)
     );
-    border: 1px solid hsl(var(--primary) / 0.35);
     box-shadow: 
-      0 8px 32px hsl(var(--primary) / 0.18),
-      inset 0 1px 0 hsl(0 0% 100% / 0.05);
+      0 8px 32px hsl(var(--primary) / 0.3),
+      inset 0 1px 0 hsl(0 0% 100% / 0.12);
   }
 
   /* Liquid Glass Design System */
@@ -247,22 +245,29 @@
     100% { background-position: 200% center; }
   }
 
-  /* Base liquid glass effect - subtle and refined */
+  /* Base liquid glass effect */
   .glass-base {
-    @apply backdrop-blur-3xl backdrop-saturate-200 bg-clip-padding;
+    @apply backdrop-blur-3xl backdrop-saturate-200 border bg-clip-padding;
     position: relative;
     background: linear-gradient(
       135deg,
-      hsl(var(--background) / 0.02),
-      hsl(var(--primary) / 0.03),
-      hsl(var(--background) / 0.01)
+      hsl(var(--background) / 0.05),
+      hsl(var(--primary) / 0.08),
+      hsl(var(--background) / 0.03)
     );
     background-size: 200% 200%;
     animation: liquid-gradient 15s ease infinite;
-    border: 1px solid hsl(var(--primary) / 0.08);
+    border: 1px solid;
+    border-image: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.3),
+      hsl(210 100% 70% / 0.2),
+      hsl(var(--primary) / 0.3)
+    ) 1;
     box-shadow: 
-      0 8px 32px hsl(var(--primary) / 0.06),
-      inset 0 1px 0 hsl(0 0% 100% / 0.03);
+      0 8px 32px hsl(var(--primary) / 0.15),
+      inset 0 1px 0 hsl(0 0% 100% / 0.1),
+      0 0 80px hsl(var(--primary) / 0.08);
   }
   
   .glass-base::before {
@@ -273,7 +278,7 @@
     background: linear-gradient(
       135deg,
       transparent 0%,
-      hsl(0 0% 100% / 0.01) 50%,
+      hsl(0 0% 100% / 0.03) 50%,
       transparent 100%
     );
     background-size: 200% 200%;
@@ -281,36 +286,41 @@
     pointer-events: none;
   }
 
-  /* Enhanced liquid glass card - subtle */
+  /* Enhanced liquid glass card */
   .glass-card {
     @apply glass-base rounded-3xl;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid hsl(var(--primary) / 0.06);
   }
   
   .glass-card:hover {
-    transform: translateY(-4px) scale(1.01);
-    border: 1px solid hsl(var(--primary) / 0.12);
+    transform: translateY(-4px) scale(1.02);
     box-shadow: 
-      0 16px 48px hsl(var(--primary) / 0.12),
-      inset 0 1px 0 hsl(0 0% 100% / 0.05);
+      0 16px 48px hsl(var(--primary) / 0.25),
+      inset 0 1px 0 hsl(0 0% 100% / 0.15),
+      0 0 120px hsl(var(--primary) / 0.15);
   }
 
-  /* Liquid glass navigation - subtle */
+  /* Liquid glass navigation */
   .glass-nav {
-    @apply backdrop-blur-3xl bg-clip-padding rounded-full;
+    @apply backdrop-blur-3xl border bg-clip-padding rounded-full;
     background: linear-gradient(
       135deg,
-      hsl(var(--background) / 0.05),
-      hsl(var(--primary) / 0.04),
-      hsl(var(--background) / 0.03)
+      hsl(var(--background) / 0.1),
+      hsl(var(--primary) / 0.12),
+      hsl(var(--background) / 0.08)
     );
     background-size: 200% 200%;
     animation: liquid-gradient 12s ease infinite;
-    border: 1px solid hsl(var(--primary) / 0.12);
+    border: 1px solid;
+    border-image: linear-gradient(
+      90deg,
+      hsl(var(--primary) / 0.4),
+      hsl(210 100% 70% / 0.3),
+      hsl(var(--primary) / 0.4)
+    ) 1;
     box-shadow: 
-      0 8px 40px hsl(var(--primary) / 0.15),
-      inset 0 1px 0 hsl(0 0% 100% / 0.04);
+      0 8px 40px hsl(var(--primary) / 0.3),
+      inset 0 1px 0 hsl(0 0% 100% / 0.12);
   }
 
   /* Liquid glass section background */
@@ -327,11 +337,10 @@
     border-color: hsl(var(--primary) / 0.15);
   }
 
-  /* Enhanced liquid glass panel - subtle */
+  /* Enhanced liquid glass panel */
   .glass-panel {
     @apply glass-base rounded-3xl;
     overflow: hidden;
-    border: 1px solid hsl(var(--primary) / 0.05);
   }
   
   .glass-panel::after {
@@ -340,10 +349,10 @@
     inset: 0;
     border-radius: inherit;
     pointer-events: none;
-    box-shadow: inset 0 2px 0 hsl(0 0% 100% / 0.02);
+    box-shadow: inset 0 2px 0 hsl(0 0% 100% / 0.1);
     background: radial-gradient(
       circle at 30% 20%,
-      hsl(0 0% 100% / 0.015),
+      hsl(0 0% 100% / 0.05),
       transparent 50%
     );
   }
@@ -388,23 +397,22 @@
     filter: blur(12px);
   }
 
-  /* Liquid blobs with organic animation - very subtle */
+  /* Liquid blobs with organic animation */
   .blur-blob {
     position: absolute;
-    width: 400px;
-    height: 400px;
-    filter: blur(80px);
-    opacity: 0.15;
-    mix-blend-mode: soft-light;
-    animation: liquid-float 25s ease-in-out infinite;
-    pointer-events: none;
+    width: 320px;
+    height: 320px;
+    filter: blur(60px);
+    opacity: 0.5;
+    mix-blend-mode: screen;
+    animation: liquid-float 20s ease-in-out infinite;
   }
   
   .blob-purple {
     background: radial-gradient(
       circle at 30% 30%,
-      hsl(var(--primary) / 0.4) 0%,
-      hsl(var(--accent) / 0.2) 40%,
+      hsl(var(--primary) / 0.8) 0%,
+      hsl(var(--accent) / 0.6) 40%,
       transparent 70%
     );
     animation-delay: 0s;
@@ -413,21 +421,21 @@
   .blob-cyan {
     background: radial-gradient(
       circle at 70% 70%,
-      hsl(210 100% 70% / 0.4) 0%,
-      hsl(190 100% 65% / 0.2) 35%,
+      hsl(210 100% 70% / 0.8) 0%,
+      hsl(190 100% 65% / 0.6) 35%,
       transparent 70%
     );
-    animation-delay: -8s;
+    animation-delay: -7s;
   }
   
   .blob-pink {
     background: radial-gradient(
       circle at 60% 40%,
-      hsl(295 85% 70% / 0.4) 0%,
-      hsl(330 85% 65% / 0.2) 35%,
+      hsl(295 85% 70% / 0.8) 0%,
+      hsl(330 85% 65% / 0.6) 35%,
       transparent 70%
     );
-    animation-delay: -16s;
+    animation-delay: -14s;
   }
   /* Rain animation */
   @keyframes rain-fall {
