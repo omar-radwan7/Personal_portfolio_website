@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import ComputerMachine from './ComputerMachine';
 import DecryptedText from './DecryptedText';
+import Aurora from './Aurora';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -58,6 +59,16 @@ const Hero: React.FC = () => {
       
       <div className="section-container relative z-10">
         <div className="glass-panel p-6 md:p-10 relative overflow-hidden">
+          {/* Aurora Background */}
+          <div className="absolute inset-0 z-0 opacity-40">
+            <Aurora
+              colorStops={["#8B5CF6", "#06B6D4", "#EC4899"]}
+              blend={0.6}
+              amplitude={1.2}
+              speed={0.4}
+            />
+          </div>
+          
           <div className="blur-blob blob-purple -top-16 -left-10"></div>
           <div className="blur-blob blob-cyan top-10 -right-10"></div>
           <div className="blur-blob blob-pink -bottom-20 left-1/3"></div>
