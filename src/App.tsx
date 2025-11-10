@@ -25,11 +25,11 @@ const queryClient = new QueryClient();
 const App = () => {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.5,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      lerp: 0.12,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.8,
+      lerp: 0.18,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
     });
 
     function raf(time: number) {
