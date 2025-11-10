@@ -2,7 +2,6 @@
 import React, { useEffect, useRef } from 'react';
 import ComputerMachine from './ComputerMachine';
 import DecryptedText from './DecryptedText';
-import GlassSurface from './GlassSurface';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -58,19 +57,7 @@ const Hero: React.FC = () => {
       ></div>
       
       <div className="section-container relative z-10">
-        <GlassSurface
-          width="100%"
-          height="auto"
-          borderRadius={24}
-          displace={12}
-          distortionScale={-150}
-          redOffset={5}
-          greenOffset={15}
-          blueOffset={25}
-          brightness={60}
-          opacity={0.8}
-          className="p-6 md:p-10 relative overflow-hidden"
-        >
+        <div className="glass-panel p-6 md:p-10 relative overflow-hidden">
           <div className="blur-blob blob-purple -top-16 -left-10"></div>
           <div className="blur-blob blob-cyan top-10 -right-10"></div>
           <div className="blur-blob blob-pink -bottom-20 left-1/3"></div>
@@ -138,7 +125,7 @@ const Hero: React.FC = () => {
             <ComputerMachine />
           </div>
           </div>
-        </GlassSurface>
+        </div>
       </div>
     </section>
   );

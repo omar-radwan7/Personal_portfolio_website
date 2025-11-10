@@ -15,7 +15,7 @@ const ProjectsList: React.FC = () => {
           </div>
         </div>
         <div className="p-4 flex-grow text-sm border-t border-foreground/10">
-          <p className="text-muted-foreground mb-1">Local Cloud Storage Emulator - Fullstack</p>
+          <p className="text-gray-400 mb-1">Local Cloud Storage Emulator - Fullstack</p>
           <h3 className="text-base font-semibold mb-2">LocalCloud</h3>
           <div className="flex gap-2 flex-wrap items-center justify-between">
             <div className="flex gap-1 flex-wrap">
@@ -36,7 +36,7 @@ const ProjectsList: React.FC = () => {
       {/* Portfolio Builder */}
       <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
         <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
-          <div className="text-center text-foreground relative">
+          <div className="text-center text-white relative">
             <div className="flex justify-center items-center mb-1 relative">
               <i className="fas fa-layer-group text-3xl text-purple-light animate-pulse"></i>
               <i className="fas fa-magic text-xl ml-2 text-yellow-400 animate-bounce"></i>
@@ -45,11 +45,11 @@ const ProjectsList: React.FC = () => {
               </div>
             </div>
             <h3 className="text-sm font-semibold">Portfolio Builder</h3>
-            <p className="text-xs text-muted-foreground mt-1">Drag & Drop</p>
+            <p className="text-xs text-gray-400 mt-1">Drag & Drop</p>
           </div>
         </div>
         <div className="p-4 flex-grow text-sm border-t border-foreground/10">
-          <p className="text-muted-foreground mb-1">No-code React portfolio builder with export</p>
+          <p className="text-gray-400 mb-1">No-code React portfolio builder with export</p>
           <h3 className="text-base font-semibold mb-2">Portfolio Builder</h3>
           <div className="flex gap-2 flex-wrap items-center justify-between">
             <div className="flex gap-1 flex-wrap">
@@ -70,17 +70,17 @@ const ProjectsList: React.FC = () => {
       {/* TradeWise Stock Market App */}
       <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
         <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
-          <div className="text-center text-foreground">
+          <div className="text-center text-white">
             <div className="flex justify-center items-center mb-1">
               <i className="fas fa-chart-line text-3xl text-green-400 animate-pulse"></i>
               <i className="fas fa-dollar-sign text-xl ml-2 text-yellow-400 animate-bounce"></i>
             </div>
             <h3 className="text-sm font-semibold">TradeWise</h3>
-            <p className="text-xs text-muted-foreground mt-1">Demo Version</p>
+            <p className="text-xs text-gray-400 mt-1">Demo Version</p>
           </div>
         </div>
         <div className="p-4 flex-grow text-sm border-t border-foreground/10">
-          <p className="text-muted-foreground mb-1">Flutter Stock Market App with Real-time Data</p>
+          <p className="text-gray-400 mb-1">Flutter Stock Market App with Real-time Data</p>
           <h3 className="text-base font-semibold mb-2">TradeWise</h3>
           <div className="flex gap-2 flex-wrap items-center justify-between">
             <div className="flex gap-1 flex-wrap">
@@ -106,7 +106,7 @@ const ProjectsList: React.FC = () => {
           </div>
         </div>
         <div className="p-4 flex-grow text-sm border-t border-foreground/10">
-          <p className="text-muted-foreground mb-1">Interactive AI Assistant with React</p>
+          <p className="text-gray-400 mb-1">Interactive AI Assistant with React</p>
           <h3 className="text-base font-semibold mb-2">Qorix AI Assistant</h3>
           <div className="flex gap-2 flex-wrap items-center justify-between">
             <div className="flex gap-1 flex-wrap">
@@ -127,7 +127,7 @@ const ProjectsList: React.FC = () => {
       {/* Weather App */}
       <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
         <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
-          <div className="text-center text-foreground">
+          <div className="text-center text-white">
             <div className="flex justify-center items-center mb-1">
               <i className="fas fa-cloud text-3xl animate-pulse"></i>
               <i className="fas fa-thermometer-half text-xl ml-2 animate-bounce"></i>
@@ -136,7 +136,7 @@ const ProjectsList: React.FC = () => {
           </div>
         </div>
         <div className="p-4 flex-grow text-sm border-t border-foreground/10">
-          <p className="text-muted-foreground mb-1">Flutter & OpenWeatherMap API</p>
+          <p className="text-gray-400 mb-1">Flutter & OpenWeatherMap API</p>
           <h3 className="text-base font-semibold mb-2">Weather App</h3>
           <div className="flex gap-2 flex-wrap items-center justify-between">
             <div className="flex gap-1 flex-wrap">
@@ -159,7 +159,7 @@ const ProjectsList: React.FC = () => {
           <PingPongGame />
         </div>
         <div className="p-4 flex-grow text-sm border-t border-foreground/10">
-          <p className="text-muted-foreground mb-1">PingPong game With HTML, CSS & JavaScript</p>
+          <p className="text-gray-400 mb-1">PingPong game With HTML, CSS & JavaScript</p>
           <h3 className="text-base font-semibold mb-2">PingPong Game</h3>
           <div className="flex gap-2 flex-wrap items-center justify-between">
             <div className="flex gap-1 flex-wrap">
