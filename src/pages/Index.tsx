@@ -11,7 +11,7 @@ const Index: React.FC = () => {
   const location = useLocation();
   
   useEffect(() => {
-    // Smooth scrolling for anchor links
+    // Smooth scrolling for anchor links using Lenis
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
@@ -22,13 +22,13 @@ const Index: React.FC = () => {
         const element = document.getElementById(id);
         
         if (element) {
-          const navHeight = 80; // Approximate navbar height
+          const navHeight = 80;
           const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const lenis = (window as any).lenis;
           
-          window.scrollTo({
-            top: elementPosition - navHeight,
-            behavior: 'smooth'
-          });
+          if (lenis) {
+            lenis.scrollTo(elementPosition - navHeight);
+          }
         }
       }
     };
@@ -42,15 +42,15 @@ const Index: React.FC = () => {
         const element = document.getElementById(id);
         
         if (element) {
-          const navHeight = 80; // Approximate navbar height
+          const navHeight = 80;
           const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const lenis = (window as any).lenis;
           
-          window.scrollTo({
-            top: elementPosition - navHeight,
-            behavior: 'smooth'
-          });
+          if (lenis) {
+            lenis.scrollTo(elementPosition - navHeight);
+          }
         }
-      }, 500); // Small delay to ensure DOM is ready
+      }, 500);
     }
     
     return () => {
