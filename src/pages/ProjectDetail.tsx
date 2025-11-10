@@ -7,7 +7,6 @@ import BouncingQ from '@/components/BouncingQ';
 import PingPongGame from '@/components/PingPongGame';
 import ThunderCloud from '@/components/ThunderCloud';
 import CloudStorageAnimation from '@/components/CloudStorageAnimation';
-import GlassSurface from '@/components/GlassSurface';
 
 // Project data structure
 export interface Project {
@@ -113,97 +112,82 @@ const ProjectDetail: React.FC = () => {
             Back to Projects
           </Link>
           
-          <GlassSurface
-            width="100%"
-            height="auto"
-            borderRadius={16}
-            displace={12}
-            distortionScale={-150}
-            redOffset={5}
-            greenOffset={15}
-            blueOffset={25}
-            brightness={60}
-            opacity={0.8}
-            className="overflow-hidden"
-            style={{ minHeight: 'auto' }}
-          >
-            <div className="w-full flex flex-col">
-              <div className="w-full aspect-video flex items-center justify-center bg-card/10 rounded-t-2xl overflow-hidden">
-                {project.image || (
-                  <div className="text-center w-full h-full flex items-center justify-center">
-                    {project.id === 'pingpong' ? (
-                      <div className="w-full h-full">
-                        <PingPongGame />
+          <div className={project.id === 'aimodel' ? "bg-card rounded-2xl overflow-hidden shadow-md border border-border/20" : "glass-panel rounded-2xl overflow-hidden shadow-lg border border-border/30"}>
+            <div className="w-full aspect-video flex items-center justify-center bg-card/20 rounded-t-2xl overflow-hidden">
+              {project.image || (
+                <div className="text-center w-full h-full flex items-center justify-center">
+                  {project.id === 'pingpong' ? (
+                    <div className="w-full h-full">
+                      <PingPongGame />
+                    </div>
+                  ) : project.id === 'aimodel' ? (
+                    <div className="w-full h-full flex items-center justify-center overflow-hidden">
+                      <BouncingQ />
+                    </div>
+                  ) : project.id === 'tradewise' ? (
+                    <div className="flex justify-center items-center text-foreground/90">
+                      <i className="fas fa-chart-line text-5xl text-green-400 animate-pulse"></i>
+                      <i className="fas fa-dollar-sign text-3xl ml-2 text-yellow-400 animate-bounce"></i>
+                    </div>
+                  ) : project.id === 'portfolio-builder' ? (
+                    <div className="flex justify-center items-center text-foreground/90 relative">
+                      <i className="fas fa-layer-group text-5xl text-purple-light animate-pulse"></i>
+                      <i className="fas fa-magic text-3xl ml-2 text-yellow-400 animate-bounce"></i>
+                      <div className="absolute -top-4 -right-4">
+                        <i className="fas fa-pencil-ruler text-2xl text-cyan-400 animate-pulse" style={{ animationDelay: '0.3s' }}></i>
                       </div>
-                    ) : project.id === 'aimodel' ? (
-                      <div className="w-full h-full flex items-center justify-center overflow-hidden">
-                        <BouncingQ />
-                      </div>
-                    ) : project.id === 'tradewise' ? (
-                      <div className="flex justify-center items-center text-foreground/90">
-                        <i className="fas fa-chart-line text-5xl text-green-400 animate-pulse"></i>
-                        <i className="fas fa-dollar-sign text-3xl ml-2 text-yellow-400 animate-bounce"></i>
-                      </div>
-                    ) : project.id === 'portfolio-builder' ? (
-                      <div className="flex justify-center items-center text-foreground/90 relative">
-                        <i className="fas fa-layer-group text-5xl text-purple-light animate-pulse"></i>
-                        <i className="fas fa-magic text-3xl ml-2 text-yellow-400 animate-bounce"></i>
-                        <div className="absolute -top-4 -right-4">
-                          <i className="fas fa-pencil-ruler text-2xl text-cyan-400 animate-pulse" style={{ animationDelay: '0.3s' }}></i>
-                        </div>
-                      </div>
-                    ) : project.id === 'weather' ? (
-                      <div className="w-full h-full relative">
-                        <ThunderCloud />
-                      </div>
-                    ) : project.id === 'localcloud' ? (
-                      <div className="w-full h-full">
-                        <CloudStorageAnimation />
-                      </div>
-                    ) : (
-                      <div className="flex justify-center items-center text-foreground/90">
-                        <i className="fas fa-cloud text-5xl"></i>
-                        <i className="fas fa-thermometer-half text-3xl ml-2"></i>
-                      </div>
-                    )}
-                  </div>
-                )}
+                    </div>
+                  ) : project.id === 'weather' ? (
+                    <div className="w-full h-full relative">
+                      <ThunderCloud />
+                    </div>
+                  ) : project.id === 'localcloud' ? (
+                    <div className="w-full h-full">
+                      <CloudStorageAnimation />
+                    </div>
+                  ) : (
+                    <div className="flex justify-center items-center text-foreground/90">
+                      <i className="fas fa-cloud text-5xl"></i>
+                      <i className="fas fa-thermometer-half text-3xl ml-2"></i>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+            
+            <div className="p-6 bg-card/20 rounded-b-2xl">
+              <p className="text-sm text-muted-foreground mb-2">{project.subtitle}</p>
+              <h1 className="text-2xl sm:text-3xl font-bold mb-4">{project.title}</h1>
+              
+              <div className="flex gap-2 flex-wrap mb-6">
+                {project.technologies.map((tech, index) => (
+                  <span key={index} className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">
+                    {tech}
+                  </span>
+                ))}
               </div>
               
-              <div className="p-6 bg-card/10 rounded-b-2xl">
-                <p className="text-sm text-muted-foreground mb-2">{project.subtitle}</p>
-                <h1 className="text-2xl sm:text-3xl font-bold mb-4">{project.title}</h1>
-                
-                <div className="flex gap-2 flex-wrap mb-6">
-                  {project.technologies.map((tech, index) => (
-                    <span key={index} className="px-2 py-1 bg-purple/20 text-purple-light rounded text-xs">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                
-                <div className="prose prose-invert max-w-none mb-8 whitespace-pre-line">
-                  <p>{project.description}</p>
-                </div>
-                
-                {project.status === 'complete' ? (
-                  <Button 
-                    className="w-full sm:w-auto flex items-center justify-center gap-2 bg-primary hover:bg-primary/90"
-                    onClick={() => window.open(project.githubLink, '_blank')}
-                  >
-                    Try It <ExternalLink className="h-4 w-4" />
-                  </Button>
-                ) : (
-                  <Button 
-                    className="w-full sm:w-auto flex items-center justify-center gap-2 bg-muted text-muted-foreground hover:bg-muted cursor-not-allowed"
-                    disabled
-                  >
-                    Coming Soon <ExternalLink className="h-4 w-4" />
-                  </Button>
-                )}
+              <div className="prose prose-invert max-w-none mb-8 whitespace-pre-line">
+                <p>{project.description}</p>
               </div>
+              
+              {project.status === 'complete' ? (
+                <Button 
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-primary hover:bg-primary/90"
+                  onClick={() => window.open(project.githubLink, '_blank')}
+                >
+                  Try It <ExternalLink className="h-4 w-4" />
+                </Button>
+              ) : (
+                <Button 
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-muted text-muted-foreground hover:bg-muted cursor-not-allowed"
+                  disabled
+                >
+                  Coming Soon <ExternalLink className="h-4 w-4" />
+                </Button>
+              )}
             </div>
-          </GlassSurface>
+          </div>
         </div>
       </div>
       <Footer />

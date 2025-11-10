@@ -1,5 +1,6 @@
 
 import React from 'react';
+import GlassSurface from './GlassSurface';
 
 type Service = {
   icon: string;
@@ -33,17 +34,27 @@ const Services: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div 
+            <GlassSurface
               key={index}
-              className="glass-card glass-clear p-6 card-hover"
+              width="100%"
+              height="auto"
+              borderRadius={16}
+              displace={8}
+              distortionScale={-160}
+              redOffset={3}
+              greenOffset={10}
+              blueOffset={18}
+              className="p-6 card-hover"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="w-14 h-14 bg-purple/20 rounded-full flex items-center justify-center mb-6">
-                <i className={`fas ${service.icon} text-purple-light text-2xl`}></i>
+              <div className="flex flex-col items-start w-full">
+                <div className="w-14 h-14 bg-purple/20 rounded-full flex items-center justify-center mb-6">
+                  <i className={`fas ${service.icon} text-purple-light text-2xl`}></i>
+                </div>
+                <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                <p className="text-muted-foreground">{service.description}</p>
               </div>
-              <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-              <p className="text-gray-400">{service.description}</p>
-            </div>
+            </GlassSurface>
           ))}
         </div>
       </div>

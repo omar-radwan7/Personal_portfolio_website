@@ -3,20 +3,12 @@ import { Link } from 'react-router-dom';
 import PingPongGame from './PingPongGame';
 import BouncingQ from './BouncingQ';
 import CloudStorageAnimation from './CloudStorageAnimation';
-import GlassSurface from './GlassSurface';
 
 const ProjectsList: React.FC = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
       {/* LocalCloud */}
-      <GlassSurface 
-        width="100%" 
-        height="100%"
-        borderRadius={12}
-        displace={8}
-        distortionScale={-160}
-        className="overflow-hidden flex flex-col h-full"
-      >
+      <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
         <div className="w-full flex items-center justify-center aspect-[16/10] bg-transparent">
           <div className="w-full h-full">
             <CloudStorageAnimation />
@@ -39,17 +31,10 @@ const ProjectsList: React.FC = () => {
             </Link>
           </div>
         </div>
-      </GlassSurface>
+      </div>
 
       {/* Portfolio Builder */}
-      <GlassSurface 
-        width="100%" 
-        height="100%"
-        borderRadius={12}
-        displace={6}
-        distortionScale={-170}
-        className="overflow-hidden flex flex-col h-full"
-      >
+      <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
         <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
           <div className="text-center text-foreground relative">
             <div className="flex justify-center items-center mb-1 relative">
@@ -80,17 +65,10 @@ const ProjectsList: React.FC = () => {
             </Link>
           </div>
         </div>
-      </GlassSurface>
+      </div>
 
       {/* TradeWise Stock Market App */}
-      <GlassSurface 
-        width="100%" 
-        height="100%"
-        borderRadius={12}
-        displace={7}
-        distortionScale={-165}
-        className="overflow-hidden flex flex-col h-full"
-      >
+      <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
         <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
           <div className="text-center text-foreground">
             <div className="flex justify-center items-center mb-1">
@@ -118,17 +96,10 @@ const ProjectsList: React.FC = () => {
             </Link>
           </div>
         </div>
-      </GlassSurface>
+      </div>
 
       {/* Qorix AI Assistant */}
-      <GlassSurface 
-        width="100%" 
-        height="100%"
-        borderRadius={12}
-        displace={9}
-        distortionScale={-155}
-        className="overflow-hidden flex flex-col h-full"
-      >
+      <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
         <div className="w-full flex items-center justify-center aspect-[16/10] bg-transparent">
           <div className="w-full h-full p-2">
             <BouncingQ />
@@ -151,17 +122,10 @@ const ProjectsList: React.FC = () => {
             </Link>
           </div>
         </div>
-      </GlassSurface>
+      </div>
 
       {/* Weather App */}
-      <GlassSurface 
-        width="100%" 
-        height="100%"
-        borderRadius={12}
-        displace={5}
-        distortionScale={-175}
-        className="overflow-hidden flex flex-col h-full"
-      >
+      <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
         <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
           <div className="text-center text-foreground">
             <div className="flex justify-center items-center mb-1">
@@ -187,17 +151,10 @@ const ProjectsList: React.FC = () => {
             </Link>
           </div>
         </div>
-      </GlassSurface>
+      </div>
 
       {/* Ping Pong Game */}
-      <GlassSurface 
-        width="100%" 
-        height="100%"
-        borderRadius={12}
-        displace={10}
-        distortionScale={-150}
-        className="overflow-hidden flex flex-col h-full"
-      >
+      <div className="glass-card glass-clear rounded-md overflow-hidden flex flex-col h-full">
         <div className="w-full bg-black flex items-center justify-center aspect-[16/10]">
           <PingPongGame />
         </div>
@@ -218,7 +175,7 @@ const ProjectsList: React.FC = () => {
             </Link>
           </div>
         </div>
-      </GlassSurface>
+      </div>
     </div>
   );
 };
