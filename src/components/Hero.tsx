@@ -8,38 +8,33 @@ const Hero: React.FC = () => {
   const rafIdRef = useRef<number | null>(null);
 
   useEffect(() => {
-    let mouseX = 0;
-    let mouseY = 0;
+    let ticking = false;
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    };
-
-    const updateWaves = () => {
-      if (!heroRef.current) return;
-      
-      const rect = heroRef.current.getBoundingClientRect();
-      const x = (mouseX - rect.left) / rect.width - 0.5;
-      const y = (mouseY - rect.top) / rect.height - 0.5;
-      
-      const waves = heroRef.current.querySelectorAll<HTMLDivElement>('.wave-animation');
-      waves.forEach((wave, index) => {
-        const factor = (index + 1) * 5;
-        wave.style.transform = `translate3d(${x * factor}px, ${y * factor}px, 0)`;
-      });
-
-      rafIdRef.current = requestAnimationFrame(updateWaves);
+      if (!ticking && heroRef.current) {
+        window.requestAnimationFrame(() => {
+          if (!heroRef.current) return;
+          
+          const rect = heroRef.current.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          
+          const waves = heroRef.current.querySelectorAll<HTMLDivElement>('.wave-animation');
+          waves.forEach((wave, index) => {
+            const factor = (index + 1) * 3;
+            wave.style.transform = `translate3d(${x * factor}px, ${y * factor}px, 0)`;
+          });
+          
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     document.addEventListener('mousemove', handleMouseMove, { passive: true });
-    rafIdRef.current = requestAnimationFrame(updateWaves);
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
-      if (rafIdRef.current !== null) {
-        cancelAnimationFrame(rafIdRef.current);
-      }
     };
   }, []);
 
