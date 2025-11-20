@@ -1,22 +1,38 @@
 import React, { useEffect, useRef } from 'react';
 
+interface Particle {
+  x: number;
+  y: number;
+  z: number;
+  vx: number;
+  vy: number;
+  vz: number;
+  life: number;
+  maxLife: number;
+  size: number;
+  color: string;
+}
+
 interface Satellite {
   x: number;
   y: number;
   z: number;
+  vx: number;
+  vy: number;
+  vz: number;
   radius: number;
-  orbitRadius: number;
-  orbitSpeed: number;
-  orbitAngle: number;
-  orbitTilt: number;
+  destroyed: boolean;
   color: string;
-  warningZone: number;
+  trail: { x: number; y: number; z: number; alpha: number }[];
 }
 
 const SatelliteCollision: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
   const satellitesRef = useRef<Satellite[]>([]);
+  const particlesRef = useRef<Particle[]>([]);
+  const timeRef = useRef(0);
+  const collisionTimeRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -25,7 +41,6 @@ const SatelliteCollision: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas size
     const updateSize = () => {
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * window.devicePixelRatio;
@@ -40,180 +55,256 @@ const SatelliteCollision: React.FC = () => {
     // Initialize satellites
     satellitesRef.current = [
       {
-        x: 0, y: 0, z: 0,
-        radius: 6,
-        orbitRadius: 80,
-        orbitSpeed: 0.01,
-        orbitAngle: 0,
-        orbitTilt: 0.3,
+        x: -80, y: -40, z: 0,
+        vx: 1.2, vy: 0.3, vz: 0.1,
+        radius: 8,
+        destroyed: false,
         color: '#60A5FA',
-        warningZone: 30
+        trail: []
       },
       {
-        x: 0, y: 0, z: 0,
-        radius: 5,
-        orbitRadius: 100,
-        orbitSpeed: -0.015,
-        orbitAngle: Math.PI / 2,
-        orbitTilt: -0.2,
-        color: '#A78BFA',
-        warningZone: 28
-      },
-      {
-        x: 0, y: 0, z: 0,
+        x: 70, y: 30, z: 10,
+        vx: -1.1, vy: -0.35, vz: -0.08,
         radius: 7,
-        orbitRadius: 65,
-        orbitSpeed: 0.018,
-        orbitAngle: Math.PI,
-        orbitTilt: 0.5,
+        destroyed: false,
         color: '#F472B6',
-        warningZone: 32
-      },
-      {
-        x: 0, y: 0, z: 0,
-        radius: 5,
-        orbitRadius: 90,
-        orbitSpeed: -0.012,
-        orbitAngle: Math.PI * 1.5,
-        orbitTilt: -0.4,
-        color: '#34D399',
-        warningZone: 29
+        trail: []
       }
     ];
 
-    // Animation loop
+    const createExplosion = (x: number, y: number, z: number, color: string) => {
+      for (let i = 0; i < 50; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 3 + 1;
+        const elevation = (Math.random() - 0.5) * Math.PI;
+        
+        particlesRef.current.push({
+          x, y, z,
+          vx: Math.cos(angle) * Math.cos(elevation) * speed,
+          vy: Math.sin(angle) * Math.cos(elevation) * speed,
+          vz: Math.sin(elevation) * speed,
+          life: 1,
+          maxLife: Math.random() * 60 + 40,
+          size: Math.random() * 3 + 1,
+          color
+        });
+      }
+    };
+
     const animate = () => {
       const rect = canvas.getBoundingClientRect();
       ctx.clearRect(0, 0, rect.width, rect.height);
+      timeRef.current++;
 
-      // Draw space background gradient
-      const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, Math.max(rect.width, rect.height) / 2);
-      gradient.addColorStop(0, 'rgba(15, 23, 42, 0.8)');
-      gradient.addColorStop(1, 'rgba(0, 0, 0, 0.95)');
-      ctx.fillStyle = gradient;
+      // Animated background
+      const bgGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, Math.max(rect.width, rect.height) / 2);
+      bgGradient.addColorStop(0, 'rgba(15, 23, 42, 0.95)');
+      bgGradient.addColorStop(0.5, 'rgba(7, 12, 25, 0.98)');
+      bgGradient.addColorStop(1, 'rgba(0, 0, 0, 1)');
+      ctx.fillStyle = bgGradient;
       ctx.fillRect(0, 0, rect.width, rect.height);
 
-      // Draw stars
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-      for (let i = 0; i < 50; i++) {
-        const x = (i * 47) % rect.width;
+      // Animated stars
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      for (let i = 0; i < 100; i++) {
+        const x = (i * 47 + timeRef.current * 0.1) % rect.width;
         const y = (i * 73) % rect.height;
+        const twinkle = Math.sin(timeRef.current * 0.05 + i) * 0.5 + 0.5;
+        ctx.globalAlpha = twinkle * 0.6;
         ctx.beginPath();
         ctx.arc(x, y, 1, 0, Math.PI * 2);
         ctx.fill();
       }
+      ctx.globalAlpha = 1;
 
-      // Draw Earth
-      const earthGradient = ctx.createRadialGradient(centerX - 5, centerY - 5, 0, centerX, centerY, 20);
-      earthGradient.addColorStop(0, '#4A90E2');
-      earthGradient.addColorStop(0.5, '#2E5F8A');
-      earthGradient.addColorStop(1, '#1A3A5C');
+      // Draw Earth with atmosphere
+      const earthGradient = ctx.createRadialGradient(centerX - 8, centerY - 8, 0, centerX, centerY, 30);
+      earthGradient.addColorStop(0, '#5BA3E8');
+      earthGradient.addColorStop(0.4, '#3A7BC8');
+      earthGradient.addColorStop(0.7, '#2A5F9E');
+      earthGradient.addColorStop(1, '#1A3F6E');
+      
+      // Atmosphere glow
+      ctx.shadowBlur = 20;
+      ctx.shadowColor = '#4A90E2';
       ctx.fillStyle = earthGradient;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 20, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, 30, 0, Math.PI * 2);
       ctx.fill();
-      
-      // Earth highlight
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.shadowBlur = 0;
+
+      // Outer glow
+      const glowGradient = ctx.createRadialGradient(centerX, centerY, 30, centerX, centerY, 45);
+      glowGradient.addColorStop(0, 'rgba(74, 144, 226, 0.3)');
+      glowGradient.addColorStop(1, 'rgba(74, 144, 226, 0)');
+      ctx.fillStyle = glowGradient;
       ctx.beginPath();
-      ctx.arc(centerX - 5, centerY - 5, 8, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, 45, 0, Math.PI * 2);
       ctx.fill();
 
       const satellites = satellitesRef.current;
+      let collision = false;
 
-      // Update satellite positions
-      satellites.forEach(sat => {
-        sat.orbitAngle += sat.orbitSpeed;
-        sat.x = Math.cos(sat.orbitAngle) * sat.orbitRadius;
-        sat.y = Math.sin(sat.orbitAngle) * sat.orbitRadius * Math.cos(sat.orbitTilt);
-        sat.z = Math.sin(sat.orbitAngle) * sat.orbitRadius * Math.sin(sat.orbitTilt);
-      });
-
-      // Sort satellites by z-index
-      const sortedSatellites = [...satellites].sort((a, b) => a.z - b.z);
-
-      // Draw orbits and check collisions
+      // Update satellites
       satellites.forEach((sat, i) => {
-        // Draw orbit path
-        ctx.strokeStyle = `${sat.color}33`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        for (let angle = 0; angle < Math.PI * 2; angle += 0.1) {
-          const x = centerX + Math.cos(angle) * sat.orbitRadius;
-          const y = centerY + Math.sin(angle) * sat.orbitRadius * Math.cos(sat.orbitTilt);
-          if (angle === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
-        }
-        ctx.closePath();
-        ctx.stroke();
+        if (sat.destroyed) return;
 
-        // Check for near collisions
+        sat.x += sat.vx;
+        sat.y += sat.vy;
+        sat.z += sat.vz;
+
+        // Add trail
+        sat.trail.unshift({ x: sat.x, y: sat.y, z: sat.z, alpha: 1 });
+        if (sat.trail.length > 30) sat.trail.pop();
+        sat.trail.forEach((t, idx) => {
+          t.alpha = 1 - (idx / sat.trail.length);
+        });
+
+        // Check collision
         for (let j = i + 1; j < satellites.length; j++) {
           const other = satellites[j];
+          if (other.destroyed) continue;
+
           const dx = sat.x - other.x;
           const dy = sat.y - other.y;
           const dz = sat.z - other.z;
           const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-          
-          if (distance < sat.warningZone) {
-            // Draw warning connection
-            const intensity = 1 - (distance / sat.warningZone);
-            ctx.strokeStyle = `rgba(239, 68, 68, ${intensity * 0.6})`;
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.moveTo(centerX + sat.x, centerY + sat.y);
-            ctx.lineTo(centerX + other.x, centerY + other.y);
-            ctx.stroke();
 
-            // Draw warning zone
-            ctx.strokeStyle = `rgba(239, 68, 68, ${intensity * 0.3})`;
-            ctx.lineWidth = 1;
-            ctx.setLineDash([5, 5]);
-            ctx.beginPath();
-            ctx.arc(centerX + sat.x, centerY + sat.y, sat.warningZone, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.setLineDash([]);
+          if (distance < sat.radius + other.radius && collisionTimeRef.current === 0) {
+            collision = true;
+            collisionTimeRef.current = timeRef.current;
+            sat.destroyed = true;
+            other.destroyed = true;
+            createExplosion((sat.x + other.x) / 2, (sat.y + other.y) / 2, (sat.z + other.z) / 2, sat.color);
+            createExplosion((sat.x + other.x) / 2, (sat.y + other.y) / 2, (sat.z + other.z) / 2, other.color);
           }
         }
+
+        // Bounce off boundaries
+        if (Math.abs(sat.x) > 120) sat.vx *= -1;
+        if (Math.abs(sat.y) > 100) sat.vy *= -1;
       });
 
-      // Draw satellites
-      sortedSatellites.forEach(sat => {
+      // Reset after collision
+      if (collisionTimeRef.current > 0 && timeRef.current - collisionTimeRef.current > 120) {
+        collisionTimeRef.current = 0;
+        particlesRef.current = [];
+        satellitesRef.current = [
+          {
+            x: -80, y: -40, z: 0,
+            vx: 1.2, vy: 0.3, vz: 0.1,
+            radius: 8,
+            destroyed: false,
+            color: '#60A5FA',
+            trail: []
+          },
+          {
+            x: 70, y: 30, z: 10,
+            vx: -1.1, vy: -0.35, vz: -0.08,
+            radius: 7,
+            destroyed: false,
+            color: '#F472B6',
+            trail: []
+          }
+        ];
+      }
+
+      // Draw trajectories and satellites
+      satellites.forEach(sat => {
+        if (sat.destroyed) return;
+
         const screenX = centerX + sat.x;
         const screenY = centerY + sat.y;
-        const scale = 1 + sat.z / 200;
+        const scale = 1 + sat.z / 150;
 
-        // Satellite glow
-        const glowGradient = ctx.createRadialGradient(screenX, screenY, 0, screenX, screenY, sat.radius * scale * 3);
-        glowGradient.addColorStop(0, `${sat.color}88`);
-        glowGradient.addColorStop(1, `${sat.color}00`);
-        ctx.fillStyle = glowGradient;
+        // Draw trail
+        ctx.lineWidth = 2;
+        for (let i = 0; i < sat.trail.length - 1; i++) {
+          const t1 = sat.trail[i];
+          const t2 = sat.trail[i + 1];
+          const scale1 = 1 + t1.z / 150;
+          const scale2 = 1 + t2.z / 150;
+          
+          ctx.strokeStyle = `${sat.color}${Math.floor(t1.alpha * 100).toString(16).padStart(2, '0')}`;
+          ctx.beginPath();
+          ctx.moveTo(centerX + t1.x, centerY + t1.y);
+          ctx.lineTo(centerX + t2.x, centerY + t2.y);
+          ctx.stroke();
+        }
+
+        // Satellite outer glow
+        const outerGlow = ctx.createRadialGradient(screenX, screenY, 0, screenX, screenY, sat.radius * scale * 4);
+        outerGlow.addColorStop(0, `${sat.color}66`);
+        outerGlow.addColorStop(1, `${sat.color}00`);
+        ctx.fillStyle = outerGlow;
         ctx.beginPath();
-        ctx.arc(screenX, screenY, sat.radius * scale * 3, 0, Math.PI * 2);
+        ctx.arc(screenX, screenY, sat.radius * scale * 4, 0, Math.PI * 2);
         ctx.fill();
 
         // Satellite body
-        const satGradient = ctx.createRadialGradient(screenX - 1, screenY - 1, 0, screenX, screenY, sat.radius * scale);
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = sat.color;
+        const satGradient = ctx.createRadialGradient(screenX - 2, screenY - 2, 0, screenX, screenY, sat.radius * scale);
         satGradient.addColorStop(0, sat.color);
+        satGradient.addColorStop(0.6, sat.color);
         satGradient.addColorStop(1, '#1E293B');
         ctx.fillStyle = satGradient;
         ctx.beginPath();
         ctx.arc(screenX, screenY, sat.radius * scale, 0, Math.PI * 2);
         ctx.fill();
+        ctx.shadowBlur = 0;
 
-        // Satellite panels
-        ctx.fillStyle = `${sat.color}AA`;
-        ctx.fillRect(screenX - sat.radius * scale * 2, screenY - 1 * scale, sat.radius * scale * 1.5, 2 * scale);
-        ctx.fillRect(screenX + sat.radius * scale * 0.5, screenY - 1 * scale, sat.radius * scale * 1.5, 2 * scale);
+        // Solar panels
+        ctx.fillStyle = `${sat.color}DD`;
+        const panelWidth = sat.radius * scale * 2;
+        const panelHeight = sat.radius * scale * 0.5;
+        ctx.fillRect(screenX - sat.radius * scale - panelWidth, screenY - panelHeight / 2, panelWidth, panelHeight);
+        ctx.fillRect(screenX + sat.radius * scale, screenY - panelHeight / 2, panelWidth, panelHeight);
 
-        // Satellite highlight
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        // Panel details
+        ctx.strokeStyle = `${sat.color}66`;
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 3; i++) {
+          ctx.beginPath();
+          const x1 = screenX - sat.radius * scale - panelWidth + (panelWidth / 3) * i;
+          const x2 = screenX + sat.radius * scale + (panelWidth / 3) * i;
+          ctx.moveTo(x1, screenY - panelHeight / 2);
+          ctx.lineTo(x1, screenY + panelHeight / 2);
+          ctx.moveTo(x2, screenY - panelHeight / 2);
+          ctx.lineTo(x2, screenY + panelHeight / 2);
+          ctx.stroke();
+        }
+
+        // Highlight
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
         ctx.beginPath();
-        ctx.arc(screenX - 1, screenY - 1, sat.radius * scale * 0.4, 0, Math.PI * 2);
+        ctx.arc(screenX - 2, screenY - 2, sat.radius * scale * 0.3, 0, Math.PI * 2);
         ctx.fill();
+      });
+
+      // Update and draw particles
+      particlesRef.current = particlesRef.current.filter(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.z += p.vz;
+        p.life++;
+
+        const lifeRatio = 1 - (p.life / p.maxLife);
+        if (lifeRatio <= 0) return false;
+
+        const screenX = centerX + p.x;
+        const screenY = centerY + p.y;
+        const scale = 1 + p.z / 150;
+
+        ctx.fillStyle = `${p.color}${Math.floor(lifeRatio * 255).toString(16).padStart(2, '0')}`;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = p.color;
+        ctx.beginPath();
+        ctx.arc(screenX, screenY, p.size * scale, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        return true;
       });
 
       animationRef.current = requestAnimationFrame(animate);
@@ -229,14 +320,18 @@ const SatelliteCollision: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full h-full relative bg-black">
       <canvas
         ref={canvasRef}
         className="w-full h-full"
         style={{ display: 'block' }}
       />
-      <div className="absolute top-2 left-2 text-xs text-white/60 font-mono bg-black/40 px-2 py-1 rounded">
-        COLLISION DETECTION ACTIVE
+      <div className="absolute top-2 left-2 text-xs text-green-400 font-mono bg-black/60 px-3 py-1.5 rounded border border-green-400/30">
+        <span className="inline-block w-2 h-2 bg-green-400 rounded-full animate-pulse mr-2"></span>
+        COLLISION TRACKING SYSTEM ACTIVE
+      </div>
+      <div className="absolute bottom-2 right-2 text-xs text-cyan-400 font-mono bg-black/60 px-3 py-1.5 rounded border border-cyan-400/30">
+        3D TRAJECTORY ANALYSIS
       </div>
     </div>
   );
