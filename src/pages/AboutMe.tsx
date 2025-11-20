@@ -179,7 +179,8 @@ const AboutMe: React.FC = () => {
                         <p className="text-gray-400 mb-2">EBNY Real Estate – Cairo, Egypt - Full Time-On-Sight</p>
                         <ul className="list-disc ml-5 text-gray-300">
                           <li>Collaborated with teams to gather requirements and implement custom solutions.</li>
-                          <li>Designed database systems to store and manage property data.</li>
+                          <li>Designed and implemented relational database schemas using PostgreSQL and SQLAlchemy ORM for efficient property data management and retrieval.</li>
+                          <li>Built ETL pipelines to integrate multiple data sources and maintain data consistency across systems.</li>
                           <li>Verified and resolved bug reports and technical issues.</li>
                           <li>Developed solutions using Python and SQL databases.</li>
                         </ul>
