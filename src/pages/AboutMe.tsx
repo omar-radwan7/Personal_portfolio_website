@@ -192,27 +192,30 @@ const AboutMe: React.FC = () => {
                     <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Projects</h3>
                     <div className="ml-0 md:ml-4 space-y-4">
                       <div>
-                        <h4 className="font-medium">SSH Keys Portal – Web-based portal for managing SSH keys in HPC environments</h4>
+                        <h4 className="font-medium">SSH Keys Portal</h4>
+                        <p className="text-gray-400 text-sm mb-2">Web-based portal for managing SSH keys in HPC environments</p>
                         <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
-                          <li>Built an HPC-focused SSH Keys Management Portal for research clusters to securely onboard users, generate/import/rotate keys, enforce access policies, and auto-deploy keys to login/compute nodes.</li>
-                          <li>Backend: Python (FastAPI, SQLAlchemy), JWT/LDAP SSO, Paramiko/Cryptography; async workers handle provisioning and detailed audit trails.</li>
-                          <li>Frontend: React + TypeScript with Tailwind and i18n, delivering RBAC-driven admin and self-service workflows with compliance checks.</li>
-                          <li>Cross-platform developer experience via a universal Makefile and bootstrap scripts; reproducible setup, SQL migrations, and health/status endpoints.</li>
+                          <li>Engineered a secure SSH key management portal utilizing Python, FastAPI, and SQLAlchemy, cutting user onboarding time by 87.5%, reducing deployment from 2 hours to just 15 minutes and saving countless hours for researchers.</li>
+                          <li>Cross-platform developing experience via universal Makefile and bootstrap scripts; reproducible setup, SQL migrations, and health/status endpoints.</li>
                         </ul>
                       </div>
                       <div>
-                        <h4 className="font-medium">Trading App – Flutter stock market app with real-time financial data and portfolio tracking</h4>
+                        <h4 className="font-medium">Trading App</h4>
+                        <p className="text-gray-400 text-sm mb-2">Flutter stock market app with real-time financial data and portfolio tracking</p>
                         <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
-                          <li>Built a cross-platform Stock Market app with Flutter (Dart) for Android, iOS, and Web.</li>
-                          <li>Implemented portfolio tracking, stock detail/list views, and curated market news using Provider state management and RESTful services.</li>
-                          <li>Containerized the web build with Docker + Nginx and streamlined runs with docker compose.</li>
-                          <li>Applied a clean, modular architecture (models, providers, services, widgets) to ensure maintainability and scalability.</li>
+                          <li>Developed a cross-platform stock market application using Flutter, achieving 99.9% uptime for the web version containerized with Docker and Nginx, ensuring reliable access to real-time financial data.</li>
                         </ul>
                       </div>
                       <div>
                         <h4 className="font-medium">Web Portfolio Builder</h4>
                         <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
-                          <li>Built a no-code React portfolio builder (Vite + Tailwind) with dual modes (Blocks/Page), drag-and-drop sections, multi-page management, theme presets, per-section layout controls, customizable hero/highlights, and one-click export to a runnable React project (JSZip/FileSaver); state via Context + useReducer.</li>
+                          <li>Built a no‑code React portfolio builder (Vite + Tailwind) with dual modes (Blocks/Page), drag‑and‑drop sections, multi‑page management, theme presets, per‑section layout controls, customizable hero/highlights, and one‑click export to a runnable React project (JSZip/FileSaver); state via Context + useReducer.</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-medium">Local Cloud Storage</h4>
+                        <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
+                          <li>A fully local Dropbox-style app built with Next.js, React, TailwindCSS, Node.js, Express, TypeScript, and SQLite, offering secure user authentication, drag-and-drop file uploads with automatic versioning, nested folders, a recycle bin, storage visualization, semantic search, and optional AI-powered file summarization and chat, all in a self-contained, portable system.</li>
                         </ul>
                       </div>
                     </div>
