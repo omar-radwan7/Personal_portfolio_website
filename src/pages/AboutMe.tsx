@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
+import SatelliteCollisionDetection from '@/components/SatelliteCollisionDetection';
 import profilePic from '@/assets/profile-pic.jpg';
 
 const AboutMe: React.FC = () => {
@@ -190,7 +191,19 @@ const AboutMe: React.FC = () => {
                   {/* Projects */}
                   <div>
                     <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Projects</h3>
-                    <div className="ml-0 md:ml-4 space-y-4">
+                    <div className="ml-0 md:ml-4 space-y-6">
+                      <div>
+                        <h4 className="font-medium mb-3">3D Satellite Collision Detection</h4>
+                        <p className="text-gray-400 text-sm mb-3">Real-time 3D visualization system for detecting potential satellite collisions in orbit</p>
+                        <div className="mb-3">
+                          <SatelliteCollisionDetection />
+                        </div>
+                        <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
+                          <li>Developed an interactive 3D simulation using Three.js and React Three Fiber to visualize satellite trajectories and collision detection zones in real-time.</li>
+                          <li>Implemented orbital mechanics algorithms to calculate satellite positions and predict potential collision scenarios with visual warning systems.</li>
+                          <li>Created an immersive user experience with interactive camera controls, allowing users to explore the 3D space environment and observe satellite movements from multiple angles.</li>
+                        </ul>
+                      </div>
                       <div>
                         <h4 className="font-medium">SSH Keys Portal</h4>
                         <p className="text-gray-400 text-sm mb-2">Web-based portal for managing SSH keys in HPC environments</p>
