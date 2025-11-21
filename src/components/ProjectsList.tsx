@@ -310,10 +310,39 @@ const ProjectsList: React.FC = () => {
                 <div className="w-full h-full">
                   <project.animation />
                 </div>
-              ) : project.icon ? (
-                <div className="text-center text-white">
-                  <div className="flex justify-center items-center mb-1">
-                    <i className={`${project.icon} text-3xl text-purple-light animate-pulse`}></i>
+              ) : project.id === 'portfolio-builder' ? (
+                <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
+                  <div className="text-center text-white relative">
+                    <div className="flex justify-center items-center mb-1 relative">
+                      <i className="fas fa-layer-group text-3xl text-purple-light animate-pulse"></i>
+                      <i className="fas fa-magic text-xl ml-2 text-yellow-400 animate-bounce"></i>
+                      <div className="absolute -top-2 -right-2">
+                        <i className="fas fa-pencil-ruler text-lg text-cyan-400 animate-pulse" style={{ animationDelay: '0.3s' }}></i>
+                      </div>
+                    </div>
+                    <h3 className="text-sm font-semibold">Portfolio Builder</h3>
+                    <p className="text-xs text-gray-400 mt-1">Drag & Drop</p>
+                  </div>
+                </div>
+              ) : project.id === 'tradewise' ? (
+                <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
+                  <div className="text-center text-white">
+                    <div className="flex justify-center items-center mb-1">
+                      <i className="fas fa-chart-line text-3xl text-green-400 animate-pulse"></i>
+                      <i className="fas fa-dollar-sign text-xl ml-2 text-yellow-400 animate-bounce"></i>
+                    </div>
+                    <h3 className="text-sm font-semibold">TradeWise</h3>
+                    <p className="text-xs text-gray-400 mt-1">Demo Version</p>
+                  </div>
+                </div>
+              ) : project.id === 'weather' ? (
+                <div className="w-full bg-transparent border-b border-foreground/10 flex items-center justify-center aspect-[16/10]">
+                  <div className="text-center text-white">
+                    <div className="flex justify-center items-center mb-1">
+                      <i className="fas fa-cloud text-3xl animate-pulse"></i>
+                      <i className="fas fa-thermometer-half text-xl ml-2 animate-bounce"></i>
+                    </div>
+                    <h3 className="text-sm font-semibold">Weather Application</h3>
                   </div>
                 </div>
               ) : null}
