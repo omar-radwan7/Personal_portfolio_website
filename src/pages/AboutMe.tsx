@@ -99,8 +99,15 @@ const AboutMe: React.FC = () => {
                   {/* Personal Information */}
                   <div className="text-center mb-8">
                     <h3 className="text-xl font-semibold mb-2">Omar Radwan</h3>
+                    <p className="text-gray-400">Germany, Berlin, Alfred Jung Straße 10369</p>
                     <p className="text-gray-400">+491777588642 - omarobrashy2004@gmail.com</p>
                     <div className="mt-2">
+                      <p className="text-gray-400">
+                        LinkedIn: 
+                        <a href="https://www.linkedin.com/in/omar-radwan-99794a27a" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
+                          www.linkedin.com/in/omar-radwan-99794a27a
+                        </a>
+                      </p>
                       <p className="text-gray-400">
                         GitHub: 
                         <a href="https://github.com/omar-radwan7" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
@@ -108,9 +115,9 @@ const AboutMe: React.FC = () => {
                         </a>
                       </p>
                       <p className="text-gray-400">
-                        LinkedIn: 
-                        <a href="https://www.linkedin.com/in/omar-radwan-99794a27a" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
-                          www.linkedin.com/in/omar-radwan-99794a27a
+                        Personal Portfolio: 
+                        <a href="https://www.omar-radwan.com" target="_blank" rel="noopener noreferrer" className="text-purple-light ml-1">
+                          www.omar-radwan.com
                         </a>
                       </p>
                     </div>
@@ -192,6 +199,12 @@ const AboutMe: React.FC = () => {
                     <h3 className="text-xl font-semibold border-b border-purple/30 pb-2 mb-4">Projects</h3>
                     <div className="ml-0 md:ml-4 space-y-4">
                       <div>
+                        <h4 className="font-medium">3D Satellite Collision Prediction System</h4>
+                        <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
+                          <li>Developed a C++20 real-time orbital simulator using OpenGL, GLFW, and GLM. Models Earth and satellite constellations, updating positions via Keplerian physics and solving Kepler's equation iteratively. The conjunction engine predicts future positions up to 1 hour ahead, calculates minimum distances, generates risk scores, and performs debris dispersion using vector-based orbital mechanics, all in real time while maintaining 60 FPS.</li>
+                        </ul>
+                      </div>
+                      <div>
                         <h4 className="font-medium">SSH Keys Portal</h4>
                         <p className="text-gray-400 text-sm mb-2">Web-based portal for managing SSH keys in HPC environments</p>
                         <ul className="list-disc ml-5 text-gray-300 text-sm mt-2">
@@ -255,7 +268,7 @@ const AboutMe: React.FC = () => {
                       <div>
                         <h4 className="font-medium">AWS Cloud Practitioner Essentials Certificate</h4>
                         <p className="text-gray-300">
-                          Foundational knowledge of AWS core services, cloud concepts & Architecture, security, and pricing models.
+                          Foundational knowledge of AWS core services, cloud concepts & Architecture, security, and cloud fundamentals.
                         </p>
                       </div>
                     </div>
