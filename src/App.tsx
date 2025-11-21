@@ -9,6 +9,7 @@ import AboutMe from "@/pages/AboutMe";
 import NotFound from "@/pages/NotFound";
 import BackToTop from "@/components/BackToTop";
 import ProjectDetail from "@/pages/ProjectDetail";
+import SatelliteCollisionDetail from "@/pages/SatelliteCollisionDetail";
 import PageTransition from "@/components/PageTransition";
 import { useEffect } from "react";
 import Lenis from "lenis";
@@ -72,6 +73,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<AboutMe />} />
+              <Route path="/project/satellite-collision" element={<SatelliteCollisionDetail />} />
               <Route path="/project/:id" element={<ProjectDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
