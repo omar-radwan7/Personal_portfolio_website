@@ -1,533 +1,485 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Stars, Sphere } from '@react-three/drei';
+import * as THREE from 'three';
 
-interface Vector3 {
-  x: number;
-  y: number;
-  z: number;
-}
-
-interface Particle {
-  pos: Vector3;
-  vel: Vector3;
-  life: number;
-  maxLife: number;
-  size: number;
-  color: string;
-}
-
-interface Satellite {
-  pos: Vector3;
-  vel: Vector3;
+interface SatelliteData {
+  id: string;
   angle: number;
   radius: number;
   speed: number;
-  id: string;
-  trail: Vector3[];
-  destroyed: boolean;
   color: string;
+  altitude: number;
+  destroyed: boolean;
+  trail: THREE.Vector3[];
 }
 
-const SatelliteCollision: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
-  const satellitesRef = useRef<Satellite[]>([]);
-  const particlesRef = useRef<Particle[]>([]);
-  const timeRef = useRef(0);
-  const collisionTimeRef = useRef(0);
-  const cameraRef = useRef({ rotation: 0, zoom: 1, shake: 0 });
+const Earth = () => {
+  const earthRef = useRef<THREE.Mesh>(null);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+  useFrame(() => {
+    if (earthRef.current) {
+      earthRef.current.rotation.y += 0.001;
+    }
+  });
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+  // Create Earth texture procedurally
+  const earthTexture = useMemo(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1024;
+    canvas.height = 512;
+    const ctx = canvas.getContext('2d')!;
 
-    const updateSize = () => {
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * window.devicePixelRatio;
-      canvas.height = rect.height * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    };
-    updateSize();
+    // Ocean base
+    ctx.fillStyle = '#1e40af';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const width = canvas.width / window.devicePixelRatio;
-    const height = canvas.height / window.devicePixelRatio;
-    const centerX = width / 2;
-    const centerY = height / 2;
+    // Add continents (simplified)
+    ctx.fillStyle = '#10b981';
+    
+    // Africa
+    ctx.beginPath();
+    ctx.ellipse(520, 280, 80, 100, 0.3, 0, Math.PI * 2);
+    ctx.fill();
 
-    // Initialize satellites in opposing orbits
-    satellitesRef.current = [
-      {
-        pos: { x: 0, y: 0, z: 0 },
-        vel: { x: 0, y: 0, z: 0 },
-        angle: 0,
-        radius: 120,
-        speed: 0.015,
-        id: 'ATLAS-7A',
-        trail: [],
-        destroyed: false,
-        color: '#60a5fa'
-      },
-      {
-        pos: { x: 0, y: 0, z: 0 },
-        vel: { x: 0, y: 0, z: 0 },
-        angle: Math.PI,
-        radius: 120,
-        speed: 0.018,
-        id: 'COSMOS-2B',
-        trail: [],
-        destroyed: false,
-        color: '#f472b6'
-      },
-      {
-        pos: { x: 0, y: 0, z: 0 },
-        vel: { x: 0, y: 0, z: 0 },
-        angle: Math.PI * 0.5,
-        radius: 150,
-        speed: 0.012,
-        id: 'IRIDIUM-33',
-        trail: [],
-        destroyed: false,
-        color: '#34d399'
-      }
-    ];
+    // Europe/Asia
+    ctx.beginPath();
+    ctx.ellipse(600, 200, 150, 80, 0, 0, Math.PI * 2);
+    ctx.fill();
 
-    const project = (x: number, y: number, z: number) => {
-      const perspective = 600;
-      const rotY = cameraRef.current.rotation;
-      
-      // Rotate around Y axis
-      const rotatedX = x * Math.cos(rotY) - z * Math.sin(rotY);
-      const rotatedZ = x * Math.sin(rotY) + z * Math.cos(rotY);
-      
-      const scale = perspective / (perspective + rotatedZ);
-      const zoom = cameraRef.current.zoom;
-      
-      const shake = cameraRef.current.shake;
-      const shakeX = (Math.random() - 0.5) * shake;
-      const shakeY = (Math.random() - 0.5) * shake;
-      
-      return {
-        x: centerX + rotatedX * scale * zoom + shakeX,
-        y: centerY + y * scale * zoom + shakeY,
-        scale: scale * zoom,
-        z: rotatedZ
-      };
-    };
+    // Americas
+    ctx.beginPath();
+    ctx.ellipse(250, 220, 60, 120, -0.2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(220, 350, 70, 100, 0.1, 0, Math.PI * 2);
+    ctx.fill();
 
-    const drawStarfield = () => {
-      // Nebula background
-      const nebulaGradient = ctx.createRadialGradient(
-        centerX + 100, centerY - 50, 0,
-        centerX, centerY, Math.max(width, height) * 0.8
-      );
-      nebulaGradient.addColorStop(0, 'rgba(139, 92, 246, 0.08)');
-      nebulaGradient.addColorStop(0.4, 'rgba(59, 130, 246, 0.05)');
-      nebulaGradient.addColorStop(0.7, 'rgba(16, 185, 129, 0.03)');
-      nebulaGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      
-      ctx.fillStyle = nebulaGradient;
-      ctx.fillRect(0, 0, width, height);
+    // Australia
+    ctx.beginPath();
+    ctx.ellipse(780, 360, 50, 40, 0, 0, Math.PI * 2);
+    ctx.fill();
 
-      // Stars
-      ctx.fillStyle = '#ffffff';
-      for (let i = 0; i < 300; i++) {
-        const x = (i * 73 % width);
-        const y = (i * 137 % height);
-        const size = Math.random() < 0.1 ? 1.2 : 0.5;
-        const twinkle = Math.sin(timeRef.current * 0.05 + i) * 0.3 + 0.7;
-        
-        ctx.globalAlpha = twinkle * 0.8;
-        ctx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      ctx.globalAlpha = 1;
-    };
-
-    const drawEarth = () => {
-      const earthSize = 60;
-      const earthProj = project(0, 0, 0);
-      
-      // Earth shadow
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+    // Add white clouds
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+    for (let i = 0; i < 100; i++) {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      const size = Math.random() * 30 + 10;
       ctx.beginPath();
-      ctx.ellipse(earthProj.x, earthProj.y + 15, earthSize * earthProj.scale * 0.8, earthSize * earthProj.scale * 0.2, 0, 0, Math.PI * 2);
+      ctx.arc(x, y, size, 0, Math.PI * 2);
       ctx.fill();
+    }
 
-      // Atmosphere glow (multiple layers)
-      for (let i = 0; i < 3; i++) {
-        const atmoRadius = earthSize * earthProj.scale * (1.3 + i * 0.15);
-        const atmoGradient = ctx.createRadialGradient(
-          earthProj.x, earthProj.y, earthSize * earthProj.scale,
-          earthProj.x, earthProj.y, atmoRadius
-        );
-        atmoGradient.addColorStop(0, `rgba(100, 180, 255, ${0.3 - i * 0.1})`);
-        atmoGradient.addColorStop(1, 'rgba(100, 180, 255, 0)');
-        
-        ctx.fillStyle = atmoGradient;
-        ctx.beginPath();
-        ctx.arc(earthProj.x, earthProj.y, atmoRadius, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // Earth body
-      const earthGradient = ctx.createRadialGradient(
-        earthProj.x - earthSize * earthProj.scale * 0.3,
-        earthProj.y - earthSize * earthProj.scale * 0.3,
-        0,
-        earthProj.x,
-        earthProj.y,
-        earthSize * earthProj.scale
-      );
-      earthGradient.addColorStop(0, '#5da8ff');
-      earthGradient.addColorStop(0.3, '#3b82f6');
-      earthGradient.addColorStop(0.6, '#1e40af');
-      earthGradient.addColorStop(1, '#0a1929');
-      
-      ctx.fillStyle = earthGradient;
-      ctx.beginPath();
-      ctx.arc(earthProj.x, earthProj.y, earthSize * earthProj.scale, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Cloud patterns
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-      ctx.beginPath();
-      ctx.arc(earthProj.x + 20 * earthProj.scale, earthProj.y - 15 * earthProj.scale, 12 * earthProj.scale, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(earthProj.x - 25 * earthProj.scale, earthProj.y + 20 * earthProj.scale, 15 * earthProj.scale, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Terminator line (day/night)
-      ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(earthProj.x, earthProj.y, earthSize * earthProj.scale, -Math.PI * 0.5, Math.PI * 0.5);
-      ctx.stroke();
-    };
-
-    const drawOrbitPath = (radius: number, color: string, opacity: number = 0.3) => {
-      const segments = 64;
-      ctx.strokeStyle = `rgba(${parseInt(color.slice(1, 3), 16)}, ${parseInt(color.slice(3, 5), 16)}, ${parseInt(color.slice(5, 7), 16)}, ${opacity})`;
-      ctx.lineWidth = 1;
-      ctx.setLineDash([5, 5]);
-      
-      ctx.beginPath();
-      for (let i = 0; i <= segments; i++) {
-        const angle = (i / segments) * Math.PI * 2;
-        const x = Math.cos(angle) * radius;
-        const z = Math.sin(angle) * radius;
-        const proj = project(x, 0, z);
-        
-        if (i === 0) {
-          ctx.moveTo(proj.x, proj.y);
-        } else {
-          ctx.lineTo(proj.x, proj.y);
-        }
-      }
-      ctx.stroke();
-      ctx.setLineDash([]);
-    };
-
-    const drawSatellite = (sat: Satellite) => {
-      if (sat.destroyed) return;
-
-      const proj = project(sat.pos.x, sat.pos.y, sat.pos.z);
-      if (proj.z > 300) return;
-
-      const size = 8 * proj.scale;
-
-      // Trail effect
-      if (sat.trail.length > 0) {
-        const trailGradient = ctx.createLinearGradient(
-          proj.x, proj.y,
-          project(sat.trail[0].x, sat.trail[0].y, sat.trail[0].z).x,
-          project(sat.trail[0].x, sat.trail[0].y, sat.trail[0].z).y
-        );
-        trailGradient.addColorStop(0, `${sat.color}88`);
-        trailGradient.addColorStop(1, `${sat.color}00`);
-
-        ctx.strokeStyle = trailGradient;
-        ctx.lineWidth = 2 * proj.scale;
-        ctx.lineCap = 'round';
-        
-        ctx.beginPath();
-        ctx.moveTo(proj.x, proj.y);
-        
-        for (let i = 0; i < Math.min(sat.trail.length, 30); i++) {
-          const trailProj = project(sat.trail[i].x, sat.trail[i].y, sat.trail[i].z);
-          ctx.lineTo(trailProj.x, trailProj.y);
-        }
-        ctx.stroke();
-      }
-
-      // Satellite glow
-      const glowGradient = ctx.createRadialGradient(proj.x, proj.y, 0, proj.x, proj.y, size * 3);
-      glowGradient.addColorStop(0, `${sat.color}44`);
-      glowGradient.addColorStop(1, `${sat.color}00`);
-      ctx.fillStyle = glowGradient;
-      ctx.beginPath();
-      ctx.arc(proj.x, proj.y, size * 3, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Solar panels (left)
-      ctx.fillStyle = `${sat.color}80`;
-      ctx.fillRect(proj.x - size * 2.5, proj.y - size * 0.5, size * 1.5, size);
-      
-      ctx.strokeStyle = sat.color;
-      ctx.lineWidth = 0.5;
-      for (let i = 0; i < 3; i++) {
-        ctx.beginPath();
-        ctx.moveTo(proj.x - size * 2.5 + (size * 1.5 / 3) * i, proj.y - size * 0.5);
-        ctx.lineTo(proj.x - size * 2.5 + (size * 1.5 / 3) * i, proj.y + size * 0.5);
-        ctx.stroke();
-      }
-
-      // Solar panels (right)
-      ctx.fillStyle = `${sat.color}80`;
-      ctx.fillRect(proj.x + size, proj.y - size * 0.5, size * 1.5, size);
-      
-      for (let i = 0; i < 3; i++) {
-        ctx.beginPath();
-        ctx.moveTo(proj.x + size + (size * 1.5 / 3) * i, proj.y - size * 0.5);
-        ctx.lineTo(proj.x + size + (size * 1.5 / 3) * i, proj.y + size * 0.5);
-        ctx.stroke();
-      }
-
-      // Main body
-      const bodyGradient = ctx.createLinearGradient(
-        proj.x - size * 0.6, proj.y - size * 0.6,
-        proj.x + size * 0.6, proj.y + size * 0.6
-      );
-      bodyGradient.addColorStop(0, '#64748b');
-      bodyGradient.addColorStop(0.5, '#94a3b8');
-      bodyGradient.addColorStop(1, '#475569');
-      
-      ctx.fillStyle = bodyGradient;
-      ctx.fillRect(proj.x - size * 0.6, proj.y - size * 0.6, size * 1.2, size * 1.2);
-
-      // Highlight
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-      ctx.fillRect(proj.x - size * 0.4, proj.y - size * 0.5, size * 0.6, size * 0.2);
-
-      // Antenna
-      ctx.strokeStyle = sat.color;
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(proj.x, proj.y - size * 0.6);
-      ctx.lineTo(proj.x, proj.y - size * 1.4);
-      ctx.stroke();
-      
-      ctx.fillStyle = sat.color;
-      ctx.beginPath();
-      ctx.arc(proj.x, proj.y - size * 1.5, size * 0.2, 0, Math.PI * 2);
-      ctx.fill();
-
-      // ID label
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-      ctx.font = `${9 * proj.scale}px monospace`;
-      ctx.textAlign = 'center';
-      ctx.fillText(sat.id, proj.x, proj.y + size * 2);
-    };
-
-    const createExplosion = (pos: Vector3, color1: string, color2: string) => {
-      // Flash
-      for (let i = 0; i < 200; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const elevation = (Math.random() - 0.5) * Math.PI;
-        const speed = Math.random() * 4 + 1;
-        
-        particlesRef.current.push({
-          pos: { ...pos },
-          vel: {
-            x: Math.cos(angle) * Math.cos(elevation) * speed,
-            y: Math.sin(elevation) * speed,
-            z: Math.sin(angle) * Math.cos(elevation) * speed
-          },
-          life: 0,
-          maxLife: Math.random() * 80 + 40,
-          size: Math.random() * 3 + 1,
-          color: Math.random() > 0.5 ? color1 : color2
-        });
-      }
-
-      // Shockwave particles
-      for (let i = 0; i < 50; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const elevation = (Math.random() - 0.5) * Math.PI * 0.3;
-        
-        particlesRef.current.push({
-          pos: { ...pos },
-          vel: {
-            x: Math.cos(angle) * Math.cos(elevation) * 8,
-            y: Math.sin(elevation) * 2,
-            z: Math.sin(angle) * Math.cos(elevation) * 8
-          },
-          life: 0,
-          maxLife: 30,
-          size: 0.5,
-          color: '#ffffff'
-        });
-      }
-    };
-
-    const animate = () => {
-      ctx.clearRect(0, 0, width, height);
-      
-      // Background
-      const bgGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, Math.max(width, height));
-      bgGradient.addColorStop(0, '#0a0e27');
-      bgGradient.addColorStop(1, '#000000');
-      ctx.fillStyle = bgGradient;
-      ctx.fillRect(0, 0, width, height);
-
-      drawStarfield();
-
-      timeRef.current++;
-      cameraRef.current.rotation += 0.002;
-
-      // Decay camera shake
-      if (cameraRef.current.shake > 0) {
-        cameraRef.current.shake *= 0.9;
-      }
-
-      // Draw orbit paths
-      satellitesRef.current.forEach(sat => {
-        if (!sat.destroyed) {
-          drawOrbitPath(sat.radius, sat.color, 0.2);
-        }
-      });
-
-      drawEarth();
-
-      // Update satellites
-      let collisionDetected = false;
-      satellitesRef.current.forEach((sat, i) => {
-        if (sat.destroyed) return;
-
-        sat.angle += sat.speed;
-        sat.pos.x = Math.cos(sat.angle) * sat.radius;
-        sat.pos.z = Math.sin(sat.angle) * sat.radius;
-        sat.pos.y = Math.sin(sat.angle * 2) * 5;
-
-        // Update trail
-        sat.trail.unshift({ ...sat.pos });
-        if (sat.trail.length > 30) {
-          sat.trail.pop();
-        }
-
-        // Check collisions
-        for (let j = i + 1; j < satellitesRef.current.length; j++) {
-          const other = satellitesRef.current[j];
-          if (other.destroyed) continue;
-
-          const dx = sat.pos.x - other.pos.x;
-          const dy = sat.pos.y - other.pos.y;
-          const dz = sat.pos.z - other.pos.z;
-          const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-          if (dist < 10 && collisionTimeRef.current === 0) {
-            collisionDetected = true;
-            collisionTimeRef.current = timeRef.current;
-            sat.destroyed = true;
-            other.destroyed = true;
-            
-            const midPos = {
-              x: (sat.pos.x + other.pos.x) / 2,
-              y: (sat.pos.y + other.pos.y) / 2,
-              z: (sat.pos.z + other.pos.z) / 2
-            };
-            
-            createExplosion(midPos, sat.color, other.color);
-            cameraRef.current.shake = 20;
-          }
-        }
-      });
-
-      // Draw satellites
-      satellitesRef.current.forEach(sat => drawSatellite(sat));
-
-      // Update particles
-      particlesRef.current = particlesRef.current.filter(p => {
-        p.pos.x += p.vel.x;
-        p.pos.y += p.vel.y;
-        p.pos.z += p.vel.z;
-        p.life++;
-
-        if (p.life >= p.maxLife) return false;
-
-        const proj = project(p.pos.x, p.pos.y, p.pos.z);
-        if (proj.z > 300) return true;
-
-        const alpha = (1 - p.life / p.maxLife) * 0.8;
-        const size = p.size * proj.scale;
-
-        ctx.fillStyle = `${p.color}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`;
-        ctx.beginPath();
-        ctx.arc(proj.x, proj.y, size, 0, Math.PI * 2);
-        ctx.fill();
-
-        return true;
-      });
-
-      // Reset after collision
-      if (collisionTimeRef.current > 0 && timeRef.current - collisionTimeRef.current > 180) {
-        if (particlesRef.current.length === 0) {
-          collisionTimeRef.current = 0;
-          satellitesRef.current = satellitesRef.current.map((sat, i) => ({
-            ...sat,
-            angle: i === 0 ? 0 : i === 1 ? Math.PI : Math.PI * 0.5,
-            destroyed: false,
-            trail: []
-          }));
-        }
-      }
-
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
+    return new THREE.CanvasTexture(canvas);
   }, []);
 
-  const status = satellitesRef.current.some(s => s.destroyed) ? 'COLLISION DETECTED' : 'TRACKING ACTIVE';
-  const statusColor = satellitesRef.current.some(s => s.destroyed) ? 'text-red-400' : 'text-emerald-400';
+  return (
+    <group>
+      {/* Earth */}
+      <Sphere ref={earthRef} args={[2, 64, 64]}>
+        <meshPhongMaterial 
+          map={earthTexture}
+          shininess={25}
+          specular={new THREE.Color(0x333333)}
+        />
+      </Sphere>
+
+      {/* Atmosphere */}
+      <Sphere args={[2.1, 64, 64]}>
+        <meshBasicMaterial
+          color="#60a5fa"
+          transparent
+          opacity={0.15}
+          side={THREE.BackSide}
+        />
+      </Sphere>
+
+      {/* Atmosphere glow */}
+      <Sphere args={[2.15, 64, 64]}>
+        <meshBasicMaterial
+          color="#3b82f6"
+          transparent
+          opacity={0.1}
+          side={THREE.BackSide}
+        />
+      </Sphere>
+    </group>
+  );
+};
+
+const Satellite = ({ 
+  data, 
+  onPositionUpdate 
+}: { 
+  data: SatelliteData; 
+  onPositionUpdate: (id: string, pos: THREE.Vector3) => void;
+}) => {
+  const meshRef = useRef<THREE.Group>(null);
+  const trailRef = useRef<THREE.Line>(null!);
+
+  useFrame(() => {
+    if (meshRef.current && !data.destroyed) {
+      data.angle += data.speed;
+      
+      const x = Math.cos(data.angle) * data.radius;
+      const y = Math.sin(data.angle * 1.3) * 0.3;
+      const z = Math.sin(data.angle) * data.radius;
+      
+      meshRef.current.position.set(x, y, z);
+      meshRef.current.rotation.y += 0.02;
+      
+      onPositionUpdate(data.id, new THREE.Vector3(x, y, z));
+    }
+  });
+
+  // Create trail line object
+  const trailLine = useMemo(() => {
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(100 * 3);
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    
+    const material = new THREE.LineBasicMaterial({
+      color: data.color,
+      transparent: true,
+      opacity: 0.4
+    });
+    
+    return new THREE.Line(geometry, material);
+  }, [data.color]);
+
+  // Update trail
+  useFrame(() => {
+    if (trailRef.current && meshRef.current && !data.destroyed) {
+      const positions = trailRef.current.geometry.attributes.position.array as Float32Array;
+      
+      // Shift trail positions
+      for (let i = positions.length - 3; i >= 3; i -= 3) {
+        positions[i] = positions[i - 3];
+        positions[i + 1] = positions[i - 2];
+        positions[i + 2] = positions[i - 1];
+      }
+      
+      // Add new position
+      positions[0] = meshRef.current.position.x;
+      positions[1] = meshRef.current.position.y;
+      positions[2] = meshRef.current.position.z;
+      
+      trailRef.current.geometry.attributes.position.needsUpdate = true;
+    }
+  });
+
+  if (data.destroyed) return null;
+
+  return (
+    <group ref={meshRef}>
+      {/* Trail */}
+      <primitive ref={trailRef} object={trailLine} />
+
+      {/* Satellite body */}
+      <mesh>
+        <boxGeometry args={[0.15, 0.15, 0.15]} />
+        <meshStandardMaterial
+          color="#94a3b8"
+          metalness={0.8}
+          roughness={0.2}
+        />
+      </mesh>
+
+      {/* Solar panels - left */}
+      <mesh position={[-0.25, 0, 0]}>
+        <boxGeometry args={[0.2, 0.3, 0.02]} />
+        <meshStandardMaterial
+          color={data.color}
+          metalness={0.6}
+          roughness={0.3}
+          emissive={data.color}
+          emissiveIntensity={0.2}
+        />
+      </mesh>
+
+      {/* Solar panels - right */}
+      <mesh position={[0.25, 0, 0]}>
+        <boxGeometry args={[0.2, 0.3, 0.02]} />
+        <meshStandardMaterial
+          color={data.color}
+          metalness={0.6}
+          roughness={0.3}
+          emissive={data.color}
+          emissiveIntensity={0.2}
+        />
+      </mesh>
+
+      {/* Antenna */}
+      <mesh position={[0, 0.15, 0]}>
+        <cylinderGeometry args={[0.01, 0.01, 0.15]} />
+        <meshStandardMaterial color="#e2e8f0" />
+      </mesh>
+
+      {/* Antenna tip */}
+      <mesh position={[0, 0.23, 0]}>
+        <sphereGeometry args={[0.02]} />
+        <meshStandardMaterial
+          color="#ef4444"
+          emissive="#ef4444"
+          emissiveIntensity={0.5}
+        />
+      </mesh>
+
+      {/* Glow effect */}
+      <pointLight color={data.color} intensity={0.5} distance={1} />
+    </group>
+  );
+};
+
+const Particles = ({ 
+  position, 
+  color1, 
+  color2 
+}: { 
+  position: THREE.Vector3; 
+  color1: string; 
+  color2: string;
+}) => {
+  const particlesRef = useRef<THREE.Points>(null);
+  const velocities = useRef<Float32Array>();
+
+  const [particleGeometry, particleCount] = useMemo(() => {
+    const count = 500;
+    const positions = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
+    const vels = new Float32Array(count * 3);
+    
+    const color1Obj = new THREE.Color(color1);
+    const color2Obj = new THREE.Color(color2);
+
+    for (let i = 0; i < count; i++) {
+      positions[i * 3] = position.x;
+      positions[i * 3 + 1] = position.y;
+      positions[i * 3 + 2] = position.z;
+
+      const color = Math.random() > 0.5 ? color1Obj : color2Obj;
+      colors[i * 3] = color.r;
+      colors[i * 3 + 1] = color.g;
+      colors[i * 3 + 2] = color.b;
+
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.random() * Math.PI;
+      const speed = Math.random() * 0.05 + 0.02;
+
+      vels[i * 3] = Math.sin(phi) * Math.cos(theta) * speed;
+      vels[i * 3 + 1] = Math.sin(phi) * Math.sin(theta) * speed;
+      vels[i * 3 + 2] = Math.cos(phi) * speed;
+    }
+
+    velocities.current = vels;
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    return [geometry, count];
+  }, [position, color1, color2]);
+
+  useFrame(() => {
+    if (particlesRef.current && velocities.current) {
+      const positions = particlesRef.current.geometry.attributes.position.array as Float32Array;
+      
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] += velocities.current[i * 3];
+        positions[i * 3 + 1] += velocities.current[i * 3 + 1];
+        positions[i * 3 + 2] += velocities.current[i * 3 + 2];
+      }
+      
+      particlesRef.current.geometry.attributes.position.needsUpdate = true;
+    }
+  });
+
+  return (
+    <points ref={particlesRef} geometry={particleGeometry}>
+      <pointsMaterial
+        size={0.05}
+        vertexColors
+        transparent
+        opacity={0.8}
+        blending={THREE.AdditiveBlending}
+      />
+    </points>
+  );
+};
+
+const Scene = () => {
+  const [satellites, setSatellites] = useState<SatelliteData[]>([
+    {
+      id: 'ATLAS-7A',
+      angle: 0,
+      radius: 3.5,
+      speed: 0.01,
+      color: '#60a5fa',
+      altitude: 420,
+      destroyed: false,
+      trail: []
+    },
+    {
+      id: 'COSMOS-2B',
+      angle: Math.PI,
+      radius: 3.5,
+      speed: 0.012,
+      color: '#f472b6',
+      altitude: 418,
+      destroyed: false,
+      trail: []
+    },
+    {
+      id: 'IRIDIUM-33',
+      angle: Math.PI * 0.5,
+      radius: 4,
+      speed: 0.008,
+      color: '#34d399',
+      altitude: 445,
+      destroyed: false,
+      trail: []
+    }
+  ]);
+
+  const [explosion, setExplosion] = useState<{
+    position: THREE.Vector3;
+    color1: string;
+    color2: string;
+  } | null>(null);
+
+  const positions = useRef<Map<string, THREE.Vector3>>(new Map());
+
+  const handlePositionUpdate = (id: string, pos: THREE.Vector3) => {
+    positions.current.set(id, pos.clone());
+  };
+
+  // Check collisions
+  useFrame(() => {
+    const posArray = Array.from(positions.current.entries());
+    
+    for (let i = 0; i < posArray.length; i++) {
+      for (let j = i + 1; j < posArray.length; j++) {
+        const [id1, pos1] = posArray[i];
+        const [id2, pos2] = posArray[j];
+        
+        const distance = pos1.distanceTo(pos2);
+        
+        if (distance < 0.5) {
+          const sat1 = satellites.find(s => s.id === id1);
+          const sat2 = satellites.find(s => s.id === id2);
+          
+          if (sat1 && sat2 && !sat1.destroyed && !sat2.destroyed) {
+            // Collision!
+            setSatellites(prev => prev.map(s => 
+              s.id === id1 || s.id === id2 ? { ...s, destroyed: true } : s
+            ));
+            
+            const midPoint = new THREE.Vector3()
+              .addVectors(pos1, pos2)
+              .multiplyScalar(0.5);
+            
+            setExplosion({
+              position: midPoint,
+              color1: sat1.color,
+              color2: sat2.color
+            });
+
+            // Reset after delay
+            setTimeout(() => {
+              setExplosion(null);
+              setSatellites(prev => prev.map((s, idx) => ({
+                ...s,
+                destroyed: false,
+                angle: idx === 0 ? 0 : idx === 1 ? Math.PI : Math.PI * 0.5,
+                trail: []
+              })));
+            }, 3000);
+          }
+        }
+      }
+    }
+  });
+
+  return (
+    <>
+      <ambientLight intensity={0.3} />
+      <pointLight position={[10, 10, 10]} intensity={1} />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#3b82f6" />
+      
+      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+      
+      <Earth />
+      
+      {satellites.map(sat => (
+        <Satellite
+          key={sat.id}
+          data={sat}
+          onPositionUpdate={handlePositionUpdate}
+        />
+      ))}
+
+      {explosion && (
+        <Particles
+          position={explosion.position}
+          color1={explosion.color1}
+          color2={explosion.color2}
+        />
+      )}
+
+      <OrbitControls
+        enablePan={false}
+        enableZoom={true}
+        minDistance={5}
+        maxDistance={15}
+        autoRotate
+        autoRotateSpeed={0.5}
+      />
+    </>
+  );
+};
+
+const SatelliteCollision: React.FC = () => {
+  const [status, setStatus] = useState<'TRACKING' | 'COLLISION'>('TRACKING');
 
   return (
     <div className="w-full h-full relative bg-black overflow-hidden">
-      <canvas
-        ref={canvasRef}
-        className="w-full h-full"
-        style={{ display: 'block' }}
-      />
-      <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-black/90 via-black/60 to-transparent p-4 backdrop-blur-sm">
+      <Canvas
+        camera={{ position: [8, 3, 8], fov: 60 }}
+        gl={{ antialias: true, alpha: false }}
+      >
+        <Scene />
+      </Canvas>
+
+      {/* UI Overlay */}
+      <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-black/90 via-black/60 to-transparent p-4 backdrop-blur-sm pointer-events-none">
         <div className="flex items-center justify-between text-[10px] font-mono">
           <div className="flex items-center gap-2">
-            <span className={`inline-block w-2 h-2 rounded-full ${satellitesRef.current.some(s => s.destroyed) ? 'bg-red-500 animate-pulse' : 'bg-emerald-500'}`}></span>
-            <span className={statusColor}>{status}</span>
+            <span className={`inline-block w-2 h-2 rounded-full ${status === 'COLLISION' ? 'bg-red-500 animate-pulse' : 'bg-emerald-500'}`}></span>
+            <span className={status === 'COLLISION' ? 'text-red-400' : 'text-emerald-400'}>
+              {status === 'COLLISION' ? 'COLLISION DETECTED' : 'TRACKING ACTIVE'}
+            </span>
           </div>
           <div className="text-gray-400">
-            3D TRAJECTORY ANALYSIS
+            3D ORBITAL SIMULATION
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 backdrop-blur-sm">
+
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 backdrop-blur-sm pointer-events-none">
         <div className="grid grid-cols-3 gap-2 text-[9px] font-mono">
-          {satellitesRef.current.map((sat) => (
-            <div key={sat.id} className={`bg-black/50 p-2 rounded border ${sat.destroyed ? 'border-red-500/50' : 'border-' + sat.color + '/50'}`}>
-              <div className="font-semibold mb-1" style={{ color: sat.color }}>{sat.id}</div>
-              <div className="text-gray-500">
-                {sat.destroyed ? 'DESTROYED' : `ALT: ${sat.radius * 3.5}km`}
-              </div>
-            </div>
-          ))}
+          <div className="bg-black/50 p-2 rounded border border-blue-500/50">
+            <div className="text-blue-400 font-semibold mb-1">ATLAS-7A</div>
+            <div className="text-gray-500">ALT: 420km</div>
+          </div>
+          <div className="bg-black/50 p-2 rounded border border-pink-500/50">
+            <div className="text-pink-400 font-semibold mb-1">COSMOS-2B</div>
+            <div className="text-gray-500">ALT: 418km</div>
+          </div>
+          <div className="bg-black/50 p-2 rounded border border-emerald-500/50">
+            <div className="text-emerald-400 font-semibold mb-1">IRIDIUM-33</div>
+            <div className="text-gray-500">ALT: 445km</div>
+          </div>
         </div>
       </div>
     </div>
