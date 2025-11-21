@@ -166,9 +166,9 @@ const ProjectsList: React.FC = () => {
           <h3 className="text-base font-semibold mb-2">Satellite Collision Detection</h3>
           <div className="flex gap-2 flex-wrap items-center justify-between">
             <div className="flex gap-1 flex-wrap">
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Canvas</span>
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">3D Math</span>
-              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">TypeScript</span>
+              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">C++</span>
+              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">OpenGL</span>
+              <span className="px-2 py-0.5 bg-purple/20 text-purple-light rounded text-xs">Three.js</span>
             </div>
             <Link
               to="/project/satellite-collision"
