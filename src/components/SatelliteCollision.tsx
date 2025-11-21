@@ -129,7 +129,6 @@ const Satellite = ({
   onCollision: (id: string, pos: THREE.Vector3) => void;
 }) => {
   const meshRef = useRef<THREE.Group>(null);
-  const trailPoints = useRef<THREE.Vector3[]>([]);
 
   useFrame(() => {
     if (meshRef.current && !data.destroyed) {
@@ -141,12 +140,6 @@ const Satellite = ({
       
       meshRef.current.position.set(x, y, z);
       meshRef.current.rotation.y += 0.02;
-      
-      // Update trail
-      trailPoints.current.unshift(new THREE.Vector3(x, y, z));
-      if (trailPoints.current.length > 30) {
-        trailPoints.current.pop();
-      }
 
       onCollision(data.id, new THREE.Vector3(x, y, z));
     }
@@ -156,20 +149,6 @@ const Satellite = ({
 
   return (
     <group ref={meshRef}>
-      {/* Trail line */}
-      {trailPoints.current.length > 1 && (
-        <line>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              count={trailPoints.current.length}
-              array={new Float32Array(trailPoints.current.flatMap(p => [p.x, p.y, p.z]))}
-              itemSize={3}
-            />
-          </bufferGeometry>
-          <lineBasicMaterial color={data.color} transparent opacity={0.4} />
-        </line>
-      )}
 
       {/* Main body */}
       <mesh>
