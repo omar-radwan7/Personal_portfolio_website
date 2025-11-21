@@ -1,6 +1,6 @@
-import React, { useRef, useMemo, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Stars, Sphere } from '@react-three/drei';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Stars } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface SatelliteData {
@@ -11,61 +11,73 @@ interface SatelliteData {
   color: string;
   altitude: number;
   destroyed: boolean;
-  trail: THREE.Vector3[];
 }
 
 const Earth = () => {
   const earthRef = useRef<THREE.Mesh>(null);
+  const cloudsRef = useRef<THREE.Mesh>(null);
 
   useFrame(() => {
     if (earthRef.current) {
       earthRef.current.rotation.y += 0.001;
     }
+    if (cloudsRef.current) {
+      cloudsRef.current.rotation.y += 0.0012;
+    }
   });
 
-  // Create Earth texture procedurally
+  // Create Earth texture
   const earthTexture = useMemo(() => {
     const canvas = document.createElement('canvas');
-    canvas.width = 1024;
-    canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 256;
     const ctx = canvas.getContext('2d')!;
 
-    // Ocean base
+    // Ocean
     ctx.fillStyle = '#1e40af';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Add continents (simplified)
+    // Continents
     ctx.fillStyle = '#10b981';
     
     // Africa
     ctx.beginPath();
-    ctx.ellipse(520, 280, 80, 100, 0.3, 0, Math.PI * 2);
+    ctx.ellipse(280, 140, 40, 50, 0.3, 0, Math.PI * 2);
     ctx.fill();
 
     // Europe/Asia
     ctx.beginPath();
-    ctx.ellipse(600, 200, 150, 80, 0, 0, Math.PI * 2);
+    ctx.ellipse(320, 100, 80, 40, 0, 0, Math.PI * 2);
     ctx.fill();
 
     // Americas
     ctx.beginPath();
-    ctx.ellipse(250, 220, 60, 120, -0.2, 0, Math.PI * 2);
+    ctx.ellipse(130, 110, 30, 60, -0.2, 0, Math.PI * 2);
     ctx.fill();
     ctx.beginPath();
-    ctx.ellipse(220, 350, 70, 100, 0.1, 0, Math.PI * 2);
+    ctx.ellipse(115, 175, 35, 50, 0.1, 0, Math.PI * 2);
     ctx.fill();
 
     // Australia
     ctx.beginPath();
-    ctx.ellipse(780, 360, 50, 40, 0, 0, Math.PI * 2);
+    ctx.ellipse(400, 180, 25, 20, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    // Add white clouds
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-    for (let i = 0; i < 100; i++) {
+    return new THREE.CanvasTexture(canvas);
+  }, []);
+
+  // Cloud texture
+  const cloudTexture = useMemo(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 256;
+    const ctx = canvas.getContext('2d')!;
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+    for (let i = 0; i < 40; i++) {
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height;
-      const size = Math.random() * 30 + 10;
+      const size = Math.random() * 20 + 10;
       ctx.beginPath();
       ctx.arc(x, y, size, 0, Math.PI * 2);
       ctx.fill();
@@ -76,47 +88,48 @@ const Earth = () => {
 
   return (
     <group>
-      {/* Earth */}
-      <Sphere ref={earthRef} args={[2, 64, 64]}>
+      {/* Earth sphere */}
+      <mesh ref={earthRef}>
+        <sphereGeometry args={[2, 32, 32]} />
         <meshPhongMaterial 
           map={earthTexture}
-          shininess={25}
-          specular={new THREE.Color(0x333333)}
+          shininess={15}
         />
-      </Sphere>
+      </mesh>
 
-      {/* Atmosphere */}
-      <Sphere args={[2.1, 64, 64]}>
-        <meshBasicMaterial
-          color="#60a5fa"
+      {/* Clouds */}
+      <mesh ref={cloudsRef}>
+        <sphereGeometry args={[2.02, 32, 32]} />
+        <meshPhongMaterial 
+          map={cloudTexture}
           transparent
-          opacity={0.15}
-          side={THREE.BackSide}
+          opacity={0.4}
         />
-      </Sphere>
+      </mesh>
 
       {/* Atmosphere glow */}
-      <Sphere args={[2.15, 64, 64]}>
+      <mesh>
+        <sphereGeometry args={[2.15, 32, 32]} />
         <meshBasicMaterial
-          color="#3b82f6"
+          color="#60a5fa"
           transparent
           opacity={0.1}
           side={THREE.BackSide}
         />
-      </Sphere>
+      </mesh>
     </group>
   );
 };
 
 const Satellite = ({ 
   data, 
-  onPositionUpdate 
+  onCollision 
 }: { 
   data: SatelliteData; 
-  onPositionUpdate: (id: string, pos: THREE.Vector3) => void;
+  onCollision: (id: string, pos: THREE.Vector3) => void;
 }) => {
   const meshRef = useRef<THREE.Group>(null);
-  const trailRef = useRef<THREE.Line>(null!);
+  const trailPoints = useRef<THREE.Vector3[]>([]);
 
   useFrame(() => {
     if (meshRef.current && !data.destroyed) {
@@ -129,43 +142,13 @@ const Satellite = ({
       meshRef.current.position.set(x, y, z);
       meshRef.current.rotation.y += 0.02;
       
-      onPositionUpdate(data.id, new THREE.Vector3(x, y, z));
-    }
-  });
-
-  // Create trail line object
-  const trailLine = useMemo(() => {
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(100 * 3);
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    
-    const material = new THREE.LineBasicMaterial({
-      color: data.color,
-      transparent: true,
-      opacity: 0.4
-    });
-    
-    return new THREE.Line(geometry, material);
-  }, [data.color]);
-
-  // Update trail
-  useFrame(() => {
-    if (trailRef.current && meshRef.current && !data.destroyed) {
-      const positions = trailRef.current.geometry.attributes.position.array as Float32Array;
-      
-      // Shift trail positions
-      for (let i = positions.length - 3; i >= 3; i -= 3) {
-        positions[i] = positions[i - 3];
-        positions[i + 1] = positions[i - 2];
-        positions[i + 2] = positions[i - 1];
+      // Update trail
+      trailPoints.current.unshift(new THREE.Vector3(x, y, z));
+      if (trailPoints.current.length > 30) {
+        trailPoints.current.pop();
       }
-      
-      // Add new position
-      positions[0] = meshRef.current.position.x;
-      positions[1] = meshRef.current.position.y;
-      positions[2] = meshRef.current.position.z;
-      
-      trailRef.current.geometry.attributes.position.needsUpdate = true;
+
+      onCollision(data.id, new THREE.Vector3(x, y, z));
     }
   });
 
@@ -173,40 +156,47 @@ const Satellite = ({
 
   return (
     <group ref={meshRef}>
-      {/* Trail */}
-      <primitive ref={trailRef} object={trailLine} />
+      {/* Trail line */}
+      {trailPoints.current.length > 1 && (
+        <line>
+          <bufferGeometry>
+            <bufferAttribute
+              attach="attributes-position"
+              count={trailPoints.current.length}
+              array={new Float32Array(trailPoints.current.flatMap(p => [p.x, p.y, p.z]))}
+              itemSize={3}
+            />
+          </bufferGeometry>
+          <lineBasicMaterial color={data.color} transparent opacity={0.4} />
+        </line>
+      )}
 
-      {/* Satellite body */}
+      {/* Main body */}
       <mesh>
         <boxGeometry args={[0.15, 0.15, 0.15]} />
         <meshStandardMaterial
           color="#94a3b8"
-          metalness={0.8}
-          roughness={0.2}
+          metalness={0.7}
+          roughness={0.3}
         />
       </mesh>
 
-      {/* Solar panels - left */}
+      {/* Solar panels */}
       <mesh position={[-0.25, 0, 0]}>
-        <boxGeometry args={[0.2, 0.3, 0.02]} />
+        <boxGeometry args={[0.2, 0.25, 0.02]} />
         <meshStandardMaterial
           color={data.color}
-          metalness={0.6}
-          roughness={0.3}
           emissive={data.color}
-          emissiveIntensity={0.2}
+          emissiveIntensity={0.3}
         />
       </mesh>
 
-      {/* Solar panels - right */}
       <mesh position={[0.25, 0, 0]}>
-        <boxGeometry args={[0.2, 0.3, 0.02]} />
+        <boxGeometry args={[0.2, 0.25, 0.02]} />
         <meshStandardMaterial
           color={data.color}
-          metalness={0.6}
-          roughness={0.3}
           emissive={data.color}
-          emissiveIntensity={0.2}
+          emissiveIntensity={0.3}
         />
       </mesh>
 
@@ -216,87 +206,96 @@ const Satellite = ({
         <meshStandardMaterial color="#e2e8f0" />
       </mesh>
 
-      {/* Antenna tip */}
       <mesh position={[0, 0.23, 0]}>
-        <sphereGeometry args={[0.02]} />
+        <sphereGeometry args={[0.02, 8, 8]} />
         <meshStandardMaterial
           color="#ef4444"
           emissive="#ef4444"
-          emissiveIntensity={0.5}
+          emissiveIntensity={0.8}
         />
       </mesh>
 
-      {/* Glow effect */}
-      <pointLight color={data.color} intensity={0.5} distance={1} />
+      {/* Point light for glow */}
+      <pointLight color={data.color} intensity={0.3} distance={1} />
     </group>
   );
 };
 
 const Particles = ({ 
   position, 
-  color1, 
-  color2 
+  colors 
 }: { 
   position: THREE.Vector3; 
-  color1: string; 
-  color2: string;
+  colors: string[];
 }) => {
-  const particlesRef = useRef<THREE.Points>(null);
-  const velocities = useRef<Float32Array>();
+  const pointsRef = useRef<THREE.Points>(null);
+  const velocities = useRef<THREE.Vector3[]>([]);
+  const life = useRef(0);
 
-  const [particleGeometry, particleCount] = useMemo(() => {
-    const count = 500;
+  useEffect(() => {
+    // Initialize particles
+    const vels: THREE.Vector3[] = [];
+    for (let i = 0; i < 300; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.random() * Math.PI;
+      const speed = Math.random() * 0.08 + 0.02;
+      
+      vels.push(new THREE.Vector3(
+        Math.sin(phi) * Math.cos(theta) * speed,
+        Math.sin(phi) * Math.sin(theta) * speed,
+        Math.cos(phi) * speed
+      ));
+    }
+    velocities.current = vels;
+  }, []);
+
+  useFrame(() => {
+    if (pointsRef.current) {
+      const positions = pointsRef.current.geometry.attributes.position.array as Float32Array;
+      
+      for (let i = 0; i < velocities.current.length; i++) {
+        positions[i * 3] += velocities.current[i].x;
+        positions[i * 3 + 1] += velocities.current[i].y;
+        positions[i * 3 + 2] += velocities.current[i].z;
+      }
+      
+      pointsRef.current.geometry.attributes.position.needsUpdate = true;
+      
+      life.current += 1;
+      if (pointsRef.current.material instanceof THREE.PointsMaterial) {
+        pointsRef.current.material.opacity = Math.max(0, 1 - life.current / 100);
+      }
+    }
+  });
+
+  const particleGeometry = useMemo(() => {
+    const count = 300;
     const positions = new Float32Array(count * 3);
-    const colors = new Float32Array(count * 3);
-    const vels = new Float32Array(count * 3);
+    const colorArray = new Float32Array(count * 3);
     
-    const color1Obj = new THREE.Color(color1);
-    const color2Obj = new THREE.Color(color2);
+    const color1 = new THREE.Color(colors[0]);
+    const color2 = new THREE.Color(colors[1] || colors[0]);
 
     for (let i = 0; i < count; i++) {
       positions[i * 3] = position.x;
       positions[i * 3 + 1] = position.y;
       positions[i * 3 + 2] = position.z;
 
-      const color = Math.random() > 0.5 ? color1Obj : color2Obj;
-      colors[i * 3] = color.r;
-      colors[i * 3 + 1] = color.g;
-      colors[i * 3 + 2] = color.b;
-
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.random() * Math.PI;
-      const speed = Math.random() * 0.05 + 0.02;
-
-      vels[i * 3] = Math.sin(phi) * Math.cos(theta) * speed;
-      vels[i * 3 + 1] = Math.sin(phi) * Math.sin(theta) * speed;
-      vels[i * 3 + 2] = Math.cos(phi) * speed;
+      const color = Math.random() > 0.5 ? color1 : color2;
+      colorArray[i * 3] = color.r;
+      colorArray[i * 3 + 1] = color.g;
+      colorArray[i * 3 + 2] = color.b;
     }
-
-    velocities.current = vels;
 
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
 
-    return [geometry, count];
-  }, [position, color1, color2]);
-
-  useFrame(() => {
-    if (particlesRef.current && velocities.current) {
-      const positions = particlesRef.current.geometry.attributes.position.array as Float32Array;
-      
-      for (let i = 0; i < particleCount; i++) {
-        positions[i * 3] += velocities.current[i * 3];
-        positions[i * 3 + 1] += velocities.current[i * 3 + 1];
-        positions[i * 3 + 2] += velocities.current[i * 3 + 2];
-      }
-      
-      particlesRef.current.geometry.attributes.position.needsUpdate = true;
-    }
-  });
+    return geometry;
+  }, [position, colors]);
 
   return (
-    <points ref={particlesRef} geometry={particleGeometry}>
+    <points ref={pointsRef} geometry={particleGeometry}>
       <pointsMaterial
         size={0.05}
         vertexColors
@@ -308,6 +307,20 @@ const Particles = ({
   );
 };
 
+const CameraController = () => {
+  const { camera } = useThree();
+  
+  useFrame(() => {
+    const time = Date.now() * 0.0001;
+    camera.position.x = Math.cos(time) * 8;
+    camera.position.z = Math.sin(time) * 8;
+    camera.position.y = 3 + Math.sin(time * 0.5) * 0.5;
+    camera.lookAt(0, 0, 0);
+  });
+
+  return null;
+};
+
 const Scene = () => {
   const [satellites, setSatellites] = useState<SatelliteData[]>([
     {
@@ -317,8 +330,7 @@ const Scene = () => {
       speed: 0.01,
       color: '#60a5fa',
       altitude: 420,
-      destroyed: false,
-      trail: []
+      destroyed: false
     },
     {
       id: 'COSMOS-2B',
@@ -327,8 +339,7 @@ const Scene = () => {
       speed: 0.012,
       color: '#f472b6',
       altitude: 418,
-      destroyed: false,
-      trail: []
+      destroyed: false
     },
     {
       id: 'IRIDIUM-33',
@@ -337,20 +348,18 @@ const Scene = () => {
       speed: 0.008,
       color: '#34d399',
       altitude: 445,
-      destroyed: false,
-      trail: []
+      destroyed: false
     }
   ]);
 
   const [explosion, setExplosion] = useState<{
     position: THREE.Vector3;
-    color1: string;
-    color2: string;
+    colors: string[];
   } | null>(null);
 
   const positions = useRef<Map<string, THREE.Vector3>>(new Map());
 
-  const handlePositionUpdate = (id: string, pos: THREE.Vector3) => {
+  const handleCollision = (id: string, pos: THREE.Vector3) => {
     positions.current.set(id, pos.clone());
   };
 
@@ -370,7 +379,6 @@ const Scene = () => {
           const sat2 = satellites.find(s => s.id === id2);
           
           if (sat1 && sat2 && !sat1.destroyed && !sat2.destroyed) {
-            // Collision!
             setSatellites(prev => prev.map(s => 
               s.id === id1 || s.id === id2 ? { ...s, destroyed: true } : s
             ));
@@ -381,18 +389,15 @@ const Scene = () => {
             
             setExplosion({
               position: midPoint,
-              color1: sat1.color,
-              color2: sat2.color
+              colors: [sat1.color, sat2.color]
             });
 
-            // Reset after delay
             setTimeout(() => {
               setExplosion(null);
               setSatellites(prev => prev.map((s, idx) => ({
                 ...s,
                 destroyed: false,
-                angle: idx === 0 ? 0 : idx === 1 ? Math.PI : Math.PI * 0.5,
-                trail: []
+                angle: idx === 0 ? 0 : idx === 1 ? Math.PI : Math.PI * 0.5
               })));
             }, 3000);
           }
@@ -403,11 +408,11 @@ const Scene = () => {
 
   return (
     <>
-      <ambientLight intensity={0.3} />
-      <pointLight position={[10, 10, 10]} intensity={1} />
+      <ambientLight intensity={0.4} />
+      <directionalLight position={[10, 10, 10]} intensity={1} />
       <pointLight position={[-10, -10, -10]} intensity={0.5} color="#3b82f6" />
       
-      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+      <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={0.5} />
       
       <Earth />
       
@@ -415,54 +420,39 @@ const Scene = () => {
         <Satellite
           key={sat.id}
           data={sat}
-          onPositionUpdate={handlePositionUpdate}
+          onCollision={handleCollision}
         />
       ))}
 
       {explosion && (
         <Particles
           position={explosion.position}
-          color1={explosion.color1}
-          color2={explosion.color2}
+          colors={explosion.colors}
         />
       )}
 
-      <OrbitControls
-        enablePan={false}
-        enableZoom={true}
-        minDistance={5}
-        maxDistance={15}
-        autoRotate
-        autoRotateSpeed={0.5}
-      />
+      <CameraController />
     </>
   );
 };
 
 const SatelliteCollision: React.FC = () => {
-  const [status, setStatus] = useState<'TRACKING' | 'COLLISION'>('TRACKING');
-
   return (
     <div className="w-full h-full relative bg-black overflow-hidden">
       <Canvas
         camera={{ position: [8, 3, 8], fov: 60 }}
-        gl={{ antialias: true, alpha: false }}
+        dpr={[1, 2]}
       >
         <Scene />
       </Canvas>
 
-      {/* UI Overlay */}
       <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-black/90 via-black/60 to-transparent p-4 backdrop-blur-sm pointer-events-none">
         <div className="flex items-center justify-between text-[10px] font-mono">
           <div className="flex items-center gap-2">
-            <span className={`inline-block w-2 h-2 rounded-full ${status === 'COLLISION' ? 'bg-red-500 animate-pulse' : 'bg-emerald-500'}`}></span>
-            <span className={status === 'COLLISION' ? 'text-red-400' : 'text-emerald-400'}>
-              {status === 'COLLISION' ? 'COLLISION DETECTED' : 'TRACKING ACTIVE'}
-            </span>
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="text-emerald-400">3D TRACKING ACTIVE</span>
           </div>
-          <div className="text-gray-400">
-            3D ORBITAL SIMULATION
-          </div>
+          <div className="text-gray-400">ORBITAL SIMULATION</div>
         </div>
       </div>
 
